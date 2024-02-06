@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj": {}
+    "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj": {
+    "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj",
+        "projectUniqueName": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj",
         "projectName": "LeitorNFe.SharedKernel",
-        "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj",
+        "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj",
         "packagesPath": "C:\\Users\\Gustavo\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.SharedKernel\\obj\\",
         "projectStyle": "PackageReference",

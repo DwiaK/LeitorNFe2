@@ -2763,9 +2763,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.API\\LeitorNFe.API.csproj",
+      "projectUniqueName": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.API\\LeitorNFe.API.csproj",
       "projectName": "LeitorNFe.API",
-      "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.API\\LeitorNFe.API.csproj",
+      "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.API\\LeitorNFe.API.csproj",
       "packagesPath": "C:\\Users\\Gustavo\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.API\\obj\\",
       "projectStyle": "PackageReference",
@@ -2789,11 +2789,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.Application\\LeitorNFe.Application.csproj": {
-              "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.Application\\LeitorNFe.Application.csproj"
+            "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.Application\\LeitorNFe.Application.csproj": {
+              "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.Application\\LeitorNFe.Application.csproj"
             },
-            "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.Persistence\\LeitorNFe.Persistence.csproj": {
-              "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.Persistence\\LeitorNFe.Persistence.csproj"
+            "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.Persistence\\LeitorNFe.Persistence.csproj": {
+              "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.Persistence\\LeitorNFe.Persistence.csproj"
             }
           }
         }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeitorNFe.App", "Wingly.Client\LeitorNFe.App.csproj", "{5E70AD79-0625-4D8D-A780-F1F28DC76809}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeitorNFe.App", "LeitorNFe.APP\LeitorNFe.App.csproj", "{5E70AD79-0625-4D8D-A780-F1F28DC76809}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CC7E836C-E5B7-4392-B20E-C3A33D98C3C9}"
 EndProject

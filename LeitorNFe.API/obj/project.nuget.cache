@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yWf4KsLtuuJQr7Zc17lkuwacyLW32k/VJteWM25glHieL8f+H238FF6FdwGtLSqXd7kFlqZZSsdFlc8TisV5eQ==",
+  "dgSpecHash": "uYTiKhQyFy4DGaYMbMCJSxwuluIvasq2EHccgdX/Nuc4VMxwFra9svQWGxuapzGlihZ6/p5MS/0c9kb9TxGXuw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.API\\LeitorNFe.API.csproj",
+  "projectFilePath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.API\\LeitorNFe.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gustavo\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Gustavo\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

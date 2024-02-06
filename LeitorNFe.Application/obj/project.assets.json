@@ -2162,9 +2162,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.Application\\LeitorNFe.Application.csproj",
+      "projectUniqueName": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.Application\\LeitorNFe.Application.csproj",
       "projectName": "LeitorNFe.Application",
-      "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.Application\\LeitorNFe.Application.csproj",
+      "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.Application\\LeitorNFe.Application.csproj",
       "packagesPath": "C:\\Users\\Gustavo\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.Application\\obj\\",
       "projectStyle": "PackageReference",
@@ -2188,11 +2188,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.Domain\\LeitorNFe.Domain.csproj": {
-              "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.Domain\\LeitorNFe.Domain.csproj"
+            "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.Domain\\LeitorNFe.Domain.csproj": {
+              "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.Domain\\LeitorNFe.Domain.csproj"
             },
-            "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj": {
-              "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNfe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj"
+            "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj": {
+              "projectPath": "C:\\Users\\Gustavo\\Desktop\\Gustavo\\All\\Programming\\dotNET\\Projetos2.0\\LeitorNFe\\LeitorNFe.SharedKernel\\LeitorNFe.SharedKernel.csproj"
             }
           }
         }
