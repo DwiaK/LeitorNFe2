@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System;
 
-namespace LeitorNFe.Application.NotaFiscalFeature.GetById;
+namespace NotaFiscalFeature.GetById;
 
 public sealed record GetNotaFiscalByIdCommand(int id) : ICommand;
 
@@ -118,5 +118,5 @@ public sealed class GetNotaFiscalByIdQueryHandler : ICommandHandler<GetNotaFisca
 
 public interface INotaFiscalRepository
 {
-    Task<Domain.Entities.NotasFiscais.NotaFiscal?> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<NotaFiscal?> GetByIdAsync(int id, CancellationToken cancellationToken);
 }

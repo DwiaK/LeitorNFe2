@@ -3,13 +3,14 @@ using LeitorNFe.Application.Abstractions.Command;
 using LeitorNFe.Application.Abstractions.Data;
 using LeitorNFe.Application.Abstractions.Messaging;
 using LeitorNFe.Application.NotaFiscalFeature.GetById;
+using LeitorNFe.Domain.Entities.NotasFiscais;
 using LeitorNFe.SharedKernel;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LeitorNFe.Application.NotaFiscal.Create;
+namespace LeitorNFe.Application.NotaFiscalFeature.Create;
 
-public sealed record CreateNotaFiscalCommand(LeitorNFe.Domain.Entities.NotasFiscais.NotaFiscal notaFiscal) : ICommand;
+public sealed record CreateNotaFiscalCommand(NotaFiscal notaFiscal) : ICommand;
 
 public class CreateNotaFiscalQueryHandler : ICommandHandler<CreateNotaFiscalCommand>
 {

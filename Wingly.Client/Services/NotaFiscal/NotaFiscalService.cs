@@ -7,12 +7,12 @@ using System.Text.Json.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
+using System.Net;
 
 namespace LeitorNFe.App.Services.NotaFiscal;
 
 public class NotaFiscalService : INotaFiscalService
 {
-    //private const string UriRequest = "sample-data/articles.json";
     private readonly HttpClient _httpClient;
 
     public NotaFiscalService(HttpClient httpClient)
@@ -29,16 +29,15 @@ public class NotaFiscalService : INotaFiscalService
 
     public async void ImportNotaFiscal(NotaFiscalModel notaFiscal)
     {
-        // ESTRUTURA TEMPORÁRIA
         var response = await _httpClient.PostAsJsonAsync("api/NotaFiscal/ImportNotaFiscal", notaFiscal);
 
-        //if (response.IsSuccessStatusCode)
-        //{
-        //    // Success
-        //}
-        //else
-        //{
-        //    // Error
-        //}
+        if (response.StatusCode is HttpStatusCode.OK)
+        {
+            // Success
+        }
+        else
+        {
+            // Error
+        }
     }
 }
