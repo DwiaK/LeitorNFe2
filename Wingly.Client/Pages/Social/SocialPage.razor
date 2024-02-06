@@ -1,0 +1,30 @@
+﻿@page "/social"
+
+<MudText Class="align-center" Typo="Typo.h6">Social</MudText>
+<MudBreadcrumbs Separator=">" Items="_items"></MudBreadcrumbs>
+
+<br />
+<MudContainer>
+    <MudPaper Class="pa-16 ma-2">
+        <MudGrid>
+            @foreach (var redeSocial in listaRedesSociais)
+            {
+                <MudItem md="12"
+                         sm="12">
+                    <MudCard Elevation="5">
+                        <MudCardMedia Image="@redeSocial.Image" Height="100" />
+                        <MudCardContent>
+                            <MudText Typo="Typo.h5">@redeSocial.Title</MudText>
+                                <MudText Typo="Typo.body2">@redeSocial.Text</MudText>
+                        </MudCardContent>
+                            <MudCardActions>
+                                <MudToolBar DisableGutters="true">
+                                    <MudIconButton Icon="@Icons.Material.Filled.Send" Color="Color.Primary" Class="mx-2" OnClick="() => ExecutarLink(redeSocial)" />
+                                </MudToolBar>
+                            </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
+    </MudPaper>
+</MudContainer>

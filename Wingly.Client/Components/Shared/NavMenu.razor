@@ -1,0 +1,31 @@
+<MudAppBar Class="px-8"
+           Elevation="0"
+           Style="@(GerenciadorTema.ModoEscuro ? "background: rgba(18, 18, 20, 0.7)" : "background: rgba(255,255,255,0.7)")">
+           @* Style="@(GerenciadorTema.ModoEscuro ? "background: rgba(26, 26, 36, 0.7)" : "background: rgba(255,255,255,0.7)")"> *@
+           @* Style="@(GerenciadorTema.ModoEscuro ? "background: rgba(21,27,34,0.7)" : "background: rgba(255,255,255,0.7)")"> *@
+    @if (!IsMiniMenu)
+    {
+        <MudHidden Breakpoint="Breakpoint.MdAndUp">
+            <MudTooltip Arrow="true"
+                        Text="Toggle menu">
+                <MudIconButton Class="mr-3"
+                               Color="Color.Default"
+                               Edge="Edge.Start"
+                               Icon="@Icons.Material.Filled.Menu"
+                               OnClick="AlternarMenuLateral" />
+            </MudTooltip>
+        </MudHidden>
+    }
+    <MudSpacer />
+
+    <MudTooltip Arrow="true"
+                Text="Trocar Tema">
+        <MudIconButton Class="mx-3"
+                       Color="Color.Default"
+                       Icon="@Icons.Material.Filled.LightMode"
+                       @onclick="@(() => AlternarTemaClaroEscuro(_alternaTema))" />
+    </MudTooltip>
+
+    <UserMenu Class="ml-3"
+              User="User" />
+</MudAppBar>

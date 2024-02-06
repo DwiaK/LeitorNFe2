@@ -1,0 +1,17 @@
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\obj\Debug\net8.0\LeitorNFe.Application.csproj.AssemblyReference.cache
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\obj\Debug\net8.0\LeitorNFe.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\obj\Debug\net8.0\LeitorNFe.Application.AssemblyInfoInputs.cache
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\obj\Debug\net8.0\LeitorNFe.Application.AssemblyInfo.cs
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\obj\Debug\net8.0\LeitorNFe.Application.csproj.CoreCompileInputs.cache
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\bin\Debug\net8.0\LeitorNFe.Application.deps.json
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\bin\Debug\net8.0\LeitorNFe.Application.dll
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\bin\Debug\net8.0\LeitorNFe.Application.pdb
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\bin\Debug\net8.0\LeitorNFe.Domain.dll
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\bin\Debug\net8.0\LeitorNFe.SharedKernel.dll
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\bin\Debug\net8.0\LeitorNFe.Domain.pdb
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\bin\Debug\net8.0\LeitorNFe.SharedKernel.pdb
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\obj\Debug\net8.0\LeitorNFe.Application.csproj.CopyComplete
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\obj\Debug\net8.0\LeitorNFe.Application.dll
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\obj\Debug\net8.0\refint\LeitorNFe.Application.dll
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\obj\Debug\net8.0\LeitorNFe.Application.pdb
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.Application\obj\Debug\net8.0\ref\LeitorNFe.Application.dll

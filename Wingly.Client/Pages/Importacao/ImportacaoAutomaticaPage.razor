@@ -1,0 +1,104 @@
+﻿@page "/importacao/automatica"
+@using MudBlazor.Utilities
+
+<MudText Class="align-center" Typo="Typo.h6">Nota Fiscal</MudText>
+<MudBreadcrumbs Separator=">" Items="_items"></MudBreadcrumbs>
+
+<br />
+<MudGrid>
+    <MudItem md="12"
+             sm="12"
+             xs="12">
+        <MudPaper Class="d-flex flex-column justify-space-between pa-4"
+                  Elevation="2"
+                  Style="height: 350px;">
+            <div class="align-center d-flex flex-column justify-center">
+                <MudText Class="my-1"
+                         Typo="Typo.h5">
+                    Envie-nos uma Nota Fiscal.
+                </MudText>
+                <MudText Class="my-5"
+                         Typo="Typo.subtitle2">
+                    Arraste o arquivo ou clique em 'Importar' para selecionar uma Nota Fiscal (.xml).
+                </MudText>
+            </div>
+            <div class="align-center d-flex flex-column justify-center">
+                <MudStack Style="width: 100%">
+                    <MudFileUpload T="IReadOnlyList<IBrowserFile>"
+                                          AppendMultipleFiles
+                                    OnFilesChanged="OnInputFileChanged"
+                                    Hidden="@false"
+                                    InputClass="absolute mud-width-full mud-height-full overflow-hidden z-20"
+                                    InputStyle="opacity:0"
+                                    @ondragenter="@SetDragClass"
+                                    @ondragleave="@ClearDragClass"
+                                    @ondragend="@ClearDragClass">
+                         <ButtonTemplate>
+                             <MudPaper Height="100px"
+                                       Outlined="true"
+                                       Class="@_dragClass">
+                                       <div class="align-center d-flex flex-column justify-center">
+                                           <MudText Typo="Typo.subtitle1" Color="Color.Dark">
+                                             Arraste para Importar
+                                         </MudText>
+                                       </div>
+                                 @foreach (var file in _fileNames)
+                                {
+                                    <MudChip Color="Color.Dark" Text="@file" />
+                                }
+                            </MudPaper>
+                        </ButtonTemplate>
+                    </MudFileUpload>
+                </MudStack>
+            </div>
+            <div class="d-flex justify-center">
+                <MudFileUpload T="IBrowserFile" FilesChanged="ImportarArquivo">
+                    <ButtonTemplate>
+                        <MudButton HtmlTag="label"
+                                   Variant="Variant.Filled"
+                                   Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.CloudUpload"
+                                   for="@context.Id">
+                            Importar
+                        </MudButton>
+                    </ButtonTemplate>
+                </MudFileUpload>
+            </div>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+#nullable enable
+    private const string DefaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full z-10";
+    private string _dragClass = DefaultDragClass;
+    private readonly List<string> _fileNames = new();
+
+    private async Task Clear()
+    {
+        _fileNames.Clear();
+        ClearDragClass();
+        await Task.Delay(100);
+    }
+
+    private void OnInputFileChanged(InputFileChangeEventArgs e)
+    {
+        ClearDragClass();
+        var files = e.GetMultipleFiles();
+        foreach (var file in files)
+        {
+            _fileNames.Add(file.Name);
+        }
+    }
+
+    private void Upload()
+    {
+        // Upload the files here
+    }
+
+    private void SetDragClass()
+        => _dragClass = $"{DefaultDragClass} mud-border-primary";
+
+    private void ClearDragClass()
+        => _dragClass = DefaultDragClass;
+}

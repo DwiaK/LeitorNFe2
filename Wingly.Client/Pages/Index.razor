@@ -1,0 +1,57 @@
+﻿@page "/"
+@using LeitorNFe.App.Models
+
+<PageTitle>Início</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False">
+    <MudGrid>
+        <MudItem md="12"
+                 sm="12"
+                 xs="12">
+            <div style="height: 120px;"></div>
+        </MudItem>
+
+        <MudItem md="12"
+                 sm="12"
+                 xs="12">
+            <MudPaper Class="d-flex flex-column justify-space-between pa-4"
+                      Elevation="2"
+                      Style="height: 250px;">
+                <div class="align-center d-flex flex-column justify-center">
+                    <MudIcon Class="mb-2"
+                             Color="Color.Primary"
+                             Icon="@GlobalConstants._LeitorNFeIcon"
+                             Style="font-size: 70px" />
+                    <MudText Class="my-1"
+                             Typo="Typo.h5">
+                        Seja bem vindo,
+                    </MudText>
+                    <MudText Class="my-5"
+                             Typo="Typo.subtitle2">
+                        Acesse suas Notas Fiscais na Aba 'Notas Fiscais' ou clique em Importações para ser redirecionado.
+                    </MudText>
+                </div>
+                <div class="d-flex justify-end">
+                    <MudButton Color="Color.Primary"
+                               Variant="Variant.Filled"
+                               Size="Size.Small"
+                               OnClick=GetNotaFiscalId>
+                        <MudText Typo="Typo.subtitle2">
+                            Importações
+                        </MudText>
+                    </MudButton>
+                </div>
+                <div class="d-flex justify-end">
+                    <MudButton Color="Color.Primary"
+                               Variant="Variant.Filled"
+                               Size="Size.Small"
+                               OnClick=ImportarNotaFiscal>
+                        <MudText Typo="Typo.subtitle2">
+                            Teste
+                        </MudText>
+                    </MudButton>
+                </div>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>

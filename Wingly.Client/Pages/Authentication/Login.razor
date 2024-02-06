@@ -1,0 +1,154 @@
+﻿@page "/login"
+@using Blazored.LocalStorage
+@using LeitorNFe.App.Models
+
+<MudThemeProvider Theme="_theme" />
+<PageTitle>@_title</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
+    <MudGrid Spacing="0">
+        <MudItem xxl="12" xl="12" xs="12" lg="12" md="12" sm="12">
+        <div class="d-flex flex-column mud-width-full align-center d-flex justify-center">
+                <MudImage Src="images/wingLibraryMin.png"
+                            Width="150"
+                            Height="150"
+                            Alt="LeitorNFe"
+                            Class="rounded-circle" />
+            </div>
+        </MudItem>
+        <MudItem xxl="12" xl="12" xs="12" lg="12" md="12" sm="12">
+            <div class="d-flex flex-column mud-width-full align-center d-flex justify-center">
+                <MudPaper Elevation="5" Class="pa-8" Width="100%" MaxWidth="500px">
+                    <MudForm>
+                        <MudText Typo="Typo.h4" GutterBottom="true">Entrar</MudText>
+                        <MudText>
+                            Não tem uma conta? <MudLink Href="/register">Registre-se</MudLink>
+                        </MudText>
+                        <MudTextField @bind-Value=@_logInText
+                                        T="string"
+                                        Label="Usuário"
+                                        Variant="Variant.Outlined"
+                                        Required="true"
+                                        OnlyValidateIfDirty="true"
+                                        Immediate="true"
+                                        Class="my-6">
+                        </MudTextField>
+
+                        <MudTextField T="string"
+                                        Label="Senha"
+                                        InputType="InputType.Password"
+                                        Variant="Variant.Outlined"
+                                        Required="true"
+                                        OnlyValidateIfDirty="true"
+                                        Immediate="true"
+                                        Class="my-6">
+                        </MudTextField>
+
+                        <MudButton Variant="Variant.Filled"
+                                    Color="Color.Primary"
+                                    Size="Size.Large"
+                                    ButtonType="ButtonType.Button"
+                                    FullWidth="true"
+                                    Href="/">
+                            Entrar
+                        </MudButton>
+                        <div class="d-flex justify-space-around flex-grow-1 my-4 gap-4">
+                            <MudButton Class="flex-grow-1" Variant="Variant.Filled" StartIcon="@Icons.Custom.Brands.Microsoft" ButtonType="ButtonType.Button"
+                                        title="Entrar com uma conta Microsoft">
+                            </MudButton>
+                            <MudButton Class="flex-grow-1" Variant="Variant.Filled" StartIcon="@Icons.Custom.Brands.Google" ButtonType="ButtonType.Button"
+                                        title="Entrar com uma conta Google">
+                            </MudButton>
+                        </div>
+                    </MudForm>
+                </MudPaper>
+            </div>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code{
+    private string _title = "Entrar";
+
+    private string _logInText = string.Empty;
+    private string _passwordText = string.Empty;
+
+    // Primary = "#594AE2",
+    //     Background = "#594AE2"
+
+
+    ///////////////////////
+
+    [Inject] private ILocalStorageService _localStorage { get; set; }
+
+    private readonly Palette _temaEscuro = new()
+    {
+        Black = "#2f2f36",
+        Background = "#121214",
+        BackgroundGrey = "#2f2f36",
+        Surface = "#17171a",
+        DrawerBackground = "rgb(18, 18, 20)",
+        DrawerText = "rgba(255,255,255, 0.50)",
+        DrawerIcon = "rgba(255,255,255, 0.50)",
+        AppbarBackground = "#2f2f36",
+        AppbarText = "rgba(255,255,255, 0.70)",
+        TextPrimary = "rgba(255,255,255, 0.70)",
+        TextSecondary = "rgba(255,255,255, 0.50)",
+        ActionDefault = "#adadb1",
+        ActionDisabled = "rgba(255,255,255, 0.26)",
+        ActionDisabledBackground = "rgba(255,255,255, 0.12)",
+        Divider = "rgba(255,255,255, 0.12)",
+        DividerLight = "rgba(255,255,255, 0.06)",
+        TableLines = "rgba(255,255,255, 0.12)",
+        LinesDefault = "rgba(255,255,255, 0.12)",
+        LinesInputs = "rgba(255,255,255, 0.3)",
+        TextDisabled = "rgba(255,255,255, 0.2)"
+    };
+
+    private readonly Palette _temaClaro = new();
+
+    private readonly MudTheme _theme = new()
+        {
+            Palette = new Palette
+            {
+                Primary = Colors.Green.Default
+            },
+            LayoutProperties = new LayoutProperties
+            {
+                AppbarHeight = "80px",
+                DefaultBorderRadius = "12px"
+            },
+            Typography = new Typography
+            {
+                Default = new Default
+                {
+                    FontSize = "0.9rem",
+                }
+            }
+        };
+
+    private GerenciaTemaModel _gerenciadorTema = new()
+    {
+        ModoEscuro = false,
+        CorPrimaria = Colors.Green.Default
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (await _localStorage.ContainKeyAsync("themeManager"))
+            _gerenciadorTema = await _localStorage.GetItemAsync<GerenciaTemaModel>("themeManager");
+
+        await GerenciadorTemaAlterado(_gerenciadorTema);
+    }
+
+    private async Task GerenciadorTemaAlterado(GerenciaTemaModel gerenciadorTema)
+    {
+        _gerenciadorTema = gerenciadorTema;
+        _theme.Palette = _gerenciadorTema.ModoEscuro ? _temaEscuro : _temaClaro;
+
+        await AtualizarArmazenamentoGerenciadorTemas();
+    }
+
+    private async Task AtualizarArmazenamentoGerenciadorTemas() =>
+        await _localStorage.SetItemAsync("themeManager", _gerenciadorTema);
+}

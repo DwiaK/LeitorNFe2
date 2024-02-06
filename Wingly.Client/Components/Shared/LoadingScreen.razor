@@ -1,0 +1,180 @@
+﻿@if (_isLoaded)
+{
+    @ChildContent
+}
+else
+{
+    <!-- Style -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #222;
+            animation: colorAnimation 2s forwards;
+        }
+
+        .circle {
+            width: 0;
+            height: 0;
+            background-color: #594AE2;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: expandCircle 1s ease-in-out forwards;
+        }
+
+        .splash {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .logo-container {
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background-color: #594AE2;
+            border-radius: 50%;
+            animation: logoAnimation 0.5s alternate infinite;
+        }
+
+        @@keyframes zoom-in {
+            50% {
+                width: var(--size);
+            }
+            60% {
+                width: calc(var(--size) *0.9);
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @@keyframes logoAnimation {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.2);
+            }
+        }
+
+        @@keyframes colorAnimation {
+            0% {
+                background-color: #ffffff;
+            }
+            100% {
+                background-color: #594AE2;
+            }
+        }
+
+        @@keyframes left-to-right-fade-in {
+            0% {
+                -webkit-mask-size: 0%;
+                -webkit-mask-image: linear-gradient(
+                    to right,
+                    rgba(0, 0, 0, 1) 70%,
+                    rgba(0, 0, 0, 0)
+                );
+            }
+            100% {
+                -webkit-mask-size: 100%;
+                -webkit-mask-image: linear-gradient(
+                    to right,
+                    rgba(0, 0, 0, 1) 100%,
+                    rgba(0, 0, 0, 0)
+                );
+            }
+        }
+        @@keyframes expandCircle {
+            0% {
+                width: 0;
+                height: 0;
+            }
+            100% {
+                width: 150vw;
+                height: 150vw;
+            }
+        }
+
+        .loader {
+          overflow: hidden;
+          width: 100%;
+          height: 100%;
+          position: fixed;
+          top: 80px; left: 0;
+          display: flex;
+          align-items: center;
+          align-content: center; 
+          justify-content: center;
+        }
+
+        .loader__element {
+          border-radius: 100%;
+          border: 5px solid #ffffff;
+          margin: 10px;
+        }
+
+        .loader__element:nth-child(1) {
+          animation: preloader .3s ease-in-out alternate infinite;
+        }
+        .loader__element:nth-child(2) {
+          animation: preloader .3s ease-in-out alternate .1s infinite;
+        }
+
+        .loader__element:nth-child(3) {
+          animation: preloader .3s ease-in-out alternate .2s infinite;
+        }
+
+        @@keyframes zoom-in {
+            0%{
+                width: 0%;
+                height: 0%;
+            }
+
+            100%{
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        @@keyframes preloader {
+          100% { transform: scale(2); }
+        }
+
+    </style>
+
+    <!-- Splash Screen Logo -->
+    <div class="circle"></div>
+    <div class="splash">
+        <div class="logo-container">
+            <img class="logo" src="/images/wingLibraryIcon.png" alt="Wing Library">
+            <div class="loader">
+                <span class="loader__element"></span>
+                <span class="loader__element"></span>
+                <span class="loader__element"></span>
+            </div>
+        </div>
+    </div>
+}
+
+@code{
+    bool _isLoaded = false;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(4000);
+        _isLoaded = true;
+    }
+}

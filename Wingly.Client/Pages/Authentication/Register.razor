@@ -1,0 +1,54 @@
+﻿@page "/register"
+
+<PageTitle>@_title</PageTitle>
+<MudForm>
+    <MudText Typo="Typo.h4" GutterBottom="true">Registrar</MudText>
+    <MudText>
+        Já tem uma conta? <MudLink Href="/login">Entrar</MudLink>
+    </MudText>
+    <MudTextField @bind-Value=@_usernameText
+                  T="string"
+                  Label="Usuário"
+                  Variant="Variant.Outlined"
+                  Required="true"
+                  OnlyValidateIfDirty="true"
+                  Immediate="true"
+                  Class="my-6">
+    </MudTextField>
+
+    <MudTextField T="string"
+                  Label="Senha"
+                  InputType="InputType.Password"
+                  Variant="Variant.Outlined"
+                  Required="true"
+                  OnlyValidateIfDirty="true"
+                  Immediate="true"
+                  Class="my-6">
+    </MudTextField>
+
+    <MudTextField T="string"
+                  Label="Confirmação"
+                  InputType="InputType.Password"
+                  Variant="Variant.Outlined"
+                  Required="true"
+                  OnlyValidateIfDirty="true"
+                  Immediate="true"
+                  Class="my-6">
+    </MudTextField>
+
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               Size="Size.Large"
+               ButtonType="ButtonType.Button"
+               FullWidth="true">
+        Registrar
+    </MudButton>
+</MudForm>
+
+@code{
+    private string _title = "Registrar";
+
+    private string _usernameText = string.Empty;
+    private string _passwordText = string.Empty;
+    private string _repeatPasswordText = string.Empty;
+}

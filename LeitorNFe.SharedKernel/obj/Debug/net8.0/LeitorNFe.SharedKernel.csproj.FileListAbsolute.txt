@@ -1,0 +1,11 @@
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.SharedKernel\bin\Debug\net8.0\LeitorNFe.SharedKernel.deps.json
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.SharedKernel\bin\Debug\net8.0\LeitorNFe.SharedKernel.dll
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.SharedKernel\bin\Debug\net8.0\LeitorNFe.SharedKernel.pdb
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.SharedKernel\obj\Debug\net8.0\LeitorNFe.SharedKernel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.SharedKernel\obj\Debug\net8.0\LeitorNFe.SharedKernel.AssemblyInfoInputs.cache
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.SharedKernel\obj\Debug\net8.0\LeitorNFe.SharedKernel.AssemblyInfo.cs
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.SharedKernel\obj\Debug\net8.0\LeitorNFe.SharedKernel.csproj.CoreCompileInputs.cache
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.SharedKernel\obj\Debug\net8.0\LeitorNFe.SharedKernel.dll
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.SharedKernel\obj\Debug\net8.0\refint\LeitorNFe.SharedKernel.dll
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.SharedKernel\obj\Debug\net8.0\LeitorNFe.SharedKernel.pdb
+C:\Users\Gustavo\Desktop\Gustavo\All\Programming\dotNET\Projetos2.0\LeitorNFe\LeitorNFe.SharedKernel\obj\Debug\net8.0\ref\LeitorNFe.SharedKernel.dll

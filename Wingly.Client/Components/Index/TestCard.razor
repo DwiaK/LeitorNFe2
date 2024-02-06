@@ -1,0 +1,31 @@
+@inherits MudComponentBase
+
+<MudElement @attributes="@UserAttributes"
+            Class="@Classname"
+            Style="@Style">
+    <MudPaper Class="d-flex flex-column justify-space-between pa-4"
+              Elevation="2"
+              Style="height: 250px;">
+        <div class="align-center d-flex flex-column justify-center">
+            <MudIcon Class="mb-2"
+                     Color="Color.Primary"
+                     Icon="@Icons.Custom.Brands.MudBlazor"
+                     Style="font-size: 70px" />
+            <MudText Class="my-1"
+                     Typo="Typo.h5">
+                Seja bem vindo, %NOMEUSUARIO%,
+            </MudText>
+            <MudText Class="my-5"
+                     Typo="Typo.subtitle2">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            </MudText>
+        </div>
+        <div class="d-flex justify-end">
+            <MudButton Color="Color.Primary"
+                       Variant="Variant.Filled"
+                       Size="Size.Small">
+                Ação
+            </MudButton>
+        </div>
+    </MudPaper>
+</MudElement>
