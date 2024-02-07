@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LeitorNFe.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d483cd13d48c05e5730a16978c489591aebd64e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a7ce505dd0edf8de759a513d8ce7d17b3d1fa9d")]
 [assembly: System.Reflection.AssemblyProductAttribute("LeitorNFe.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LeitorNFe.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

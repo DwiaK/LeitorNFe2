@@ -2,12 +2,9 @@
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Reflection.Metadata;
-using System.Text.Json.Serialization;
-using System.Text;
 using System.Threading.Tasks;
-using static System.Net.WebRequestMethods;
 using System.Net;
+using System.Collections.Generic;
 
 namespace LeitorNFe.App.Services.NotaFiscal;
 
@@ -20,24 +17,33 @@ public class NotaFiscalService : INotaFiscalService
         _httpClient = httpClient;
     }
 
-    public async Task<NotaFiscalModel> GetNotaFiscalById(int id)
+    public async Task<NotaFiscalModel> BuscarNotaFiscalPorId(int id)
     {
-        var request = await _httpClient.GetFromJsonAsync<NotaFiscalModel>($"api/NotaFiscal/GetNotaFiscalById/{id}");
+        var request = await _httpClient.GetFromJsonAsync<NotaFiscalModel>($"api/NotaFiscal/BuscarNotaFiscalPorId/{id}");
 
         return request ?? throw new InvalidOperationException();
     }
 
-    public async void ImportNotaFiscal(NotaFiscalModel notaFiscal)
+    public async Task<bool> ImportarNotaFiscal(NotaFiscalModel notaFiscal)
     {
-        var response = await _httpClient.PostAsJsonAsync("api/NotaFiscal/ImportNotaFiscal", notaFiscal);
+        var request = await _httpClient.PostAsJsonAsync("api/NotaFiscal/ImportarNotaFiscal", notaFiscal);
 
-        if (response.StatusCode is HttpStatusCode.OK)
+        if (request.StatusCode is HttpStatusCode.OK)
         {
             // Success
+            return true;
         }
         else
         {
             // Error
+            return false;
         }
+    }
+
+    public async Task<List<NotaFiscalModel>> ListarNotasFiscais()
+    {
+        var request = await _httpClient.GetFromJsonAsync<List<NotaFiscalModel>>("api/NotaFiscal/BuscarNotasFiscais");
+
+        return request ?? throw new InvalidOperationException();
     }
 }

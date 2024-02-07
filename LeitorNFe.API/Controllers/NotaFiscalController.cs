@@ -4,7 +4,8 @@ using LeitorNFe.Application.NotaFiscalFeature.GetById;
 using LeitorNFe.Application.NotaFiscalFeature.Create;
 using LeitorNFe.Domain.Entities.NotasFiscais;
 using Microsoft.AspNetCore.Mvc;
-using LeitorNFe.Application.NotaFiscal.Create;
+using NotaFiscalFeature.GetById;
+using LeitorNFe.Application.NotaFiscalFeature.Get;
 
 namespace LeitorNFe.API.Controllers;
 
@@ -19,7 +20,7 @@ public class NotaFiscalController : ControllerBase
         _sqlConnection = sqlConnection;
     }
 
-    [HttpGet("GetNotaFiscalById/{id}")]
+    [HttpGet("BuscarNotaFiscalPorId/{id}")]
     public async Task<NotaFiscal> GetNotaFiscalById(int id, CancellationToken cancellationToken)
     {
         //await using (SqlConnection connection =
@@ -43,10 +44,18 @@ public class NotaFiscalController : ControllerBase
             .Handle(new GetNotaFiscalByIdQuery(id), cancellationToken);
     }
 
-    [HttpPost("ImportNotaFiscal")]
-    public async Task<bool> ImportNotaFiscal(NotaFiscal notaFiscal, CancellationToken cancellationToken)
+    [HttpPost("ImportarNotaFiscal")]
+    public async Task<bool> ImportarNotaFiscal(NotaFiscal notaFiscal, CancellationToken cancellationToken)
     {
-        new CreateNotaFiscalQueryHandler(_sqlConnection).Handle(new CreateNotaFiscalCommand(notaFiscal), cancellationToken);
+        await new CreateNotaFiscalQueryHandler(_sqlConnection).Handle(new CreateNotaFiscalCommand(notaFiscal), cancellationToken);
+
+        return true;
+    }
+
+    [HttpGet("BuscarNotasFiscais")]
+    public async Task<bool> BuscarNotasFiscais(CancellationToken cancellationToken)
+    {
+        await new GetNotaFiscalQueryHandler(_sqlConnection).Handle(new GetNotasFiscaisCommand(), cancellationToken);
 
         return true;
     }

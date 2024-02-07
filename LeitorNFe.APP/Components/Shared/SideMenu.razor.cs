@@ -29,6 +29,7 @@ public partial class SideMenu
             Title = "Nota Fiscal",
             SectionItems = new List<MenuSectionItemModel>
             {
+                // Importação
                 new()
                 {
                     IsParent = true,
@@ -51,7 +52,16 @@ public partial class SideMenu
                             PageStatus = PageStatus.Concluido
                         },
                     }
-                }
+                },
+
+                // Visualização
+                new()
+                {
+                    Title = "Minhas Notas",
+                    Icon = Icons.Material.Filled.Notes,
+                    Href = "/importacao/manual",
+                    PageStatus = PageStatus.Concluido
+                },
             }
         },
 

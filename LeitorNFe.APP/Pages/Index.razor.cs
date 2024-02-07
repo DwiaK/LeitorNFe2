@@ -3,6 +3,7 @@ using LeitorNFe.App.Services;
 using LeitorNFe.App.Services.NotaFiscal;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Runtime.ConstrainedExecution;
 
@@ -21,7 +22,7 @@ public partial class Index
 
     public async void GetNotaFiscalId()
     {
-        var result = await _notaFiscalService.GetNotaFiscalById(5);
+        var result = await _notaFiscalService.BuscarNotaFiscalPorId(5);
 
         var teste = result;
 
@@ -33,7 +34,7 @@ public partial class Index
     {
         // Teste
 
-        _notaFiscalService.ImportNotaFiscal(new NotaFiscalModel()
+        _notaFiscalService.ImportarNotaFiscal(new NotaFiscalModel()
         {
             nNF = "12345",
             chNFe = "13451358932462362346234623467",
@@ -50,5 +51,12 @@ public partial class Index
             UF = "qwegqgeqgwe",
             CEP = "34254622"
         });
+    }
+
+    public List<NotaFiscalModel> BuscarNotasFiscais()
+    {
+        _notaFiscalService.ListarNotasFiscais();
+
+        return new List<NotaFiscalModel>();
     }
 }

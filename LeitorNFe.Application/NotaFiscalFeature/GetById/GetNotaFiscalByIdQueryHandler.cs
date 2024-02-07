@@ -4,6 +4,7 @@ using LeitorNFe.Domain.Entities.NotasFiscais;
 using LeitorNFe.Application.Abstractions.Command;
 using LeitorNFe.Application.Abstractions.Data;
 using LeitorNFe.Application.Abstractions.Messaging;
+using LeitorNFe.Application.NotaFiscalFeature.GetById;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
@@ -44,13 +45,13 @@ public sealed class GetNotaFiscalByIdQueryHandler : ICommandHandler<GetNotaFisca
     #endregion
 
     #region Handler
-    public async Task<Domain.Entities.NotasFiscais.NotaFiscal> Handle(GetNotaFiscalByIdQuery query, CancellationToken cancellationToken)
+    public async Task<NotaFiscal> Handle(GetNotaFiscalByIdQuery query, CancellationToken cancellationToken)
     {
         await using var sqlConnection = _sqlConnectionFactory
             .CreateConnection();
 
-        LeitorNFe.Domain.Entities.NotasFiscais.NotaFiscal? notaFiscalResponse = await
-            sqlConnection.QueryFirstOrDefaultAsync<LeitorNFe.Domain.Entities.NotasFiscais.NotaFiscal>(
+        NotaFiscal? notaFiscalResponse = await
+            sqlConnection.QueryFirstOrDefaultAsync<NotaFiscal>(
                 @"SELECT *
                   FROM [NotaFiscal]
                   WHERE IdNotaFiscal = @Id",
@@ -67,13 +68,13 @@ public sealed class GetNotaFiscalByIdQueryHandler : ICommandHandler<GetNotaFisca
         return notaFiscalResponse;
     }
 
-    public async Task<Result<Domain.Entities.NotasFiscais.NotaFiscal>> Handle(GetNotaFiscalByIdCommand command, CancellationToken cancellationToken)
+    public async Task<Result<NotaFiscal>> Handle(GetNotaFiscalByIdCommand command, CancellationToken cancellationToken)
     {
         await using var sqlConnection = _sqlConnectionFactory
             .CreateConnection();
 
-        LeitorNFe.Domain.Entities.NotasFiscais.NotaFiscal? notaFiscalResponse = await
-            sqlConnection.QueryFirstOrDefaultAsync<LeitorNFe.Domain.Entities.NotasFiscais.NotaFiscal>(
+        NotaFiscal? notaFiscalResponse = await
+            sqlConnection.QueryFirstOrDefaultAsync<NotaFiscal>(
                 @"SELECT *
                   FROM [NotaFiscal]
                   WHERE IdNotaFiscal = @Id",

@@ -1,11 +1,22 @@
 ﻿using Dapper;
+using LeitorNFe.Application.Abstractions.Command;
 using LeitorNFe.Application.Abstractions.Data;
+using LeitorNFe.Application.Abstractions.Messaging;
+using LeitorNFe.Application.NotaFiscalFeature.GetById;
+using LeitorNFe.Domain.Entities.NotasFiscais;
+using LeitorNFe.SharedKernel;
+using NotaFiscalFeature.GetById;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Get;
 
-public class GetNotaFiscalQueryHandler
+public sealed record GetNotasFiscaisCommand() : ICommand;
+
+public sealed class GetNotaFiscalQueryHandler : ICommandHandler<GetNotasFiscaisCommand>
 {
     #region Atributos
     private readonly ISqlConnectionFactory _sqlConnectionFactory;
@@ -19,31 +30,33 @@ public class GetNotaFiscalQueryHandler
     #endregion
 
     #region Handle
-    public async Task<NotaFiscalResponse> Handle(GetNotaFiscalQuery query, CancellationToken cancellationToken)
+    public async Task<List<NotaFiscal>> Handle(GetNotasFiscaisCommand command, CancellationToken cancellationToken)
     {
         await using var sqlConnection = _sqlConnectionFactory
             .CreateConnection();
 
-        NotaFiscalResponse? notaFiscalResponse = await 
-            sqlConnection.QueryFirstOrDefaultAsync<NotaFiscalResponse>(
-                @"SELECT 
-                    nNF, chNFe, dhEmi, 
-                    CNPJDest, xNomeDest, EmailDest, 
-                    xLgr, nro, xBairro, 
-                    xMun, UF, CEP
-                 FROM NotaFiscal
-                 WHERE Id = @Id",
-                new
-                {
-                    Id = query.Id
-                });
+        var sql = (@"SELECT 
+                        nNF, chNFe, dhEmi, 
+                        CNPJDest, xNomeDest, EmailDest, 
+                        xLgr, nro, xBairro, 
+                        xMun, UF, CEP
+                    FROM NotaFiscal");
 
-        if (notaFiscalResponse is null)
+        List<NotaFiscal?> listaNotasFiscais = sqlConnection
+            .Query<NotaFiscal?>(sql)
+            .ToList();
+
+        if (listaNotasFiscais is null)
         {
             // Tratar nf nulo
         }
 
-        return notaFiscalResponse;
+        return listaNotasFiscais;
+    }
+
+    Task<Result> ICommandHandler<GetNotasFiscaisCommand>.Handle(GetNotasFiscaisCommand command, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
     #endregion
 }
