@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LeitorNFe.SharedKernel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a7ce505dd0edf8de759a513d8ce7d17b3d1fa9d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+45a1ace2be0d3a84718cc1d473755e0a1b11a765")]
 [assembly: System.Reflection.AssemblyProductAttribute("LeitorNFe.SharedKernel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LeitorNFe.SharedKernel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

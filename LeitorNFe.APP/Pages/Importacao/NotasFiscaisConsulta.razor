@@ -1,0 +1,36 @@
+﻿@page "/importacao/consulta"
+@using MudBlazor.Utilities
+
+<MudText Class="align-center" Typo="Typo.h6">Nota Fiscal</MudText>
+<MudBreadcrumbs Separator=">" Items="_items"></MudBreadcrumbs>
+
+<br />
+<MudGrid>
+    <MudItem md="12"
+             sm="12"
+             xs="12">
+        <MudPaper Class="d-flex flex-column justify-space-between pa-4"
+                  Elevation="2"
+                  Style="height: 350px;">
+                  
+            @if (ListaNotasFiscais is not null)
+            {
+                <MudTable Items="@ListaNotasFiscais" Hover="true" Breakpoint="Breakpoint.Sm">
+                    <HeaderContent>
+                        <MudTh>nNF</MudTh>
+                        <MudTh>chNFe</MudTh>
+                        <MudTh>Emitente</MudTh>
+                        <MudTh>Destinatário</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="nNF">@context.nNF</MudTd>
+                            <MudTd DataLabel="chNFe">@context.chNFe</MudTd>
+                            <MudTd DataLabel="Emitente">@context.xNomeEmit</MudTd>
+                            <MudTd DataLabel="Destinatário">@context.xNomeDest</MudTd>
+                        </RowTemplate>
+                    </MudTable>
+            }
+            <MudButton Variant="Variant.Filled" OnClick=BuscarNotasFiscais>Buscar</MudButton>
+        </MudPaper>
+    </MudItem>
+</MudGrid>

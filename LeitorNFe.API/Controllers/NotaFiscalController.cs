@@ -53,10 +53,9 @@ public class NotaFiscalController : ControllerBase
     }
 
     [HttpGet("BuscarNotasFiscais")]
-    public async Task<bool> BuscarNotasFiscais(CancellationToken cancellationToken)
+    public async Task<List<NotaFiscal>> BuscarNotasFiscais(CancellationToken cancellationToken)
     {
-        await new GetNotaFiscalQueryHandler(_sqlConnection).Handle(new GetNotasFiscaisCommand(), cancellationToken);
-
-        return true;
+        return await new GetNotaFiscalQueryHandler(_sqlConnection)
+            .Handle(new GetNotasFiscaisCommand(), cancellationToken);
     }
 }

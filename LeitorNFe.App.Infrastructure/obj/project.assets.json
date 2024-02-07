@@ -2180,9 +2180,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Diniz\\Source\\Repos\\LeitorNFe2\\LeitorNFe.App.Infrastructure\\LeitorNFe.App.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Diniz\\source\\repos\\LeitorNFe2\\LeitorNFe.App.Infrastructure\\LeitorNFe.App.Infrastructure.csproj",
       "projectName": "LeitorNFe.App.Infrastructure",
-      "projectPath": "C:\\Users\\Diniz\\Source\\Repos\\LeitorNFe2\\LeitorNFe.App.Infrastructure\\LeitorNFe.App.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\Diniz\\source\\repos\\LeitorNFe2\\LeitorNFe.App.Infrastructure\\LeitorNFe.App.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Diniz\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Diniz\\Source\\Repos\\LeitorNFe2\\LeitorNFe.App.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
@@ -2206,8 +2206,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Diniz\\Source\\Repos\\LeitorNFe2\\LeitorNFe.Application\\LeitorNFe.Application.csproj": {
-              "projectPath": "C:\\Users\\Diniz\\Source\\Repos\\LeitorNFe2\\LeitorNFe.Application\\LeitorNFe.Application.csproj"
+            "C:\\Users\\Diniz\\source\\repos\\LeitorNFe2\\LeitorNFe.Application\\LeitorNFe.Application.csproj": {
+              "projectPath": "C:\\Users\\Diniz\\source\\repos\\LeitorNFe2\\LeitorNFe.Application\\LeitorNFe.Application.csproj"
             }
           }
         }

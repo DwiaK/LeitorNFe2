@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "h3PRh0c0wVbUaWQVg8ieLpOLjITNjQNXuVGd9HdhRmNIymntKGoO7W1yPwk6IjYyZMvBerZ3VqdYWpz2llrjEQ==",
+  "dgSpecHash": "Gvbnju0qXpV1+dZDhp4WtZfSaoHioFtOzTCF04CdeTkTgXBnRfHUEqLz3Dc01k1oL1tURPWTWI9ThosMV+VDng==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Diniz\\Source\\Repos\\LeitorNFe2\\LeitorNFe.Persistence\\LeitorNFe.Persistence.csproj",
+  "projectFilePath": "C:\\Users\\Diniz\\source\\repos\\LeitorNFe2\\LeitorNFe.Persistence\\LeitorNFe.Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Diniz\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Diniz\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

@@ -59,7 +59,7 @@ public partial class SideMenu
                 {
                     Title = "Minhas Notas",
                     Icon = Icons.Material.Filled.Notes,
-                    Href = "/importacao/manual",
+                    Href = "/importacao/consulta",
                     PageStatus = PageStatus.Concluido
                 },
             }

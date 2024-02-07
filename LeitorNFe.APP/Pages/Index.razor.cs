@@ -53,10 +53,10 @@ public partial class Index
         });
     }
 
-    public List<NotaFiscalModel> BuscarNotasFiscais()
+    public async void BuscarNotasFiscais()
     {
-        _notaFiscalService.ListarNotasFiscais();
+        var listaNotasFiscais = await _notaFiscalService.ListarNotasFiscais();
 
-        return new List<NotaFiscalModel>();
+        var teste = listaNotasFiscais;
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3oUI9nLlXTFsN1yVDARMT0azbqrukvLmB4nPZsxm5ISs3s1mKKNwxBsP63WgKyvclQ/g0moSRw13+uuEfqZocw==",
+  "dgSpecHash": "uDpJ7tcYWOr732kirFbONSO7Rq0wiiF2Xx1arUGchVCsHxHVHZuGJNmnr26omTi773gByEfcpDEtjgKgXznc1Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Diniz\\Source\\Repos\\LeitorNFe2\\LeitorNFe.App.Infrastructure\\LeitorNFe.App.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Diniz\\source\\repos\\LeitorNFe2\\LeitorNFe.App.Infrastructure\\LeitorNFe.App.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Diniz\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Diniz\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
