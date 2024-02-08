@@ -30,7 +30,7 @@ public partial class NotasFiscaisConsulta
     #endregion
 
     #region Métodos
-    public async void BuscarNotasFiscais()
+    protected override async Task OnInitializedAsync()
     {
         ListaNotasFiscais = await NotaFiscalService.ListarNotasFiscais();
     }

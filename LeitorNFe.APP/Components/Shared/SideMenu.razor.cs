@@ -75,14 +75,29 @@ public partial class SideMenu
                     Title = "Social",
                     Icon = Icons.Material.Filled.PeopleAlt,
                     Href = "/social",
-                    PageStatus = PageStatus.Concluido
+                    PageStatus = PageStatus.EmProgresso
                 },
             }
         }
     };
 
-    [EditorRequired][Parameter] public bool SideMenuDrawerOpen { get; set; }
-    [EditorRequired][Parameter] public EventCallback<bool> SideMenuDrawerOpenChanged { get; set; }
-    [EditorRequired][Parameter] public bool CanMiniSideMenuDrawer { get; set; }
-    [EditorRequired][Parameter] public EventCallback<bool> CanMiniSideMenuDrawerChanged { get; set; }
+    [EditorRequired]
+    [Parameter]
+    public GerenciaTemaModel GerenciadorTema { get; set; }
+
+    [EditorRequired]
+    [Parameter] 
+    public bool SideMenuDrawerOpen { get; set; }
+
+    [EditorRequired]
+    [Parameter] 
+    public EventCallback<bool> SideMenuDrawerOpenChanged { get; set; }
+
+    [EditorRequired]
+    [Parameter] 
+    public bool CanMiniSideMenuDrawer { get; set; }
+
+    [EditorRequired]
+    [Parameter] 
+    public EventCallback<bool> CanMiniSideMenuDrawerChanged { get; set; }
 }
