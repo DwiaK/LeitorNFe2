@@ -397,3 +397,32 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+/LeitorNFe.SharedKernel/obj/Debug/net8.0/LeitorNFe.SharedKernel.AssemblyInfo.cs
+/LeitorNFe.SharedKernel/obj/Debug/net8.0/LeitorNFe.SharedKernel.AssemblyInfoInputs.cache
+/LeitorNFe.SharedKernel/obj/Debug/net8.0/LeitorNFe.SharedKernel.assets.cache
+/LeitorNFe.SharedKernel/obj/Debug/net8.0/LeitorNFe.SharedKernel.GeneratedMSBuildEditorConfig.editorconfig
+/LeitorNFe.Persistence/obj/Debug/net8.0/LeitorNFe.Persistence.AssemblyInfo.cs
+/LeitorNFe.Persistence/obj/Debug/net8.0/LeitorNFe.Persistence.AssemblyInfoInputs.cache
+/LeitorNFe.Persistence/obj/Debug/net8.0/LeitorNFe.Persistence.assets.cache
+/LeitorNFe.Persistence/obj/Debug/net8.0/LeitorNFe.Persistence.csproj.AssemblyReference.cache
+/LeitorNFe.Persistence/obj/Debug/net8.0/LeitorNFe.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+/LeitorNFe.Domain/obj/Debug/net8.0/LeitorNFe.Domain.AssemblyInfo.cs
+/LeitorNFe.Domain/obj/Debug/net8.0/LeitorNFe.Domain.AssemblyInfoInputs.cache
+/LeitorNFe.Domain/obj/Debug/net8.0/LeitorNFe.Domain.assets.cache
+/LeitorNFe.Domain/obj/Debug/net8.0/LeitorNFe.Domain.csproj.AssemblyReference.cache
+/LeitorNFe.Domain/obj/Debug/net8.0/LeitorNFe.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/LeitorNFe.App.Infrastructure/obj/Debug/net8.0/LeitorNFe.App.Infrastructure.AssemblyInfo.cs
+/LeitorNFe.App.Infrastructure/obj/Debug/net8.0/LeitorNFe.App.Infrastructure.AssemblyInfoInputs.cache
+/LeitorNFe.App.Infrastructure/obj/Debug/net8.0/LeitorNFe.App.Infrastructure.assets.cache
+/LeitorNFe.App.Infrastructure/obj/Debug/net8.0/LeitorNFe.App.Infrastructure.csproj.AssemblyReference.cache
+/LeitorNFe.App.Infrastructure/obj/Debug/net8.0/LeitorNFe.App.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/LeitorNFe.Application/obj/Debug/net8.0/LeitorNFe.Application.AssemblyInfo.cs
+/LeitorNFe.Application/obj/Debug/net8.0/LeitorNFe.Application.AssemblyInfoInputs.cache
+/LeitorNFe.Application/obj/Debug/net8.0/LeitorNFe.Application.assets.cache
+/LeitorNFe.Application/obj/Debug/net8.0/LeitorNFe.Application.csproj.AssemblyReference.cache
+/LeitorNFe.Application/obj/Debug/net8.0/LeitorNFe.Application.GeneratedMSBuildEditorConfig.editorconfig
+/LeitorNFe.API/obj/Debug/net8.0/LeitorNFe.API.AssemblyInfo.cs
+/LeitorNFe.API/obj/Debug/net8.0/LeitorNFe.API.AssemblyInfoInputs.cache
+/LeitorNFe.API/obj/Debug/net8.0/LeitorNFe.API.assets.cache
+/LeitorNFe.API/obj/Debug/net8.0/LeitorNFe.API.csproj.AssemblyReference.cache
+/LeitorNFe.API/obj/Debug/net8.0/LeitorNFe.API.GeneratedMSBuildEditorConfig.editorconfig
