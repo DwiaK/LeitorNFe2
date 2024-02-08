@@ -8,18 +8,24 @@
                           Placeholder="Digite informações sobre a Nota Fiscal"
                           TextChanged="@(BuscarPaginas)"
                           Immediate="true"
-                          Variant="Variant.Text"/>
+                          Variant="Variant.Text" />
 
             <MudList Clickable="true"
                      Style="overflow-y: auto">
                 @foreach (var (key, value) in _paginasFiltradas)
                 {
-                    <MudListItem OnClick="@(() => Navigation.NavigateTo(value))" Style="font-size: 12px;">
-                        <MudHighlighter HighlightedText="@_busca"
-                                        Class="mud-primary-text"
-                                        Style="background-color:transparent; font-weight:bold"
-                                        Text="@key" />
-                    </MudListItem>
+                    if (_busca is not null)
+                    {
+                        if (!Equals(_busca, string.Empty))
+                        {
+                            <MudListItem OnClick="@(() => Navigation.NavigateTo(value))" Style="font-size: 12px;">
+                                <MudHighlighter HighlightedText="@_busca"
+                                                Class="mud-primary-text"
+                                                Style="background-color:transparent; font-weight:bold"
+                                                Text="@key" />
+                            </MudListItem>
+                        }
+                    }
                 }
             </MudList>
         </MudContainer>

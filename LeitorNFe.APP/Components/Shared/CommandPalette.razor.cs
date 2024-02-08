@@ -1,8 +1,12 @@
+using LeitorNFe.App.Models.NotaFiscal;
+using LeitorNFe.App.Services.NotaFiscal;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Toolbelt.Blazor.HotKeys;
 
 namespace LeitorNFe.App.Components.Shared;
@@ -15,15 +19,20 @@ public partial class CommandPalette : IDisposable
 
     private Dictionary<string, string> _paginasFiltradas = new();
 
+    private List<NotaFiscalModel> ListaNotasFiscais { get; set; }
+
     private string _busca;
 
-    [Inject] 
+    [Inject]
+    private INotaFiscalService NotaFiscalService { get; set; }
+
+    [Inject]
     private HotKeys HotKeys { get; set; }
 
-    [Inject] 
+    [Inject]
     private NavigationManager Navigation { get; set; }
 
-    [CascadingParameter] 
+    [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; }
 
     public void Dispose()
@@ -31,9 +40,11 @@ public partial class CommandPalette : IDisposable
         _hotKeysContext?.Dispose();
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        AdicionarPaginas();
+        ListaNotasFiscais = await NotaFiscalService.ListarNotasFiscais();
+
+        AdicionarNotasFiscais(ListaNotasFiscais);
 
         _hotKeysContext = HotKeys.CreateContext()
             .Add(ModKeys.None, Keys.ESC, () => MudDialog.Close(), "Fechar comandos");
@@ -51,24 +62,16 @@ public partial class CommandPalette : IDisposable
             _paginasFiltradas = _paginas;
     }
 
-    private void AdicionarPaginas()
+    private void AdicionarNotasFiscais(List<NotaFiscalModel> listaNotasFiscais)
     {
-        // Separar por Section, Parent e Child
+        //_paginas.Add("us Projetos ", "/");
 
-        _paginas.Add("Início", "/");
-        _paginas.Add("Meus Projetos > Concluídos", "/");
-        _paginas.Add("Meus Projetos > Em Desenvolvimento", "/");
-        _paginas.Add("Meus Projetos > Projetos Futuros", "/");
-        _paginas.Add("Meus Projetos > Projetos ", "/");
-        _paginas.Add("Meus Projeos > Pros ", "/");
-        _paginas.Add("Meus Proos ", "/");
-        _paginas.Add("Mes Projetoetos ", "/");
-        _paginas.Add("Meus Pos > Projetos ", "/");
-        _paginas.Add("Mes > Projetos ", "/");
-        _paginas.Add("Meus Proetos ", "/");
-        _paginas.Add("Meetos ", "/");
-        _paginas.Add("Meus tos ", "/");
-        _paginas.Add("us Projetos ", "/");
+        listaNotasFiscais.ForEach(item =>
+        {
+            var informacoesExibicaoNf = $"{item.xNomeEmit} {item.xNomeDest}";
+
+            _paginas.Add(informacoesExibicaoNf, "/");
+        });
 
         _paginasFiltradas = _paginas;
     }

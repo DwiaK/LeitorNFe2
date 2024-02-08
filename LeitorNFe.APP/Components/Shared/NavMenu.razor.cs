@@ -9,6 +9,7 @@ namespace LeitorNFe.App.Components.Shared;
 public partial class NavMenu
 {
     private bool _alternaTema;
+    private bool _paletaComandosAberta;
 
     private readonly Palette _darkPalette = new()
     {
