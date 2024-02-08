@@ -20,13 +20,4 @@ public class NotaFiscalModel
     public string xNomeDest { get; set; }
     public string EmailDest { get; set; }
     #endregion
-
-    #region Endereço
-    public string xLgr { get; set; }
-    public string nro { get; set; }
-    public string xBairro { get; set; }
-    public string xMun { get; set; }
-    public string UF { get; set; }
-    public string CEP { get; set; }
-    #endregion
 }

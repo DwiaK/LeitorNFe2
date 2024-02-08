@@ -64,13 +64,11 @@ public partial class CommandPalette : IDisposable
 
     private void AdicionarNotasFiscais(List<NotaFiscalModel> listaNotasFiscais)
     {
-        //_paginas.Add("us Projetos ", "/");
-
         listaNotasFiscais.ForEach(item =>
         {
             var informacoesExibicaoNf = $"{item.xNomeEmit} {item.xNomeDest}";
 
-            _paginas.Add(informacoesExibicaoNf, "/");
+            _paginas.Add(informacoesExibicaoNf, "/"); // Redirecionar p/tela de edição c/ a nota
         });
 
         _paginasFiltradas = _paginas;

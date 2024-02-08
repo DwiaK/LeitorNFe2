@@ -43,7 +43,11 @@ public partial class Index
             xNomeEmit = "NomeEmit",
             CNPJDest = "125234952",
             xNomeDest = "NomeDest",
-            EmailDest = "EmailDest",
+            EmailDest = "EmailDest"
+        },
+        new NotaFiscalEnderecosModel()
+        {
+            // Endereço
             xLgr = "wfeqef",
             nro = "23423",
             xBairro = "erwgerg",
