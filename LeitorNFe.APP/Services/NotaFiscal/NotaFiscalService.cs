@@ -25,31 +25,9 @@ public class NotaFiscalService : INotaFiscalService
         return request ?? throw new InvalidOperationException();
     }
 
-    public async Task<bool> ImportarNotaFiscal(NotaFiscalModel notaFiscal, NotaFiscalEnderecosModel enderecoNotaFiscal)
+    public async Task<bool> ImportarNotaFiscal(NotaFiscalModel notaFiscal)
     {
-        // Montar Requisição
-        var importarNotaFiscalRequest = new ImportarNotaFiscalRequest
-        {
-            // Nf
-            nNF = "12345",
-            chNFe = "13451358932462362346234623467",
-            dhEmi = "05/02/2024",
-            CNPJEmit = "12341341",
-            xNomeEmit = "NomeEmit",
-            CNPJDest = "125234952",
-            xNomeDest = "NomeDest",
-            EmailDest = "EmailDest",
-
-            // Endereço
-            xLgr = "wfeqef",
-            nro = "23423",
-            xBairro = "erwgerg",
-            xMun = " gererwwger",
-            UF = "qwegqgeqgwe",
-            CEP = "34254622"
-        };
-
-        var request = await _httpClient.PostAsJsonAsync("api/NotaFiscal/ImportarNotaFiscal", importarNotaFiscalRequest);
+        var request = await _httpClient.PostAsJsonAsync("api/NotaFiscal/ImportarNotaFiscal", notaFiscal);
 
         if (request.StatusCode is HttpStatusCode.OK)
         {

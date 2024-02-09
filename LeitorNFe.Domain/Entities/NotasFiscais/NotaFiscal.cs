@@ -24,7 +24,7 @@ public class NotaFiscal : EntidadeBase
     public NotaFiscal()
     {
     }
-
+    
     public int IdNotaFiscal { get; set; }
 
     #region Base
@@ -36,11 +36,14 @@ public class NotaFiscal : EntidadeBase
     #region Emitente
     public string CNPJEmit { get; set; }
     public string xNomeEmit { get; set; }
+    public Endereco EnderecoEmitente { get; set; }
+    #endregion
 
     #region Destinatário
     public string CNPJDest { get; set; }
     public string xNomeDest { get; set; }
     public string EmailDest { get; set; }
+    public Endereco EnderecoDestinatario { get; set; }
     #endregion
 
     public static NotaFiscal Create(int id, string numeroNf, string chaveNFe, string DhEmi,

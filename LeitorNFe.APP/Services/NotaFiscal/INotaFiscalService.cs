@@ -8,5 +8,5 @@ public interface INotaFiscalService
 {
     public Task<NotaFiscalModel> BuscarNotaFiscalPorId(int id);
     public Task<List<NotaFiscalModel>> ListarNotasFiscais();
-    public Task<bool> ImportarNotaFiscal(NotaFiscalModel notaFiscal, NotaFiscalEnderecosModel enderecoNotaFiscal);
+    public Task<bool> ImportarNotaFiscal(NotaFiscalModel notaFiscal);
 }

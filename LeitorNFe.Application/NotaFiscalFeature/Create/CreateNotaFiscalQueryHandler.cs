@@ -5,6 +5,7 @@ using LeitorNFe.Application.Abstractions.Messaging;
 using LeitorNFe.Application.NotaFiscalFeature.GetById;
 using LeitorNFe.Domain.Entities.NotasFiscais;
 using LeitorNFe.SharedKernel;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -36,22 +37,28 @@ public class CreateNotaFiscalQueryHandler : ICommandHandler<CreateNotaFiscalComm
                     NotaFiscal (
                         nNF, chNFe, dhEmi, 
                         CNPJEmit, xNomeEmit, CNPJDest, 
-                        xNomeDest, EmailDest, xLgr, 
-                        nro, xBairro, xMun, UF
+                        xNomeDest, EmailDest
                     )
                     Values (
                         @nNF, @chNFe, @dhEmi, 
                         @CNPJEmit, @xNomeEmit, @CNPJDest, 
-                        @xNomeDest, @EmailDest, 'test', 
-                        'test', 'test', 'test', 'test'       
+                        @xNomeDest, @EmailDest      
                     )";
+        try
+        {
+            var linhasAfetadas = await sqlConnection.ExecuteAsync(sql, command.notaFiscal);
+        }
+        catch (Exception e)
+        {
 
-        var linhasAfetadas = await sqlConnection.ExecuteAsync(sql, command.notaFiscal);
+        }
 
-        if (linhasAfetadas is > 0)
-            return Result.Success(true);
-        else
-            return Result.Failure(Error.None);
+        var test = command.notaFiscal;
+
+        //if (linhasAfetadas is > 0)
+        return Result.Success(true);
+        //else
+        //    return Result.Failure(Error.None);
     }
     #endregion
 }

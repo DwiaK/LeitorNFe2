@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using LeitorNFe.SharedKernel;
 using LeitorNFe.Domain.Entities.NotasFiscais;
+using LeitorNFe.Domain.Entities.Enderecos;
 using LeitorNFe.Application.Abstractions.Command;
 using LeitorNFe.Application.Abstractions.Data;
 using LeitorNFe.Application.Abstractions.Messaging;
@@ -59,6 +60,27 @@ public sealed class GetNotaFiscalByIdQueryHandler : ICommandHandler<GetNotaFisca
                 {
                     query.Id
                 });
+
+        // REF
+        var sql = @"SELECT *
+                    FROM
+                        [NotaFiscal][nf]
+                    INNER JOIN
+                        [NotaFiscalEndereco][nfe] ON [nf].[IdNotaFiscal] = [nfe].[IdNotaFiscal]
+                    WHERE
+                        [nf].[IdNotaFiscal] = @Id";
+
+        var asd = await sqlConnection
+            .QueryAsync<NotaFiscal, Endereco, Endereco, NotaFiscal>(sql, (nf, nfee, nfed) =>
+            {
+                nf.EnderecoEmitente = nfee;
+                nf.EnderecoDestinatario = nfed;
+
+                return nf;
+            }, 
+            splitOn: "IdNotaFiscal");
+
+        // REF
 
         if (notaFiscalResponse is null)
         {

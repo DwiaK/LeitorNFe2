@@ -43,17 +43,25 @@ public partial class Index
             xNomeEmit = "NomeEmit",
             CNPJDest = "125234952",
             xNomeDest = "NomeDest",
-            EmailDest = "EmailDest"
-        },
-        new NotaFiscalEnderecosModel()
-        {
-            // Endereço
-            xLgr = "wfeqef",
-            nro = "23423",
-            xBairro = "erwgerg",
-            xMun = " gererwwger",
-            UF = "qwegqgeqgwe",
-            CEP = "34254622"
+            EmailDest = "EmailDest",
+            EnderecoEmitente = new NotaFiscalEnderecosModel()
+            {
+                xLgr = "wfeqef",
+                nro = "23423",
+                xBairro = "erwgerg",
+                xMun = " gererwwger",
+                UF = "qwegqgeqgwe",
+                CEP = "34254622"
+            },
+            EnderecoDestinatario = new NotaFiscalEnderecosModel()
+            {
+                xLgr = "xcvvxc",
+                nro = "9999",
+                xBairro = "qwerty",
+                xMun = " qwerty",
+                UF = "qwerty",
+                CEP = "1234"
+            }
         });
     }
 

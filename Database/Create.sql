@@ -7,17 +7,11 @@ CREATE TABLE NotaFiscal(
     xNomeEmit VARCHAR(255),
     CNPJDest VARCHAR(255),
     xNomeDest VARCHAR(255),
-    EmailDest VARCHAR(255),
-    xLgr VARCHAR(255),
-    nro VARCHAR(255),
-    xBairro VARCHAR(255),
-    xMun VARCHAR(255),
-    UF VARCHAR(255),
-    CEP VARCHAR(255)
+    EmailDest VARCHAR(255)
 )
 
 CREATE TABLE NotaFiscalProdutos(
-    IdNotaFiscalProdutos INT NOT NULL,
+    IdNotaFiscalProdutos INT IDENTITY(1,1) PRIMARY KEY,
     IdNotaFiscal INT,
     NumeroItem VARCHAR(255),
     CodigoProduto VARCHAR(255),
@@ -28,5 +22,18 @@ CREATE TABLE NotaFiscalProdutos(
     FOREIGN KEY (IdNotaFiscal) REFERENCES NotaFiscal(IdNotaFiscal)
 )
 
+CREATE TABLE NotaFiscalEnderecos(
+    IdNotaFiscalEnderecos INT IDENTITY(1,1) PRIMARY KEY,
+    IdNotaFiscal INT,
+    xLgr VARCHAR(255),
+    nro VARCHAR(255),
+    xBairro VARCHAR(255),
+    xMun VARCHAR(255),
+    UF VARCHAR(255),
+    CEP VARCHAR(255),
+    FOREIGN KEY (IdNotaFiscal) REFERENCES NotaFiscal(IdNotaFiscal)
+)
+
+-- DROP TABLE NotaFiscalEnderecos
 -- DROP TABLE NotaFiscalProdutos
 -- DROP TABLE NotaFiscal
