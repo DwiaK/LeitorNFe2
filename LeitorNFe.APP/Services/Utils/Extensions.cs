@@ -1,12 +1,11 @@
 ﻿using LeitorNFe.App.Models.NotaFiscal;
 using Microsoft.AspNetCore.Components.Forms;
-using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Serialization;
 
 namespace LeitorNFe.App.Services.Utils;
 
@@ -117,4 +116,22 @@ public class Extensions
                 BuscarTagXml(item, tagXml, nodePai);
     }
     #endregion
+}
+
+public static class BasicExtensions
+{
+    public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
+    {
+        if (enumerable == null)
+        {
+            return true;
+        }
+
+        var collection = enumerable as ICollection<T>;
+        if (collection != null)
+        {
+            return collection.Count < 1;
+        }
+        return !enumerable.Any();
+    }
 }
