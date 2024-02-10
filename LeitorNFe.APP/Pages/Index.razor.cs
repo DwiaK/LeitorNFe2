@@ -22,7 +22,7 @@ public partial class Index
 
     public async void GetNotaFiscalId()
     {
-        var result = await _notaFiscalService.BuscarNotaFiscalPorId(5);
+        var result = await _notaFiscalService.BuscarNotaFiscalPorId(10);
 
         var teste = result;
 

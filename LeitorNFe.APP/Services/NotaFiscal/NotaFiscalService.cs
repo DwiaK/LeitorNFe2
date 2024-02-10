@@ -1,11 +1,12 @@
 ﻿using LeitorNFe.App.Models.NotaFiscal;
+using LeitorNFe.App.Services.Utils;
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Net;
 using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace LeitorNFe.App.Services.NotaFiscal;
 
@@ -46,5 +47,16 @@ public class NotaFiscalService : INotaFiscalService
         var request = await _httpClient.GetFromJsonAsync<List<NotaFiscalModel>>("api/NotaFiscal/BuscarNotasFiscais");
 
         return request ?? throw new InvalidOperationException();
+    }
+
+    public async Task<NotaFiscalModel> MontarNotaFiscal(IBrowserFile arquivo)
+    {
+        var extensions = new Extensions();
+
+        // Converter de IBrowsable para XmlDocument
+        var documentoXml = await extensions.ConverterArquivoXmlDocument(arquivo);
+        var objetoNotaFiscal = extensions.RetornarObjetoXml(documentoXml);
+
+        return objetoNotaFiscal;
     }
 }
