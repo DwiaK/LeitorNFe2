@@ -1,9 +1,9 @@
-SELECT *
-FROM 
-    [NotaFiscal]
+SELECT * FROM [NotaFiscal]
+SELECT * FROM [NotaFiscalEnderecos]
+SELECT * FROM [NotaFiscalProdutos]
 
--- DELETE
---     FROM
---         [NotaFiscal]
---     WHERE
---         [IdNotaFiscal] > 10
+
+
+-- DELETE FROM [NotaFiscalProdutos]
+-- DELETE FROM [NotaFiscalEnderecos]
+-- DELETE FROM [NotaFiscal]

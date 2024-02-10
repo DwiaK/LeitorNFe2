@@ -46,6 +46,7 @@ public partial class Index
             EmailDest = "EmailDest",
             EnderecoEmitente = new NotaFiscalEnderecosModel()
             {
+                IsEmit = true,
                 xLgr = "wfeqef",
                 nro = "23423",
                 xBairro = "erwgerg",
@@ -55,6 +56,7 @@ public partial class Index
             },
             EnderecoDestinatario = new NotaFiscalEnderecosModel()
             {
+                IsEmit = false,
                 xLgr = "xcvvxc",
                 nro = "9999",
                 xBairro = "qwerty",

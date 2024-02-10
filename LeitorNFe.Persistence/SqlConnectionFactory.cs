@@ -15,5 +15,4 @@ public class SqlConnectionFactory : ISqlConnectionFactory
 
     public SqlConnection CreateConnection() =>
         new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
-        //new SqlConnection(_configuration.GetConnectionString("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=WingLibrary;Integrated Security=True"));
 }

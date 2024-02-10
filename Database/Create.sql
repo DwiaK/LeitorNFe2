@@ -25,6 +25,7 @@ CREATE TABLE NotaFiscalProdutos(
 CREATE TABLE NotaFiscalEnderecos(
     IdNotaFiscalEnderecos INT IDENTITY(1,1) PRIMARY KEY,
     IdNotaFiscal INT,
+    DestEmit INT,
     xLgr VARCHAR(255),
     nro VARCHAR(255),
     xBairro VARCHAR(255),

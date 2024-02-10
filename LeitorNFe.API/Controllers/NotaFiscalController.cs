@@ -23,25 +23,9 @@ public class NotaFiscalController : ControllerBase
     [HttpGet("BuscarNotaFiscalPorId/{id}")]
     public async Task<NotaFiscal> GetNotaFiscalById(int id, CancellationToken cancellationToken)
     {
-        //await using (SqlConnection connection =
-        //    new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=LeitorNFe;Integrated Security=True"))
-        //{
-        //    var result = connection.Query<NotaFiscalResponse>(
-        //        @"SELECT * 
-        //            FROM NotaFiscal
-        //            WHERE IdNotaFiscal = @Id", new { id })
-        //        .FirstOrDefault();
-        //    return Ok(result);
-        //}
+        var result = await new GetNotaFiscalByIdQueryHandler(_sqlConnection).Handle(new GetNotaFiscalByIdCommand(id), cancellationToken);
 
-        // TODO: Realizar operações chamando o Handle
-        //var query = new GetNotaFiscalByIdQuery(id);
-
-
-        //return Results.Ok(new GetNotaFiscalByIdQueryHandler().Handle(new GetNotaFiscalByIdQuery(id), cancellationToken));
-
-        return await new GetNotaFiscalByIdQueryHandler(_sqlConnection)
-            .Handle(new GetNotaFiscalByIdQuery(id), cancellationToken);
+        return result.Value;
     }
 
     [HttpPost("ImportarNotaFiscal")]
@@ -55,7 +39,8 @@ public class NotaFiscalController : ControllerBase
     [HttpGet("BuscarNotasFiscais")]
     public async Task<List<NotaFiscal>> BuscarNotasFiscais(CancellationToken cancellationToken)
     {
-        return await new GetNotaFiscalQueryHandler(_sqlConnection)
-            .Handle(new GetNotasFiscaisCommand(), cancellationToken);
+        var result = await new GetNotaFiscalQueryHandler(_sqlConnection).Handle(new GetNotaFiscalCommand(), cancellationToken);
+
+        return result.Value;
     }
 }

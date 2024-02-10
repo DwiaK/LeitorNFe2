@@ -1,10 +1,16 @@
-﻿namespace LeitorNFe.Domain.Entities.Enderecos;
+﻿using LeitorNFe.Domain.Common.Enums;
+using System.Collections.Generic;
+
+namespace LeitorNFe.Domain.Entities.Enderecos;
 
 public class Endereco
 {
     #region Ctor
-    public Endereco(string xlogr, string num, string bairro, string mun, string uf, string cep)
+    public Endereco(int id, int idNf, bool isEmit, string xlogr, string num, string bairro, string mun, string uf, string cep)
     {
+        IdNotaFiscalEnderecos = id;
+        IdNotaFiscal = idNf;
+        IsEmit = isEmit;
         xLgr = xlogr;
         nro = num;
         xBairro = bairro;
@@ -19,6 +25,11 @@ public class Endereco
     #endregion
 
     #region Props
+    public int IdNotaFiscalEnderecos { get; set; }
+    public int IdNotaFiscal { get; set; } // Foreign Key -> NotaFiscal
+
+    public bool IsEmit { get; set; }
+
     public string xLgr { get; set; }
     public string nro { get; set; }
     public string xBairro { get; set; }
@@ -29,9 +40,9 @@ public class Endereco
 
     #region Methods
     public static Endereco Create
-        (string xLgr, string nro, string xBairro, string xMun, string uf, string cep)
+        (int id, int idNf, bool isEmit, string xLgr, string nro, string xBairro, string xMun, string uf, string cep)
     {
-        Endereco endereco = new Endereco(xLgr, nro, xBairro, xMun, uf, cep);
+        Endereco endereco = new Endereco(id, idNf, isEmit, xLgr, nro, xBairro, xMun, uf, cep);
 
         return endereco;
     }

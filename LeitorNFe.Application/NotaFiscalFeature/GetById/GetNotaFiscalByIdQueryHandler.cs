@@ -9,36 +9,20 @@ using LeitorNFe.Application.NotaFiscalFeature.GetById;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace NotaFiscalFeature.GetById;
 
-public sealed record GetNotaFiscalByIdCommand(int id) : ICommand;
+public sealed record GetNotaFiscalByIdCommand(int id) : IQuery<NotaFiscal>;
 
-public sealed class GetNotaFiscalByIdQueryHandler : ICommandHandler<GetNotaFiscalByIdCommand>
+public sealed class GetNotaFiscalByIdQueryHandler : IQueryHandler<GetNotaFiscalByIdCommand, NotaFiscal>
 {
     #region Atributos
     private readonly ISqlConnectionFactory _sqlConnectionFactory;
     #endregion
 
-    #region Repositórios/Serviços/UnitOfWork
-    //private readonly INotaFiscalRepository _notaFiscalRepository;
-    //private readonly NotaFiscalService _notaFiscalService;
-    //private readonly IUnitOfWork _unitOfWork;
-    #endregion
-
     #region Construtor
-    //public GetNotaFiscalByIdQueryHandler(
-    //    ISqlConnectionFactory sqlConnectionFactory, 
-    //    INotaFiscalRepository notaFiscalRepository,
-    //    NotaFiscalService notaFiscalService,
-    //    IUnitOfWork unitOfWork)
-    //{
-    //    _sqlConnectionFactory = sqlConnectionFactory;
-    //    _notaFiscalRepository = notaFiscalRepository;
-    //    _notaFiscalService = notaFiscalService;
-    //    _unitOfWork = unitOfWork;
-    //}
-
     public GetNotaFiscalByIdQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
     {
         _sqlConnectionFactory = sqlConnectionFactory;
@@ -46,100 +30,56 @@ public sealed class GetNotaFiscalByIdQueryHandler : ICommandHandler<GetNotaFisca
     #endregion
 
     #region Handler
-    public async Task<NotaFiscal> Handle(GetNotaFiscalByIdQuery query, CancellationToken cancellationToken)
-    {
-        await using var sqlConnection = _sqlConnectionFactory
-            .CreateConnection();
-
-        NotaFiscal? notaFiscalResponse = await
-            sqlConnection.QueryFirstOrDefaultAsync<NotaFiscal>(
-                @"SELECT *
-                  FROM [NotaFiscal]
-                  WHERE IdNotaFiscal = @Id",
-                new
-                {
-                    query.Id
-                });
-
-        // REF
-        var sql = @"SELECT *
-                    FROM
-                        [NotaFiscal][nf]
-                    INNER JOIN
-                        [NotaFiscalEndereco][nfe] ON [nf].[IdNotaFiscal] = [nfe].[IdNotaFiscal]
-                    WHERE
-                        [nf].[IdNotaFiscal] = @Id";
-
-        var asd = await sqlConnection
-            .QueryAsync<NotaFiscal, Endereco, Endereco, NotaFiscal>(sql, (nf, nfee, nfed) =>
-            {
-                nf.EnderecoEmitente = nfee;
-                nf.EnderecoDestinatario = nfed;
-
-                return nf;
-            }, 
-            splitOn: "IdNotaFiscal");
-
-        // REF
-
-        if (notaFiscalResponse is null)
-        {
-            // Tratar nf nulo
-        }
-
-        return notaFiscalResponse;
-    }
-
     public async Task<Result<NotaFiscal>> Handle(GetNotaFiscalByIdCommand command, CancellationToken cancellationToken)
     {
         await using var sqlConnection = _sqlConnectionFactory
             .CreateConnection();
 
-        NotaFiscal? notaFiscalResponse = await
-            sqlConnection.QueryFirstOrDefaultAsync<NotaFiscal>(
-                @"SELECT *
-                  FROM [NotaFiscal]
-                  WHERE IdNotaFiscal = @Id",
-                new
-                {
-                    command.id
+        try
+        {
+            // Iniciar Conexão Assíncrona
+            await sqlConnection.OpenAsync();
+
+            // Buscar query
+            var nfQuery = GetNotaFiscalByIdStringQuery();
+
+            var notaFiscal = await sqlConnection
+                .QueryFirstOrDefaultAsync<NotaFiscal>
+                (nfQuery, new 
+                { 
+                    IdNotaFiscal = command.id 
                 });
 
-        if (notaFiscalResponse is null)
-        {
-            // Tratar nf nulo
-            Result.Failure(Error.NullValue);
+            // Se a lista de notas fiscais for nula
+            if (notaFiscal is null)
+            {
+                return Result.Failure<NotaFiscal>(Error.NullValue);
+            }
+
+            return Result.Success<NotaFiscal>(notaFiscal);
         }
-
-        return notaFiscalResponse;
+        catch (Exception)
+        {
+            return Result.Failure<NotaFiscal>(Error.None);
+        }
     }
 
-    Task<Result> ICommandHandler<GetNotaFiscalByIdCommand>.Handle(GetNotaFiscalByIdCommand command, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    // Teste
-    //public async Task<Result> Handle(GetNotaFiscalByIdCommand command, CancellationToken cancellationToken)
-    //{
-    //    LeitorNFe.Domain.Entities.NotasFiscais.NotaFiscal? notaFiscal = await _notaFiscalRepository.GetByIdAsync(command.id, cancellationToken);
-
-    //    if (notaFiscal is null)
-    //        return NotaFiscalErrors.NotFound(command.id);
-
-    //    Result result = await _notaFiscalService.BuscarNotaFiscal(notaFiscal, cancellationToken);
-
-    //    if (result.IsFailure)
-    //        return Result.Failure(result.Error);
-
-    //    await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-    //    return Result.Success();
-    //}
     #endregion
-}
 
-public interface INotaFiscalRepository
-{
-    Task<NotaFiscal?> GetByIdAsync(int id, CancellationToken cancellationToken);
+    #region Database Queries
+    public string GetNotaFiscalByIdStringQuery()
+    {
+        StringBuilder query = new StringBuilder();
+
+        query.AppendLine("SELECT ");
+        query.AppendLine("  [NF].* ");
+        query.AppendLine("FROM ");
+        query.AppendLine("  [NotaFiscal][NF] ");
+
+        query.AppendLine("WHERE");
+        query.AppendLine(@"  [NF].[IdNotaFiscal] = @IdNotaFiscal");
+
+        return query.ToString();
+    }
+    #endregion
 }
