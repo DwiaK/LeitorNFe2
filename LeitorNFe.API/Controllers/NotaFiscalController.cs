@@ -31,9 +31,12 @@ public class NotaFiscalController : ControllerBase
     [HttpPost("ImportarNotaFiscal")]
     public async Task<bool> ImportarNotaFiscal([FromBody] NotaFiscal notaFiscal, CancellationToken cancellationToken)
     {
-        await new CreateNotaFiscalQueryHandler(_sqlConnection).Handle(new CreateNotaFiscalCommand(notaFiscal), cancellationToken);
+        var result = await new CreateNotaFiscalQueryHandler(_sqlConnection).Handle(new CreateNotaFiscalCommand(notaFiscal), cancellationToken);
 
-        return true;
+        if (result.IsSuccess)
+            return true;
+        else
+            return false;
     }
 
     [HttpGet("BuscarNotasFiscais")]

@@ -51,11 +51,15 @@ public partial class ImportacaoAutomaticaPage
             return;
         }
 
+        var resultado = false;
+
         arquivos.ForEach(async item =>
         {
             var notaFiscal = await _notaFiscalService.MontarNotaFiscal(item);
-            var resultado = await _notaFiscalService.ImportarNotaFiscal(notaFiscal);
+            resultado = await _notaFiscalService.ImportarNotaFiscal(notaFiscal);
         });
+
+        _snackbar.Add($"Nota(s) importada(s) com sucesso!", Severity.Success);
     }
 
     private void OnInputFileChanged(InputFileChangeEventArgs e)

@@ -1,8 +1,16 @@
 ﻿@page "/importacao/consulta"
 @using MudBlazor.Utilities
 
-<MudText Class="align-center" Typo="Typo.h6">Nota Fiscal</MudText>
-<MudBreadcrumbs Separator=">" Items="_items"></MudBreadcrumbs>
+<MudGrid>
+    <MudItem md="12"
+             sm="12"
+             xs="12">
+        <MudBreadcrumbs Separator=">"
+                        Items="_items"
+                        Style="font-size: 10px;"
+                        Class="relative d-flex justify-end" />
+    </MudItem>
+</MudGrid>
 
 <br />
 <MudGrid>
