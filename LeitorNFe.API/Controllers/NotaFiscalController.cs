@@ -6,6 +6,7 @@ using LeitorNFe.Domain.Entities.NotasFiscais;
 using Microsoft.AspNetCore.Mvc;
 using NotaFiscalFeature.GetById;
 using LeitorNFe.Application.NotaFiscalFeature.Get;
+using LeitorNFe.Application.NotaFiscalFeature.Delete;
 
 namespace LeitorNFe.API.Controllers;
 
@@ -37,6 +38,14 @@ public class NotaFiscalController : ControllerBase
             return true;
         else
             return false;
+    }
+
+    [HttpDelete("DeletarNotaFiscal")]
+    public async Task<bool> DeletarNotaFiscal(int id, CancellationToken cancellationToken)
+    {
+        var result = await new DeleteNotaFiscalQueryHandler(_sqlConnection).Handle(new DeleteNotaFiscalCommand(id), cancellationToken);
+
+        return true;
     }
 
     [HttpGet("BuscarNotasFiscais")]

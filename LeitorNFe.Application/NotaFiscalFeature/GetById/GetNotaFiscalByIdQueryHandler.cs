@@ -1,15 +1,11 @@
 ﻿using Dapper;
 using LeitorNFe.SharedKernel;
 using LeitorNFe.Domain.Entities.NotasFiscais;
-using LeitorNFe.Domain.Entities.Enderecos;
-using LeitorNFe.Application.Abstractions.Command;
 using LeitorNFe.Application.Abstractions.Data;
 using LeitorNFe.Application.Abstractions.Messaging;
-using LeitorNFe.Application.NotaFiscalFeature.GetById;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace NotaFiscalFeature.GetById;

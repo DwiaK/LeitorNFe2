@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using System.Collections.Generic;
 using System.Linq;
-using static MudBlazor.CategoryTypes;
 
 namespace LeitorNFe.App.Pages.Importacao;
 
@@ -14,8 +13,6 @@ public partial class ImportacaoAutomaticaPage
     #region Props
     private const string _defaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full z-10";
     private string _dragClass = _defaultDragClass;
-    private bool _isValid;
-    private bool _isTouched;
 
     private readonly List<string> _nomesArquivos = new();
 
@@ -82,6 +79,6 @@ public partial class ImportacaoAutomaticaPage
         => _dragClass = $"{_defaultDragClass} mud-border-primary";
 
     private void ClearDragClass()
-    => _dragClass = _defaultDragClass;
+        => _dragClass = _defaultDragClass;
     #endregion
 }

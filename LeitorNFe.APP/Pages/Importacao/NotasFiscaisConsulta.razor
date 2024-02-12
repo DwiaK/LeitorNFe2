@@ -25,12 +25,22 @@
                     <MudTh>chNFe</MudTh>
                     <MudTh>Emitente</MudTh>
                     <MudTh>Destinatário</MudTh>
+                    <MudTh></MudTh>
+                    <MudTh></MudTh>
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="nNF">@context.nNF</MudTd>
                         <MudTd DataLabel="chNFe">@context.chNFe</MudTd>
                         <MudTd DataLabel="Emitente">@context.xNomeEmit</MudTd>
                         <MudTd DataLabel="Destinatário">@context.xNomeDest</MudTd>
+                        <!-- Botões Editar/Deletar -->
+                        <MudTd DataLabel="Editar">
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" aria-label="delete"/>
+                        </MudTd>
+                        <MudTd DataLabel="Deletar">
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" aria-label="delete"/>
+                        </MudTd>
+
                     </RowTemplate>
                 </MudTable>
         }

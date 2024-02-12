@@ -13,7 +13,7 @@ public partial class NotasFiscaisConsulta
 {
     #region Attributes
     [Inject]
-    private INotaFiscalService NotaFiscalService { get; set; }
+    private INotaFiscalService _notaFiscalService { get; set; }
     #endregion
 
     #region Props
@@ -26,13 +26,18 @@ public partial class NotasFiscaisConsulta
     }
 
     public NotasFiscaisConsulta(INotaFiscalService notaFiscalService) =>
-        NotaFiscalService = notaFiscalService;
+        _notaFiscalService = notaFiscalService;
     #endregion
 
     #region Métodos
     protected override async Task OnInitializedAsync()
     {
-        ListaNotasFiscais = await NotaFiscalService.ListarNotasFiscais();
+        ListaNotasFiscais = await _notaFiscalService.ListarNotasFiscais();
+    }
+
+    private void DeletarNotaFiscal(int id)
+    {
+        _notaFiscalService.DeletarNotaFiscal(id);
     }
     #endregion
 

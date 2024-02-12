@@ -26,6 +26,23 @@ public class NotaFiscalService : INotaFiscalService
         return request ?? throw new InvalidOperationException();
     }
 
+    public async Task<bool> DeletarNotaFiscal(int id)
+    {
+        var request = await _httpClient.PostAsJsonAsync($"api/NotaFiscal/DeletarNotaFiscal", id);
+        var test = await _httpClient.DeleteAsync($"api/NotaFiscal/DeletarNotaFiscal{id}"); // <-- Alterar Para
+
+        if (request.StatusCode is HttpStatusCode.OK)
+        {
+            // Success
+            return true;
+        }
+        else
+        {
+            // Error
+            return false;
+        }
+    }
+
     public async Task<bool> ImportarNotaFiscal(NotaFiscalModel notaFiscal)
     {
         var request = await _httpClient.PostAsJsonAsync("api/NotaFiscal/ImportarNotaFiscal", notaFiscal);
