@@ -40,7 +40,7 @@ public class NotaFiscalController : ControllerBase
             return false;
     }
 
-    [HttpDelete("DeletarNotaFiscal")]
+    [HttpDelete("DeletarNotaFiscal/{id}")]
     public async Task<bool> DeletarNotaFiscal(int id, CancellationToken cancellationToken)
     {
         var result = await new DeleteNotaFiscalQueryHandler(_sqlConnection).Handle(new DeleteNotaFiscalCommand(id), cancellationToken);

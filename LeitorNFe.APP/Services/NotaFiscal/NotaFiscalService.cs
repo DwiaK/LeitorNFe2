@@ -28,8 +28,7 @@ public class NotaFiscalService : INotaFiscalService
 
     public async Task<bool> DeletarNotaFiscal(int id)
     {
-        var request = await _httpClient.PostAsJsonAsync($"api/NotaFiscal/DeletarNotaFiscal", id);
-        var test = await _httpClient.DeleteAsync($"api/NotaFiscal/DeletarNotaFiscal{id}"); // <-- Alterar Para
+        var request = await _httpClient.DeleteAsync($"api/NotaFiscal/DeletarNotaFiscal/{id}");
 
         if (request.StatusCode is HttpStatusCode.OK)
         {
