@@ -9,6 +9,7 @@ using LeitorNFe.App.Services.NotaFiscal;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
 using System;
+using LeitorNFe.App.Models;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -21,5 +22,6 @@ builder.Services.AddHotKeys();
 builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddTransient<INotaFiscalService, NotaFiscalService>();
+builder.Services.AddSingleton<Teste>();
 
 await builder.Build().RunAsync();

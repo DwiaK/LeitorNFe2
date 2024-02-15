@@ -1,5 +1,10 @@
 ﻿@page "/importacao/consulta"
+@page "/importacao/consulta/{Codigo:int}"
+
 @using MudBlazor.Utilities
+
+<p>Código: @Codigo</p>
+<p>Código: @Codigo2</p>
 
 <MudGrid>
     <MudItem md="12"
@@ -46,3 +51,10 @@
         }
     </MudItem>
 </MudGrid>
+
+@if (!Equals(_TESTE,null))
+{
+    <p>Nome: @_TESTE.Nome</p>
+    <p>Nome2: @_TESTE.Nome2</p>
+    
+}

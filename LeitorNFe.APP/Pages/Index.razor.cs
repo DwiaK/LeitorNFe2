@@ -1,3 +1,4 @@
+using LeitorNFe.App.Models;
 using LeitorNFe.App.Models.NotaFiscal;
 using LeitorNFe.App.Services;
 using LeitorNFe.App.Services.NotaFiscal;
@@ -12,6 +13,9 @@ namespace LeitorNFe.App.Pages;
 public partial class Index
 {
     [Inject]
+    public Teste _TESTE { get; set; }
+
+    [Inject]
     public HttpClient _httpClient { get; set; }
 
     [Inject]
@@ -19,6 +23,17 @@ public partial class Index
 
     [Inject]
     private ISnackbar _snackbar { get; set; }
+
+    public Index()
+    {
+
+    }
+
+    protected override void OnInitialized()
+    {
+        _TESTE.Nome = "A";
+        _TESTE.Nome2 = "B";
+    }
 
     public async void GetNotaFiscalId()
     {

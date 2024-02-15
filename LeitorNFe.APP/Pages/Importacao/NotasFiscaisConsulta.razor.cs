@@ -1,5 +1,7 @@
+using LeitorNFe.App.Models;
 using LeitorNFe.App.Models.NotaFiscal;
 using LeitorNFe.App.Services.NotaFiscal;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
@@ -11,7 +13,16 @@ namespace LeitorNFe.App.Pages.Importacao;
 
 public partial class NotasFiscaisConsulta
 {
+    [Parameter]
+    public int Codigo { get; set; }
+    
+    [Parameter]
+    public int Codigo2 { get; set; }
+
     #region Attributes
+    [Inject]
+    public Teste _TESTE { get; set; }
+
     [Inject]
     private INotaFiscalService _notaFiscalService { get; set; }
     #endregion
@@ -27,6 +38,7 @@ public partial class NotasFiscaisConsulta
 
     public NotasFiscaisConsulta(INotaFiscalService notaFiscalService) =>
         _notaFiscalService = notaFiscalService;
+
     #endregion
 
     #region Métodos
