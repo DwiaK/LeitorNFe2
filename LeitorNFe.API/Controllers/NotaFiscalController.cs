@@ -32,7 +32,7 @@ public class NotaFiscalController : ControllerBase
     [HttpPost("ImportarNotaFiscal")]
     public async Task<bool> ImportarNotaFiscal([FromBody] NotaFiscal notaFiscal, CancellationToken cancellationToken)
     {
-        var result = await new CreateNotaFiscalQueryHandler(_sqlConnection).Handle(new CreateNotaFiscalCommand(notaFiscal), cancellationToken);
+        var result = await new CreateNotaFiscalCommandHandler(_sqlConnection).Handle(new CreateNotaFiscalCommand(notaFiscal), cancellationToken);
 
         if (result.IsSuccess)
             return true;
@@ -43,7 +43,7 @@ public class NotaFiscalController : ControllerBase
     [HttpDelete("DeletarNotaFiscal/{id}")]
     public async Task<bool> DeletarNotaFiscal(int id, CancellationToken cancellationToken)
     {
-        var result = await new DeleteNotaFiscalQueryHandler(_sqlConnection).Handle(new DeleteNotaFiscalCommand(id), cancellationToken);
+        var result = await new DeleteNotaFiscalCommandHandler(_sqlConnection).Handle(new DeleteNotaFiscalCommand(id), cancellationToken);
 
         return true;
     }
@@ -51,7 +51,7 @@ public class NotaFiscalController : ControllerBase
     [HttpGet("BuscarNotasFiscais")]
     public async Task<List<NotaFiscal>> BuscarNotasFiscais(CancellationToken cancellationToken)
     {
-        var result = await new GetNotaFiscalQueryHandler(_sqlConnection).Handle(new GetNotaFiscalCommand(), cancellationToken);
+        var result = await new GetNotaFiscalQueryHandler(_sqlConnection).Handle(new GetNotaFiscalQuery(), cancellationToken);
 
         return result.Value;
     }

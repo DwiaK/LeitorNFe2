@@ -73,9 +73,4 @@ public partial class CommandPalette : IDisposable
 
         _paginasFiltradas = _paginas;
     }
-
-    private void TesteMetodo()
-    {
-
-    }
 }

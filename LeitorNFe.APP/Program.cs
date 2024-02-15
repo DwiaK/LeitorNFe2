@@ -22,6 +22,5 @@ builder.Services.AddHotKeys();
 builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddTransient<INotaFiscalService, NotaFiscalService>();
-builder.Services.AddSingleton<Teste>();
 
 await builder.Build().RunAsync();

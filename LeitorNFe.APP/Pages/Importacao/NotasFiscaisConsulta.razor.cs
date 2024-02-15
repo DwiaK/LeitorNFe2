@@ -13,16 +13,7 @@ namespace LeitorNFe.App.Pages.Importacao;
 
 public partial class NotasFiscaisConsulta
 {
-    [Parameter]
-    public int Codigo { get; set; }
-    
-    [Parameter]
-    public int Codigo2 { get; set; }
-
     #region Attributes
-    [Inject]
-    public Teste _TESTE { get; set; }
-
     [Inject]
     private INotaFiscalService _notaFiscalService { get; set; }
     #endregion

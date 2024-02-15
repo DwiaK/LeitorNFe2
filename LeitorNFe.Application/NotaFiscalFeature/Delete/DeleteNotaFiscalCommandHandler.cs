@@ -11,16 +11,16 @@ using System.Transactions;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Delete;
 
-public sealed record DeleteNotaFiscalCommand(int id) : IQuery<bool>;
 
-public sealed class DeleteNotaFiscalQueryHandler : IQueryHandler<DeleteNotaFiscalCommand, bool>
+
+public sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNotaFiscalCommand, bool>
 {
     #region Atributos
     private readonly ISqlConnectionFactory _sqlConnectionFactory;
     #endregion
 
     #region Construtor
-    public DeleteNotaFiscalQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
+    public DeleteNotaFiscalCommandHandler(ISqlConnectionFactory sqlConnectionFactory)
     {
         _sqlConnectionFactory = sqlConnectionFactory;
     }

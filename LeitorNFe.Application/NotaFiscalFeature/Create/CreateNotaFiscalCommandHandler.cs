@@ -15,16 +15,16 @@ using System.Transactions;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Create;
 
-public sealed record CreateNotaFiscalCommand(NotaFiscal notaFiscal) : ICommand;
 
-public class CreateNotaFiscalQueryHandler : ICommandHandler<CreateNotaFiscalCommand>
+
+public class CreateNotaFiscalCommandHandler : ICommandHandler<CreateNotaFiscalCommand>
 {
     #region Atributos
     private readonly ISqlConnectionFactory _sqlConnectionFactory;
     #endregion
 
     #region Construtor
-    public CreateNotaFiscalQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
+    public CreateNotaFiscalCommandHandler(ISqlConnectionFactory sqlConnectionFactory)
     {
         _sqlConnectionFactory = sqlConnectionFactory;
     }

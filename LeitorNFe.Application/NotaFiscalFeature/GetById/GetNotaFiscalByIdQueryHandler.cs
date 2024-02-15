@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using System.Threading;
 using System;
 using System.Text;
+using LeitorNFe.Application.NotaFiscalFeature.GetById;
 
 namespace NotaFiscalFeature.GetById;
 
-public sealed record GetNotaFiscalByIdCommand(int id) : IQuery<NotaFiscal>;
 
-public sealed class GetNotaFiscalByIdQueryHandler : IQueryHandler<GetNotaFiscalByIdCommand, NotaFiscal>
+
+public sealed class GetNotaFiscalByIdQueryHandler : IQueryHandler<GetNotaFiscalByIdQuery, NotaFiscal>
 {
     #region Atributos
     private readonly ISqlConnectionFactory _sqlConnectionFactory;
@@ -26,7 +27,7 @@ public sealed class GetNotaFiscalByIdQueryHandler : IQueryHandler<GetNotaFiscalB
     #endregion
 
     #region Handler
-    public async Task<Result<NotaFiscal>> Handle(GetNotaFiscalByIdCommand command, CancellationToken cancellationToken)
+    public async Task<Result<NotaFiscal>> Handle(GetNotaFiscalByIdQuery command, CancellationToken cancellationToken)
     {
         await using var sqlConnection = _sqlConnectionFactory
             .CreateConnection();

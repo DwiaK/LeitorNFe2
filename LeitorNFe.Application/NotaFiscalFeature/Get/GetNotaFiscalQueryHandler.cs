@@ -14,9 +14,9 @@ using System.Linq;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Get;
 
-public sealed record GetNotaFiscalCommand() : IQuery<List<NotaFiscal>>;
 
-public class GetNotaFiscalQueryHandler : IQueryHandler<GetNotaFiscalCommand, List<NotaFiscal>>
+
+public class GetNotaFiscalQueryHandler : IQueryHandler<GetNotaFiscalQuery, List<NotaFiscal>>
 {
     #region Atributos
     private readonly ISqlConnectionFactory _sqlConnectionFactory;
@@ -30,7 +30,7 @@ public class GetNotaFiscalQueryHandler : IQueryHandler<GetNotaFiscalCommand, Lis
     #endregion
 
     #region Handle
-    public async Task<Result<List<NotaFiscal>>> Handle(GetNotaFiscalCommand command, CancellationToken cancellationToken)
+    public async Task<Result<List<NotaFiscal>>> Handle(GetNotaFiscalQuery command, CancellationToken cancellationToken)
     {
         await using var sqlConnection = _sqlConnectionFactory
             .CreateConnection();

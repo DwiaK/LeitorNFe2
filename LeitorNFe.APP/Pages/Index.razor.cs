@@ -12,8 +12,6 @@ namespace LeitorNFe.App.Pages;
 
 public partial class Index
 {
-    [Inject]
-    public Teste _TESTE { get; set; }
 
     [Inject]
     public HttpClient _httpClient { get; set; }
@@ -29,12 +27,6 @@ public partial class Index
 
     }
 
-    protected override void OnInitialized()
-    {
-        _TESTE.Nome = "A";
-        _TESTE.Nome2 = "B";
-    }
-
     public async void GetNotaFiscalId()
     {
         var result = await _notaFiscalService.BuscarNotaFiscalPorId(10);
@@ -42,7 +34,6 @@ public partial class Index
         var teste = result;
 
         _snackbar.Add($"{result.xNomeEmit}", Severity.Error);
-        //_snackbar.Add("Network connection error", Severity.Error);
     }
 
     public async void BuscarNotasFiscais()
