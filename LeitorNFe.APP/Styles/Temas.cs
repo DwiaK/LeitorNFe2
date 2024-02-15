@@ -42,9 +42,6 @@ public class Temas
 
 public enum Tema
 {
-    [Description("Wingly")]
-    Wingly,
-
     [Description("LeitorNFe")]
     LeitorNFe
 }

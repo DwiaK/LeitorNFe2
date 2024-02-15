@@ -24,7 +24,7 @@ public class NotaFiscalController : ControllerBase
     [HttpGet("BuscarNotaFiscalPorId/{id}")]
     public async Task<NotaFiscal> GetNotaFiscalById(int id, CancellationToken cancellationToken)
     {
-        var result = await new GetNotaFiscalByIdQueryHandler(_sqlConnection).Handle(new GetNotaFiscalByIdCommand(id), cancellationToken);
+        var result = await new GetNotaFiscalByIdQueryHandler(_sqlConnection).Handle(new GetNotaFiscalByIdQuery(id), cancellationToken);
 
         return result.Value;
     }

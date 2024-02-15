@@ -4,15 +4,15 @@
 
 <MudDrawer Breakpoint="Breakpoint.Md"
            Class="side-menu"
-           Elevation="2"
+           Elevation="0"
            MiniWidth="100px"
            Open="SideMenuDrawerOpen"
            OpenChanged="@(e => SideMenuDrawerOpenChanged.InvokeAsync(e))"
            OpenMiniOnHover="true"
            Variant="@(CanMiniSideMenuDrawer ? DrawerVariant.Mini : DrawerVariant.Responsive)"
            Width="280px"
-           Style="@(GerenciadorTema.ModoEscuro ? "background: rgba(15, 15, 17, 0.7)" : "background: rgba(200,200,200,0.650)")">
-           @* Style="@(GerenciadorTema.ModoEscuro ? "background: rgba(18, 18, 20, 0.7)" : "background: rgba(255,255,255,0.7)")"> *@
+           Style="@(GerenciadorTema.ModoEscuro ? "background: rgba(18, 18, 20, 0.7)" : "background: rgba(255,255,255,0.7)")">
+           @* Style="@(GerenciadorTema.ModoEscuro ? "background: rgba(15, 15, 17, 0.7)" : "background: rgba(200,200,200,0.650)")"> *@
     <MudDrawerHeader Class="align-center d-flex justify-center pa-0">
         <MudIcon Class="@(SideMenuDrawerOpen ? "ml-6" : "")"
                  Color="Color.Primary"
