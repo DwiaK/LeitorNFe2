@@ -1,6 +1,7 @@
 ﻿@page "/importacao/consulta"
 @* @page "/importacao/consulta/{Codigo:int}" *@
 
+@using LeitorNFe.App.Services.Utils
 @using MudBlazor.Utilities
 
 <MudGrid>
@@ -19,7 +20,7 @@
     <MudItem md="12"
              sm="12"
              xs="12">
-        @if (ListaNotasFiscais is not null)
+        @if (!ListaNotasFiscais.IsNullOrEmpty())
         {
             <MudTable Items="@ListaNotasFiscais" Hover="true" Breakpoint="Breakpoint.Sm">
                 <HeaderContent>

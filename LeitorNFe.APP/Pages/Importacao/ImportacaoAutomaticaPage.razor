@@ -1,14 +1,15 @@
 ﻿@page "/importacao/automatica"
+@using LeitorNFe.App.Services.Utils
 @using MudBlazor.Utilities
 
 <MudGrid>
     <MudItem md="12"
              sm="12"
              xs="12">
-        <MudBreadcrumbs Separator=">" 
-                        Items="_items" 
-                        Style="font-size: 10px;" 
-                        Class="relative d-flex justify-end"/>
+        <MudBreadcrumbs Separator=">"
+                        Items="_items"
+                        Style="font-size: 10px;"
+                        Class="relative d-flex justify-end" />
     </MudItem>
 </MudGrid>
 
@@ -77,17 +78,48 @@
         </MudPaper>
     </MudItem>
 
+    <!-- Adicionar card p/ exibir a lista de notas fiscais p/ importação -->
+    <!-- Adicionar possibilidade de adicionar um Código de Pedido p/ as notas Individualmente -->
+    @if (!ListaNotasFiscaisAdicionadas.IsNullOrEmpty())
+    {
+        <MudItem md="12"
+                 sm="12"
+                 xs="12">
+            <MudPaper Class="relative d-flex justify-end gap-4 pa-2"
+                      Elevation="2">
+                <MudTable Items="@ListaNotasFiscaisAdicionadas" Hover="true" Breakpoint="Breakpoint.Sm">
+                    <HeaderContent>
+                        <MudTh>nNF</MudTh>
+                        <MudTh>chNFe</MudTh>
+                        <MudTh>Emitente</MudTh>
+                        <MudTh>Destinatário</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="nNF">@context.nNF</MudTd>
+                            <MudTd DataLabel="chNFe">@context.chNFe</MudTd>
+                            <MudTd DataLabel="Emitente">@context.xNomeEmit</MudTd>
+                            <MudTd DataLabel="Destinatário">@context.xNomeDest</MudTd>
+                            <!-- Botões Editar/Deletar -->
+                            <MudTd DataLabel="Editar">
+                                <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" aria-label="delete" />
+                            </MudTd>
+                        </RowTemplate>
+                    </MudTable>
+                </MudPaper>
+            </MudItem>
+    }
+
     <MudItem md="12"
              sm="12"
              xs="12">
-        <MudPaper Class="relative d-flex justify-end gap-4 pa-2"
-                  Elevation="2">
+        <div class="relative d-flex justify-end gap-4 pa-2">
             <MudButton OnClick=ImportarArquivos
                        Variant="Variant.Filled"
                        EndIcon="@Icons.Material.Filled.Upload"
                        Color="Color.Primary">
                 Importar
             </MudButton>
-        </MudPaper>
+        </div>
     </MudItem>
 </MudGrid>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using System.Collections.Generic;
 using System.Linq;
+using LeitorNFe.App.Models.NotaFiscal;
 
 namespace LeitorNFe.App.Pages.Importacao;
 
@@ -23,6 +24,8 @@ public partial class ImportacaoAutomaticaPage
     private ISnackbar _snackbar { get; set; }
 
     IList<IBrowserFile> _arquivos = new List<IBrowserFile>();
+
+    List<NotaFiscalModel> ListaNotasFiscaisAdicionadas = new List<NotaFiscalModel>();
     #endregion
 
     #region Breadcrumbs
@@ -34,8 +37,14 @@ public partial class ImportacaoAutomaticaPage
     #endregion
 
     #region Métodos
-    private void AdicionarNota(IReadOnlyList<IBrowserFile> arquivos) =>
+    private void AdicionarNota(IReadOnlyList<IBrowserFile> arquivos)
+    {
+        // Adicionar objeto convertido p/ a Lista de Adicionados
+        BuscarObjetoListaAdicionado(arquivos);
+
+        // Adicionar item
         arquivos.ToList().ForEach(item => _arquivos.Add(item));
+    }
 
     private void ImportarArquivos()
     {
@@ -57,6 +66,21 @@ public partial class ImportacaoAutomaticaPage
         });
 
         _snackbar.Add($"Nota(s) importada(s) com sucesso!", Severity.Success);
+    }
+
+    private void BuscarObjetoListaAdicionado(IReadOnlyList<IBrowserFile> arquivos)
+    {
+        if (arquivos.IsNullOrEmpty())
+            return;
+
+        arquivos.ToList().ForEach(async item =>
+        {
+            var notaFiscal = await _notaFiscalService.MontarNotaFiscal(item);
+
+            ListaNotasFiscaisAdicionadas.Add(notaFiscal);
+        });
+
+        StateHasChanged();
     }
 
     private void OnInputFileChanged(InputFileChangeEventArgs e)

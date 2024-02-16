@@ -11,8 +11,6 @@ using LeitorNFe.Application.NotaFiscalFeature.GetById;
 
 namespace NotaFiscalFeature.GetById;
 
-
-
 public sealed class GetNotaFiscalByIdQueryHandler : IQueryHandler<GetNotaFiscalByIdQuery, NotaFiscal>
 {
     #region Atributos
@@ -27,7 +25,7 @@ public sealed class GetNotaFiscalByIdQueryHandler : IQueryHandler<GetNotaFiscalB
     #endregion
 
     #region Handler
-    public async Task<Result<NotaFiscal>> Handle(GetNotaFiscalByIdQuery command, CancellationToken cancellationToken)
+    public async Task<Result<NotaFiscal>> Handle(GetNotaFiscalByIdQuery query, CancellationToken cancellationToken)
     {
         await using var sqlConnection = _sqlConnectionFactory
             .CreateConnection();
@@ -44,7 +42,7 @@ public sealed class GetNotaFiscalByIdQueryHandler : IQueryHandler<GetNotaFiscalB
                 .QueryFirstOrDefaultAsync<NotaFiscal>
                 (nfQuery, new 
                 { 
-                    IdNotaFiscal = command.id 
+                    IdNotaFiscal = query.id 
                 });
 
             // Se a lista de notas fiscais for nula
