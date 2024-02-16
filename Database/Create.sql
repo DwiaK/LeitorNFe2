@@ -1,3 +1,5 @@
+-- CREATE DATABASE LeitorNFe   -- Criar db como 'LeitorNFe'
+
 CREATE TABLE NotaFiscal(
     IdNotaFiscal INT IDENTITY(1,1) PRIMARY KEY,
     nNF VARCHAR(255),
@@ -25,7 +27,7 @@ CREATE TABLE NotaFiscalProdutos(
 CREATE TABLE NotaFiscalEnderecos(
     IdNotaFiscalEnderecos INT IDENTITY(1,1) PRIMARY KEY,
     IdNotaFiscal INT,
-    IsEmit INT,
+    IsEmit BIT,
     xLgr VARCHAR(255),
     nro VARCHAR(255),
     xBairro VARCHAR(255),
