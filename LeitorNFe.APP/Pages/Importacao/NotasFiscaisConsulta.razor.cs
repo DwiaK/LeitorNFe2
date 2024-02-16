@@ -29,7 +29,6 @@ public partial class NotasFiscaisConsulta
 
     public NotasFiscaisConsulta(INotaFiscalService notaFiscalService) =>
         _notaFiscalService = notaFiscalService;
-
     #endregion
 
     #region Métodos
