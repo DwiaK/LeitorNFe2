@@ -38,7 +38,7 @@
                         <MudTd DataLabel="Destinatário">@context.xNomeDest</MudTd>
                         <!-- Botões Editar/Deletar -->
                         <MudTd DataLabel="Editar">
-                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" aria-label="delete"/>
+                            <MudIconButton OnClick="@(() => EditarNotaFiscal(context.IdNotaFiscal))" Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" aria-label="delete"/>
                         </MudTd>
                         <MudTd DataLabel="Deletar">
                             <MudIconButton OnClick="@(() => DeletarNotaFiscal(context.IdNotaFiscal))" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" aria-label="delete"/>

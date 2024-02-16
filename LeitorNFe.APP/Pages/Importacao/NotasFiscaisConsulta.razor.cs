@@ -1,11 +1,7 @@
-using LeitorNFe.App.Models;
 using LeitorNFe.App.Models.NotaFiscal;
 using LeitorNFe.App.Services.NotaFiscal;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
-using MudBlazor.Utilities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,6 +12,9 @@ public partial class NotasFiscaisConsulta
     #region Attributes
     [Inject]
     private INotaFiscalService _notaFiscalService { get; set; }
+
+    [Inject]
+    private NavigationManager _navigationManager { get; set; }
     #endregion
 
     #region Props
@@ -35,6 +34,11 @@ public partial class NotasFiscaisConsulta
     protected override async Task OnInitializedAsync()
     {
         ListaNotasFiscais = await _notaFiscalService.ListarNotasFiscais();
+    }
+
+    private void EditarNotaFiscal(int id)
+    {
+        _navigationManager.NavigateTo($"/importacao/edicao/{id}");
     }
 
     private void DeletarNotaFiscal(int id)
