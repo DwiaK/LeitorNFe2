@@ -9,7 +9,8 @@ CREATE TABLE NotaFiscal(
     xNomeEmit VARCHAR(255),
     CNPJDest VARCHAR(255),
     xNomeDest VARCHAR(255),
-    EmailDest VARCHAR(255)
+    EmailDest VARCHAR(255),
+    Descricao VARCHAR(255)
 )
 
 CREATE TABLE NotaFiscalProdutos(
