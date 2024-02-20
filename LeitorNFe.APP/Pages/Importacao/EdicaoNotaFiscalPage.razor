@@ -15,94 +15,292 @@
 
 <br />
 <MudGrid>
-    <MudItem md="12"
-             sm="12">
-        <MudPaper Elevation="2">
-            <!-- Dados Base da NF -->
-            <MudContainer Style="height: 200px;">
-                <MudGrid>
-                    <MudItem md="4"
-                             sm="4">
-                        <MudText>
-                            Número da Nota Fiscal:
-                        </MudText>
-                    </MudItem>
-                    <MudItem md="8"
-                             sm="8">
-                        <MudTextField @bind-Value="@NotaFiscal.nNF"
-                                      AutoFocus=true
-                                      Class="mb-1 pa-0 ma-0"
-                                      Style="font-size: 12px;"
-                                      Clearable="true"
-                                      Placeholder="Número da Nota Fiscal"
-                                      Immediate="true"
-                                      Variant="Variant.Text" />
-                    </MudItem>
-                </MudGrid>
-            </MudContainer>
-        </MudPaper>
-    </MudItem>
-    <MudItem md="6"
-             sm="6">
-        <MudPaper Elevation="2">
-            <!-- Dados Emitente -->
-            <MudContainer Style="height: 200px;">
+    @if (NotaFiscal is not null)
+    {
+        <MudGrid>
+            <!-- Itens à esquerda -->
+            <MudItem md="8"
+                     sm="8"
+                     xs="8">
                 <MudGrid>
                     <MudItem md="12"
-                             sm="12">
-                        <MudTextField @bind-Value="@NotaFiscal.xNomeEmit"
-                                      AutoFocus=true
-                                      Class="mb-1 pa-0 ma-0"
-                                      Style="font-size: 12px;"
-                                      Clearable="true"
-                                      Placeholder="Número do Emitente"
-                                      Immediate="true"
-                                      Variant="Variant.Text" />
+                             sm="12"
+                             xs="12">
+                        <MudPaper Elevation="2">
+                            <!-- Dados Base da NF -->
+                            <MudContainer Style="height: 200px;">
+                                <MudGrid>
+                                    <MudItem md="12"
+                                             sm="12"
+                                             xs="12">
+                                        <MudText Style="font-size: 18px;">
+                                            Dados da Nota Fiscal
+                                        </MudText>
+                                        <MudDivider />
+                                    </MudItem>
+                                    <MudItem md="12"
+                                             sm="12"
+                                             xs="12">
+                                        <MudText Style="font-size: 12px;">
+                                            Número da Nota Fiscal (nNF):
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.nNF
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="12"
+                                             sm="12"
+                                             xs="12">
+                                        <MudText Style="font-size: 12px;">
+                                            Chave da Nota Fiscal (chNFe):
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.chNFe
+                                        </MudText>
+                                    </MudItem>
+                                </MudGrid>
+                            </MudContainer>
+                        </MudPaper>
+                    </MudItem>
+                    <MudItem md="6"
+                             sm="6"
+                             xs="6">
+                        <MudPaper Elevation="2">
+                            <!-- Dados Emitente -->
+                            <MudContainer Style="height: 400px;">
+                                <MudGrid>
+                                    <MudItem md="12"
+                                             sm="12"
+                                             xs="12">
+                                        <MudText Style="font-size: 18px;">
+                                            Emitente
+                                        </MudText>
+                                        <MudDivider />
+                                    </MudItem>
+                                    <MudItem md="12"
+                                             sm="12">
+                                        <MudText Style="font-size: 12px;">
+                                            Nome:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.xNomeEmit
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="12"
+                                             sm="12"
+                                             xs="12">
+                                        <MudText Style="font-size: 12px;">
+                                            CNPJ:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.CNPJEmit
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            Logradouro:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoEmitente.xLgr
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            Nº:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoEmitente.nro
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            Bairro:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoEmitente.xBairro
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            Município:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoEmitente.xMun
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            UF:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoEmitente.UF
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            CEP:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoEmitente.CEP
+                                        </MudText>
+                                    </MudItem>
+                                </MudGrid>
+                            </MudContainer>
+                        </MudPaper>
+                    </MudItem>
+                    <MudItem md="6"
+                             sm="6"
+                             xs="6">
+                        <MudPaper Elevation="2">
+                            <!-- Dados Destinatário -->
+                            <MudContainer Style="height: 400px;">
+                                <MudGrid>
+                                    <MudItem md="12"
+                                             sm="12"
+                                             xs="12">
+                                        <MudText Style="font-size: 18px;">
+                                            Destinatário
+                                        </MudText>
+                                        <MudDivider />
+                                    </MudItem>
+                                    <MudItem md="12"
+                                             sm="12">
+                                        <MudText Style="font-size: 12px;">
+                                            Nome:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.xNomeDest
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="12"
+                                             sm="12"
+                                             xs="12">
+                                        <MudText Style="font-size: 12px;">
+                                            CNPJ:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.CNPJDest
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            Logradouro:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoDestinatario.xLgr
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            Nº:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoDestinatario.nro
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            Bairro:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoDestinatario.xBairro
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            Município:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoDestinatario.xMun
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            UF:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoDestinatario.UF
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem md="6"
+                                             sm="6"
+                                             xs="6">
+                                        <MudText Style="font-size: 12px;">
+                                            CEP:
+                                        </MudText>
+                                        <MudText Style="font-size: 12px; font-weight: bold">
+                                            @NotaFiscal.EnderecoDestinatario.CEP
+                                        </MudText>
+                                    </MudItem>
+                                </MudGrid>
+                            </MudContainer>
+                        </MudPaper>
                     </MudItem>
                 </MudGrid>
-            </MudContainer>
-        </MudPaper>
-    </MudItem>
-    <MudItem md="6"
-             sm="6">
-        <MudPaper Elevation="2">
-            <!-- Dados Destinatário -->
-            <MudContainer Style="height: 200px;">
-                <MudGrid>
-                    <MudItem md="12"
-                             sm="12">
-                        <MudTextField @bind-Value="@NotaFiscal.xNomeDest"
-                                      AutoFocus=true
-                                      Class="mb-1 pa-0 ma-0"
-                                      Style="font-size: 12px;"
-                                      Clearable="true"
-                                      Placeholder="Número do Destinatário"
-                                      Immediate="true"
-                                      Variant="Variant.Text" />
-                    </MudItem>
-                </MudGrid>
-            </MudContainer>
-        </MudPaper>
-    </MudItem>
+            </MudItem>
 
-    <MudItem md="12"
-             sm="12"
-             xs="12">
-        <div class="relative d-flex justify-end gap-4 pa-2">
-            <MudButton OnClick=CancelarEdicao
-                       Variant="Variant.Filled"
-                       EndIcon="@Icons.Material.Filled.Cancel"
-                       Color="Color.Error">
-                Cancelar
-            </MudButton>
-            <MudButton OnClick=SalvarEdicao
-                       Variant="Variant.Filled"
-                       EndIcon="@Icons.Material.Filled.Save"
-                       Color="Color.Primary">
-                Salvar
-            </MudButton>
-        </div>
-    </MudItem>
+            <!-- Itens à direita -->
+            <MudItem md="4"
+                     sm="4"
+                     xs="4" Class="ma-0 pa-0">
+                <MudPaper Elevation="2">
+                    <MudContainer Style="height: 612px;">
+                        <MudItem md="12"
+                                 sm="12"
+                                 xs="12" Class="pa-2">
+                            <MudText Style="font-size: 18px;" Class="mt-1 mb-1">
+                                Dados da Nota Fiscal
+                            </MudText>
+                            <MudDivider Class="mb-3" />
+                        </MudItem>
+                        <MudTextField T="string" Label="Descrição" Variant="Variant.Text" Text="@Descricao" Lines="25" />
+                    </MudContainer>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+
+        <!-- Botões -->
+        <MudItem md="12"
+                 sm="12"
+                 xs="12">
+            <div class="relative d-flex justify-end gap-4 pa-2">
+                <MudButton OnClick=CancelarEdicao
+                           Variant="Variant.Filled"
+                           EndIcon="@Icons.Material.Filled.Cancel"
+                           Color="Color.Error">
+                    Cancelar
+                </MudButton>
+                <MudButton OnClick=SalvarEdicao
+                           Variant="Variant.Filled"
+                           EndIcon="@Icons.Material.Filled.Save"
+                           Color="Color.Primary">
+                    Salvar
+                </MudButton>
+            </div>
+        </MudItem>
+    }
 
 </MudGrid>
 

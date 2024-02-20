@@ -24,6 +24,8 @@ public partial class EdicaoNotaFiscalPage
     public int IdNotaFiscal { get; set; }
 
     private NotaFiscalModel NotaFiscal { get; set; }
+
+    private string Descricao { get; set; }
     #endregion
 
     #region Breadcrumbs
@@ -35,22 +37,18 @@ public partial class EdicaoNotaFiscalPage
     #endregion
 
     #region Métodos
-    protected override void OnInitialized() =>
-        BuscarInformacoesNotaFiscal(IdNotaFiscal);
+    protected override async Task OnInitializedAsync() =>
+        await BuscarInformacoesNotaFiscal(IdNotaFiscal);
 
     private void AbrirDrawer() =>
         _isDrawerOpen = !_isDrawerOpen;
 
-    private async void BuscarInformacoesNotaFiscal(int idNotaFiscal)
+    private async Task BuscarInformacoesNotaFiscal(int idNotaFiscal)
     {
         var retornoNotaFiscal = await _notaFiscalService.BuscarNotaFiscalPorId(idNotaFiscal);
 
         if (retornoNotaFiscal is not null)
             NotaFiscal = retornoNotaFiscal;
-        else
-            NotaFiscal = new NotaFiscalModel(); // Temp
-
-        StateHasChanged();
     }
 
     private void CancelarEdicao() =>
