@@ -58,6 +58,7 @@ public class Extensions
             // Endereço Emitente
             nfObj.EnderecoEmitente = new NotaFiscalEnderecosModel();
             nfObj.EnderecoEmitente.IsEmit = true;
+            nfObj.EnderecoEmitente.xLgr = LerDadosXml(xmlDoc, "xLgr", "enderEmit");
             nfObj.EnderecoEmitente.nro = LerDadosXml(xmlDoc, "nro", "enderEmit");
             nfObj.EnderecoEmitente.xBairro = LerDadosXml(xmlDoc, "xBairro", "enderEmit");
             nfObj.EnderecoEmitente.xMun = LerDadosXml(xmlDoc, "xMun", "enderEmit");

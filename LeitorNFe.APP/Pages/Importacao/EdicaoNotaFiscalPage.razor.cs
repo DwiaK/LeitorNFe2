@@ -56,7 +56,8 @@ public partial class EdicaoNotaFiscalPage
 
     private void SalvarEdicao()
     {
-
+        // Update
+        var retorno = _notaFiscalService.EditarNotaFiscal(NotaFiscal);
     }
     #endregion
 }

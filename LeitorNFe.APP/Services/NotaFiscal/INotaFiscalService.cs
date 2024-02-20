@@ -12,4 +12,5 @@ public interface INotaFiscalService
     public Task<bool> ImportarNotaFiscal(NotaFiscalModel notaFiscal);
     public Task<NotaFiscalModel> MontarNotaFiscal(IBrowserFile arquivo);
     public Task<bool> DeletarNotaFiscal(int idNotaFiscal);
+    public Task<bool> EditarNotaFiscal(NotaFiscalModel notaFiscal);
 }

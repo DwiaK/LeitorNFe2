@@ -42,6 +42,22 @@ public class NotaFiscalService : INotaFiscalService
         }
     }
 
+    public async Task<bool> EditarNotaFiscal(NotaFiscalModel notaFiscal)
+    {
+		var request = await _httpClient.PostAsJsonAsync("api/NotaFiscal/EditarNotaFiscal", notaFiscal);
+
+		if (request.StatusCode is HttpStatusCode.OK)
+		{
+			// Success
+			return true;
+		}
+		else
+		{
+			// Error
+			return false;
+		}
+	}
+
     public async Task<bool> ImportarNotaFiscal(NotaFiscalModel notaFiscal)
     {
         var request = await _httpClient.PostAsJsonAsync("api/NotaFiscal/ImportarNotaFiscal", notaFiscal);

@@ -11,98 +11,101 @@ namespace LeitorNFe.App.Pages.Importacao;
 
 public partial class ImportacaoAutomaticaPage
 {
-    #region Props
-    private const string _defaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full z-10";
-    private string _dragClass = _defaultDragClass;
+	#region Props
+	private const string _defaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full z-10";
+	private string _dragClass = _defaultDragClass;
 
-    private readonly List<string> _nomesArquivos = new();
+	private readonly List<string> _nomesArquivos = new();
 
-    [Inject]
-    private INotaFiscalService _notaFiscalService { get; set; }
+	[Inject]
+	private INotaFiscalService _notaFiscalService { get; set; }
 
-    [Inject]
-    private ISnackbar _snackbar { get; set; }
+	[Inject]
+	private ISnackbar _snackbar { get; set; }
 
-    IList<IBrowserFile> _arquivos = new List<IBrowserFile>();
+	IList<IBrowserFile> _arquivos = new List<IBrowserFile>();
 
-    List<NotaFiscalModel> ListaNotasFiscaisAdicionadas = new List<NotaFiscalModel>();
-    #endregion
+	List<NotaFiscalModel> ListaNotasFiscaisAdicionadas = new List<NotaFiscalModel>();
+	#endregion
 
-    #region Breadcrumbs
-    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
-    {
-        new BreadcrumbItem("Nota Fiscal", href: "/"),
-        new BreadcrumbItem("Importação Automática", href: null, disabled: true)
-    };
-    #endregion
+	#region Breadcrumbs
+	private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+	{
+		new BreadcrumbItem("Nota Fiscal", href: "/"),
+		new BreadcrumbItem("Importação Automática", href: null, disabled: true)
+	};
+	#endregion
 
-    #region Métodos
-    private void AdicionarNota(IReadOnlyList<IBrowserFile> arquivos)
-    {
-        // Adicionar objeto convertido p/ a Lista de Adicionados
-        BuscarObjetoListaAdicionado(arquivos);
+	#region Métodos
+	private void AdicionarNota(IReadOnlyList<IBrowserFile> arquivos)
+	{
+		// Adicionar objeto convertido p/ a Lista de Adicionados
+		BuscarObjetoListaAdicionado(arquivos);
 
-        // Adicionar item
-        arquivos.ToList().ForEach(item => _arquivos.Add(item));
+		// Adicionar item
+		arquivos.ToList().ForEach(item => _arquivos.Add(item));
+	}
+
+	private void ImportarArquivos()
+	{
+		// Importar Arquivos
+		var arquivos = _arquivos.ToList();
+
+		if (arquivos.IsNullOrEmpty())
+		{
+			_snackbar.Add($"É Necessário adicionar pelo menos um arquivo para importação.", Severity.Error);
+			return;
+		}
+
+		var resultado = false;
+
+		arquivos.ForEach(async item =>
+		{
+			var notaFiscal = await _notaFiscalService.MontarNotaFiscal(item);
+			resultado = await _notaFiscalService.ImportarNotaFiscal(notaFiscal);
+		});
+
+		if (resultado is true)
+			_snackbar.Add($"Nota(s) importada(s) com sucesso!", Severity.Success);
+        else
+			_snackbar.Add($"Ocorreu um erro ao Importar as Notas Fiscais.", Severity.Error);
     }
 
-    private void ImportarArquivos()
-    {
-        // Importar Arquivos
-        var arquivos = _arquivos.ToList();
+	private void BuscarObjetoListaAdicionado(IReadOnlyList<IBrowserFile> arquivos)
+	{
+		if (arquivos.IsNullOrEmpty())
+			return;
 
-        if (arquivos.IsNullOrEmpty())
-        {
-            _snackbar.Add($"É Necessário adicionar pelo menos um arquivo para importação.", Severity.Error);
-            return;
-        }
+		arquivos.ToList().ForEach(async item =>
+		{
+			var notaFiscal = await _notaFiscalService.MontarNotaFiscal(item);
 
-        var resultado = false;
+			ListaNotasFiscaisAdicionadas.Add(notaFiscal);
+		});
 
-        arquivos.ForEach(async item =>
-        {
-            var notaFiscal = await _notaFiscalService.MontarNotaFiscal(item);
-            resultado = await _notaFiscalService.ImportarNotaFiscal(notaFiscal);
-        });
+		StateHasChanged();
+	}
 
-        _snackbar.Add($"Nota(s) importada(s) com sucesso!", Severity.Success);
-    }
+	private void OnInputFileChanged(InputFileChangeEventArgs e)
+	{
+		ClearDragClass();
+		var files = e.GetMultipleFiles();
 
-    private void BuscarObjetoListaAdicionado(IReadOnlyList<IBrowserFile> arquivos)
-    {
-        if (arquivos.IsNullOrEmpty())
-            return;
+		files.ToList().ForEach(file => _nomesArquivos.Add(file.Name));
 
-        arquivos.ToList().ForEach(async item =>
-        {
-            var notaFiscal = await _notaFiscalService.MontarNotaFiscal(item);
+		AdicionarNota(files);
+	}
 
-            ListaNotasFiscaisAdicionadas.Add(notaFiscal);
-        });
+	private void RemoverNotas()
+	{
+		_arquivos.Clear();
+		_nomesArquivos.Clear();
+	}
 
-        StateHasChanged();
-    }
+	private void SetDragClass()
+		=> _dragClass = $"{_defaultDragClass} mud-border-primary";
 
-    private void OnInputFileChanged(InputFileChangeEventArgs e)
-    {
-        ClearDragClass();
-        var files = e.GetMultipleFiles();
-
-        files.ToList().ForEach(file => _nomesArquivos.Add(file.Name));
-
-        AdicionarNota(files);
-    }
-
-    private void RemoverNotas()
-    {
-        _arquivos.Clear();
-        _nomesArquivos.Clear();
-    }
-
-    private void SetDragClass()
-        => _dragClass = $"{_defaultDragClass} mud-border-primary";
-
-    private void ClearDragClass()
-        => _dragClass = _defaultDragClass;
-    #endregion
+	private void ClearDragClass()
+		=> _dragClass = _defaultDragClass;
+	#endregion
 }

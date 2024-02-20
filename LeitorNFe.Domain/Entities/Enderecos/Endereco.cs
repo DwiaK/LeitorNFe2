@@ -6,12 +6,12 @@ namespace LeitorNFe.Domain.Entities.Enderecos;
 public class Endereco
 {
     #region Ctor
-    public Endereco(int id, int idNf, bool isEmit, string xlogr, string num, string bairro, string mun, string uf, string cep)
+    public Endereco(int id, int idNf, bool isEmit, string xlgr, string num, string bairro, string mun, string uf, string cep)
     {
         IdNotaFiscalEnderecos = id;
         IdNotaFiscal = idNf;
         IsEmit = isEmit;
-        xLgr = xlogr;
+        xLgr = xlgr;
         nro = num;
         xBairro = bairro;
         xMun = mun;

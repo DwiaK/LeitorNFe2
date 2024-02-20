@@ -15,8 +15,6 @@ using System.Transactions;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Create;
 
-
-
 public class CreateNotaFiscalCommandHandler : ICommandHandler<CreateNotaFiscalCommand>
 {
     #region Atributos
@@ -43,14 +41,6 @@ public class CreateNotaFiscalCommandHandler : ICommandHandler<CreateNotaFiscalCo
             {
                 // Iniciar Conexão Assíncrona
                 await sqlConnection.OpenAsync();
-
-                // Verificar se a nota Já existe no banco
-                //var notaExiste = await VerificaNotaExistente(sqlConnection, command);
-
-                //if (notaExiste is true)
-                //{
-                //    return Result.Failure(Error.NullValue);
-                //}
 
                 // Buscar queries
                 var nfQuery = NotaFiscalStringQuery();
@@ -90,46 +80,9 @@ public class CreateNotaFiscalCommandHandler : ICommandHandler<CreateNotaFiscalCo
             return Result.Success(true);
         }
     }
-
-    //public async Task<bool> VerificaNotaExistente(SqlConnection sqlConnection, CreateNotaFiscalCommand command)
-    //{
-    //    var nfQuery = NotaDuplicadaStringQuery();
-
-    //    var notaFiscal = await sqlConnection
-    //        .QueryFirstOrDefaultAsync<NotaFiscal>
-    //        (nfQuery, new
-    //        {
-    //            NumeroNotaFiscal = command.notaFiscal.nNF
-    //        });
-
-    //    // Se a lista de notas fiscais for nula
-    //    if (notaFiscal is null)
-    //    {
-    //        return false;
-    //    }
-
-    //    return true;
-    //}
     #endregion
 
     #region Database Queries
-    public string NotaDuplicadaStringQuery()
-    {
-        #region Query NotaFiscal
-        StringBuilder query = new StringBuilder();
-
-        query.AppendLine("SELECT ");
-        query.AppendLine("  [NF].[nNF] ");
-        query.AppendLine("FROM ");
-        query.AppendLine("  [NotaFiscal][NF] ");
-
-        query.AppendLine("WHERE");
-        query.AppendLine(@"  [NF].[nNF] = @NumeroNotaFiscal");
-
-        return query.ToString();
-        #endregion
-    }
-
     public string NotaFiscalStringQuery()
     {
         #region Query NotaFiscal
