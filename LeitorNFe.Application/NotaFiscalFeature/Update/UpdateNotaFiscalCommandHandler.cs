@@ -40,28 +40,31 @@ public class UpdateNotaFiscalCommandHandler : ICommandHandler<UpdateNotaFiscalCo
 				// Buscar queries
 				var nfQuery = NotaFiscalStringQuery();
 
-				// Executar Edição na NotaFiscal
-				//var notaFiscalAlterada = (await sqlConnection
-				//	.QueryAsync<NotaFiscal>(nfQuery, (nota) => 
-				//	{
-				//	}, 
-				//	splitOn: ""))
-				//	.ToList();
-
-			//	var notasFiscais = (await sqlConnection.QueryAsync<NotaFiscal, Endereco, Endereco, NotaFiscal>(
-			//	nfQuery,
-			//	(notaFiscal, enderecoEmitente, enderecoDestinatario) =>
-			//	{
-			//		notaFiscal.EnderecoEmitente = enderecoEmitente;
-			//		notaFiscal.EnderecoDestinatario = enderecoDestinatario;
-			//		return notaFiscal;
-			//	},
-			//	splitOn: "IdNotaFiscalEnderecos, IdNotaFiscalEnderecos"
-			//)).ToList();
+                // Executar Edição na NotaFiscal
+                await sqlConnection.ExecuteAsync(nfQuery, new { command.notaFiscal.Descricao, command.notaFiscal.IdNotaFiscal });
 
 
 
-				transaction.Complete();
+                //var notaFiscalAlterada = (await sqlConnection
+                //	.QueryAsync<NotaFiscal>(nfQuery, (nota) =>
+                //	{
+                //	}))
+                //	.ToList();
+
+                //	var notasFiscais = (await sqlConnection.QueryAsync<NotaFiscal, Endereco, Endereco, NotaFiscal>(
+                //	nfQuery,
+                //	(notaFiscal, enderecoEmitente, enderecoDestinatario) =>
+                //	{
+                //		notaFiscal.EnderecoEmitente = enderecoEmitente;
+                //		notaFiscal.EnderecoDestinatario = enderecoDestinatario;
+                //		return notaFiscal;
+                //	},
+                //	splitOn: "IdNotaFiscalEnderecos, IdNotaFiscalEnderecos"
+                //)).ToList();
+
+
+
+                transaction.Complete();
 			}
 			catch (Exception)
 			{

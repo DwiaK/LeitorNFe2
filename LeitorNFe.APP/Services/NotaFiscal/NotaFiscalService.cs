@@ -44,7 +44,7 @@ public class NotaFiscalService : INotaFiscalService
 
     public async Task<bool> EditarNotaFiscal(NotaFiscalModel notaFiscal)
     {
-		var request = await _httpClient.PostAsJsonAsync("api/NotaFiscal/EditarNotaFiscal", notaFiscal);
+		var request = await _httpClient.PutAsJsonAsync("api/NotaFiscal/EditarNotaFiscal", notaFiscal);
 
 		if (request.StatusCode is HttpStatusCode.OK)
 		{

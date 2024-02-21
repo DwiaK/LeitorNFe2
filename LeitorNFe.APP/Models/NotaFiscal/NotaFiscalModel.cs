@@ -40,4 +40,8 @@ public class NotaFiscalModel
 
     public NotaFiscalEnderecosModel EnderecoDestinatario { get; set; }
     #endregion
+
+    #region Outras Informações
+    public string Descricao { get; set; }
+    #endregion
 }

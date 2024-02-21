@@ -1,3 +1,4 @@
+using LeitorNFe.App.Components.NotaFiscal;
 using LeitorNFe.App.Models.NotaFiscal;
 using LeitorNFe.App.Services.NotaFiscal;
 using Microsoft.AspNetCore.Components;
@@ -15,6 +16,9 @@ public partial class NotasFiscaisConsulta
 
     [Inject]
     private NavigationManager _navigationManager { get; set; }
+
+    [Inject]
+    private IDialogService _dialogService { get; set; }
     #endregion
 
     #region Props
@@ -34,6 +38,17 @@ public partial class NotasFiscaisConsulta
     protected override async Task OnInitializedAsync()
     {
         ListaNotasFiscais = await _notaFiscalService.ListarNotasFiscais();
+    }
+
+    private async Task VisualizarNotaFiscal(int id)
+    {
+        var parameters = new DialogParameters<NotaFiscalModel> 
+        { 
+            { x => x.IdNotaFiscal, id } 
+        };
+
+        var dialog = await _dialogService.ShowAsync<InformacoesNotaFiscal>("Informações da Nota Fiscal", parameters);
+        var result = await dialog.Result;
     }
 
     private void EditarNotaFiscal(int id)

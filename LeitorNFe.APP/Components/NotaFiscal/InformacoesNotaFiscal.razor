@@ -1,0 +1,20 @@
+<MudDialog>
+    <TitleContent>
+        <MudText Style="font-size: 15px">
+            Informações da Nota Fiscal
+        </MudText>
+        <MudDivider/>
+    </TitleContent>
+    <DialogContent>
+        @if (NotaFiscal is not null)
+        {
+            <MudTextField Value="@NotaFiscal.nNF" Label="Número da Nota Fiscal" ReadOnly="true" />
+            <MudTextField Value="@NotaFiscal.nNF" Label="Número da Nota Fiscal" ReadOnly="true" />
+            <MudTextField Value="@NotaFiscal.nNF" Label="Número da Nota Fiscal" ReadOnly="true" />
+            <MudTextField Value="@NotaFiscal.nNF" Label="Número da Nota Fiscal" ReadOnly="true" />
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="FecharDialog">Fechar</MudButton>
+    </DialogActions>
+</MudDialog>

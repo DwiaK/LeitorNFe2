@@ -8,7 +8,7 @@ public class NotaFiscal : EntidadeBase
     private NotaFiscal(
         int id, string numeroNf, string chaveNFe, string DhEmi, 
         string CNPJEmitente, string xNomeEmitente,
-        string CNPJDestinatario, string xNomeDestinatario, string EmailDestinatario)
+        string CNPJDestinatario, string xNomeDestinatario, string EmailDestinatario, string descricao)
     {
         IdNotaFiscal = id;
         nNF = numeroNf;
@@ -19,6 +19,7 @@ public class NotaFiscal : EntidadeBase
         CNPJDest = CNPJDestinatario;
         xNomeDest = xNomeDestinatario;
         EmailDest = EmailDestinatario;
+        Descricao = descricao;
     }
 
     public NotaFiscal()
@@ -46,13 +47,17 @@ public class NotaFiscal : EntidadeBase
     public Endereco EnderecoDestinatario { get; set; }
     #endregion
 
+    #region Outras Informações
+    public string Descricao { get; set; }
+    #endregion
+
     public static NotaFiscal Create(int id, string numeroNf, string chaveNFe, string DhEmi,
         string CNPJEmitente, string xNomeEmitente,
-        string CNPJDestinatario, string xNomeDestinatario, string EmailDestinatario)
+        string CNPJDestinatario, string xNomeDestinatario, string EmailDestinatario, string descricao)
     {
         var notaFiscal = new NotaFiscal(id, numeroNf, chaveNFe, DhEmi,
             CNPJEmitente, xNomeEmitente,
-            CNPJDestinatario, xNomeDestinatario, EmailDestinatario);
+            CNPJDestinatario, xNomeDestinatario, EmailDestinatario, descricao);
 
         return notaFiscal;
     }

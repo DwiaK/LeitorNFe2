@@ -22,28 +22,31 @@
              xs="12">
         @if (!ListaNotasFiscais.IsNullOrEmpty())
         {
-            <MudTable Items="@ListaNotasFiscais" Hover="true" Breakpoint="Breakpoint.Sm">
+            <MudTable Items="@ListaNotasFiscais" Hover="true" Breakpoint="Breakpoint.Sm" Dense=true>
                 <HeaderContent>
                     <MudTh>nNF</MudTh>
-                    <MudTh>chNFe</MudTh>
                     <MudTh>Emitente</MudTh>
                     <MudTh>Destinatário</MudTh>
+                    <MudTh>Descrição</MudTh>
+                    <MudTh></MudTh>
                     <MudTh></MudTh>
                     <MudTh></MudTh>
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="nNF">@context.nNF</MudTd>
-                        <MudTd DataLabel="chNFe">@context.chNFe</MudTd>
                         <MudTd DataLabel="Emitente">@context.xNomeEmit</MudTd>
                         <MudTd DataLabel="Destinatário">@context.xNomeDest</MudTd>
+                        <MudTd DataLabel="Destinatário">@context.Descricao</MudTd>
                         <!-- Botões Editar/Deletar -->
+                        <MudTd DataLabel="Visualizar">
+                            <MudIconButton OnClick="@(() => VisualizarNotaFiscal(context.IdNotaFiscal))" Icon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Primary" aria-label="delete" />
+                        </MudTd>
                         <MudTd DataLabel="Editar">
                             <MudIconButton OnClick="@(() => EditarNotaFiscal(context.IdNotaFiscal))" Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" aria-label="delete"/>
                         </MudTd>
                         <MudTd DataLabel="Deletar">
                             <MudIconButton OnClick="@(() => DeletarNotaFiscal(context.IdNotaFiscal))" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" aria-label="delete"/>
                         </MudTd>
-
                     </RowTemplate>
                 </MudTable>
         }

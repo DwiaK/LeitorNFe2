@@ -32,7 +32,7 @@ public partial class EdicaoNotaFiscalPage
     private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
     {
         new BreadcrumbItem("Nota Fiscal", href: "/"),
-        new BreadcrumbItem("Importação Manual", href: null, disabled: true)
+        new BreadcrumbItem("Edição", href: null, disabled: true)
     };
     #endregion
 
@@ -48,7 +48,10 @@ public partial class EdicaoNotaFiscalPage
         var retornoNotaFiscal = await _notaFiscalService.BuscarNotaFiscalPorId(idNotaFiscal);
 
         if (retornoNotaFiscal is not null)
+        {
             NotaFiscal = retornoNotaFiscal;
+            Descricao = NotaFiscal.Descricao;
+        }
     }
 
     private void CancelarEdicao() =>
@@ -56,6 +59,10 @@ public partial class EdicaoNotaFiscalPage
 
     private void SalvarEdicao()
     {
+        // Setar descrição
+        if (!string.IsNullOrEmpty(Descricao))
+            NotaFiscal.Descricao = Descricao;
+
         // Update
         var retorno = _notaFiscalService.EditarNotaFiscal(NotaFiscal);
     }

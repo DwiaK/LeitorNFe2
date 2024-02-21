@@ -275,7 +275,7 @@
                             </MudText>
                             <MudDivider Class="mb-3" />
                         </MudItem>
-                        <MudTextField T="string" Label="Insira uma descrição para a Nota Fiscal." Style="font-size: 12px;" Variant="Variant.Text" Text="@Descricao" Lines="25" />
+                        <MudTextField @bind-Text=@Descricao T="string" Placeholder="Insira uma descrição para a Nota Fiscal." Style="font-size: 12px;" Variant="Variant.Text" Lines="25" />
                     </MudContainer>
                 </MudPaper>
             </MudItem>

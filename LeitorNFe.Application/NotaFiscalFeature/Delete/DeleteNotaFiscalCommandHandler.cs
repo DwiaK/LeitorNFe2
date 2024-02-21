@@ -11,8 +11,6 @@ using System.Transactions;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Delete;
 
-
-
 public sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNotaFiscalCommand, bool>
 {
     #region Atributos
