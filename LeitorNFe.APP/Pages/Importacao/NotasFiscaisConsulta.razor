@@ -19,6 +19,14 @@
 <MudGrid>
     <MudItem md="12"
              sm="12"
+             xs="12" Class="py-3 mt-5">
+        <MudText Style="font-size: 18px;">
+            Notas Fiscais Automáticas
+        </MudText>
+        <MudDivider />
+    </MudItem>
+    <MudItem md="12"
+             sm="12"
              xs="12">
         @if (!ListaNotasFiscais.IsNullOrEmpty())
         {
@@ -28,9 +36,9 @@
                     <MudTh>Emitente</MudTh>
                     <MudTh>Destinatário</MudTh>
                     <MudTh>Descrição</MudTh>
-                    <MudTh></MudTh>
-                    <MudTh></MudTh>
-                    <MudTh></MudTh>
+                    <MudTh Class="pa-0"></MudTh>
+                    <MudTh Class="pa-0"></MudTh>
+                    <MudTh Class="pa-0"></MudTh>
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="nNF">@context.nNF</MudTd>
@@ -38,13 +46,13 @@
                         <MudTd DataLabel="Destinatário">@context.xNomeDest</MudTd>
                         <MudTd DataLabel="Destinatário">@context.Descricao</MudTd>
                         <!-- Botões Editar/Deletar -->
-                        <MudTd DataLabel="Visualizar">
+                        <MudTd DataLabel="Visualizar" Class="pa-0">
                             <MudIconButton OnClick="@(() => VisualizarNotaFiscal(context.IdNotaFiscal))" Icon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Primary" aria-label="delete" />
                         </MudTd>
-                        <MudTd DataLabel="Editar">
+                        <MudTd DataLabel="Editar" Class="pa-0">
                             <MudIconButton OnClick="@(() => EditarNotaFiscal(context.IdNotaFiscal))" Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" aria-label="delete"/>
                         </MudTd>
-                        <MudTd DataLabel="Deletar">
+                        <MudTd DataLabel="Deletar" Class="pa-0">
                             <MudIconButton OnClick="@(() => DeletarNotaFiscal(context.IdNotaFiscal))" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" aria-label="delete"/>
                         </MudTd>
                     </RowTemplate>

@@ -47,6 +47,12 @@ public partial class NotasFiscaisConsulta
             { x => x.IdNotaFiscal, id } 
         };
 
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true
+        };
+
         var dialog = await _dialogService.ShowAsync<InformacoesNotaFiscal>("Informações da Nota Fiscal", parameters);
         var result = await dialog.Result;
     }
