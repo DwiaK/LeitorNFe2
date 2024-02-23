@@ -48,8 +48,12 @@ public class NotaFiscalService : INotaFiscalService
 
 		if (request.StatusCode is HttpStatusCode.OK)
 		{
-			// Success
-			return true;
+            // Success
+
+            //var user = JsonConvert.DeserializeObject<User>(responseContent);
+
+
+            return true;
 		}
 		else
 		{
