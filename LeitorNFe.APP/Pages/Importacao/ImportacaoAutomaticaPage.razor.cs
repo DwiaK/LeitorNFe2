@@ -6,6 +6,7 @@ using MudBlazor;
 using System.Collections.Generic;
 using System.Linq;
 using LeitorNFe.App.Models.NotaFiscal;
+using LeitorNFe.App.Infrastructure.Wrapper;
 
 namespace LeitorNFe.App.Pages.Importacao;
 

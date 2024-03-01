@@ -1,4 +1,5 @@
-﻿using LeitorNFe.App.Models.NotaFiscal;
+﻿using LeitorNFe.App.Infrastructure.Wrapper;
+using LeitorNFe.App.Models.NotaFiscal;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -2,6 +2,7 @@
 using LeitorNFe.Application.Abstractions.Data;
 using LeitorNFe.Application.NotaFiscalFeature.GetById;
 using LeitorNFe.Persistence;
+using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 
 namespace LeitorNFe.API
@@ -22,10 +23,12 @@ namespace LeitorNFe.API
 
             builder.Configuration.AddConfiguration(configuration);
 
+            var corsLiberate = builder.Configuration.GetValue<string>("CorsLiberate")!;
+
             builder.Services.AddCors(policy =>
             {
                 policy.AddPolicy("AllowSpecificOrigin", builder =>
-                 builder.WithOrigins("http://localhost:7227/")
+                 builder.WithOrigins(corsLiberate)
                   .SetIsOriginAllowed((host) => true) // Para endereço localhost
                   .AllowAnyMethod()
                   .AllowAnyHeader()
