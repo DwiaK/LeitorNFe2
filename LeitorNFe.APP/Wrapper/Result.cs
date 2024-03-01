@@ -1,149 +1,51 @@
-﻿//using System.Collections.Generic;
-//using System.Threading.Tasks;
+﻿using System;
 
-//namespace LeitorNFe.App.Infrastructure.Wrapper;
+namespace LeitorNFe.App.Wrapper;
 
-//public class Result : IResult
-//{
-//    public Result()
-//    {
-//    }
+public class Result
+{
+    protected internal Result(bool isSuccess, Error error)
+    {
+        if (isSuccess && error != Error.None)
+            throw new InvalidOperationException();
 
-//    public List<string> Messages { get; set; } = new List<string>();
+        if (!isSuccess && error == Error.None)
+            throw new InvalidOperationException();
 
-//    public bool Succeeded { get; set; }
+        IsSuccess = isSuccess;
+        Error = error;
+    }
 
-//    public static IResult Fail()
-//    {
-//        return new Result { Succeeded = false };
-//    }
+    public bool IsSuccess { get; }
 
-//    public static IResult Fail(string message)
-//    {
-//        return new Result { Succeeded = false, Messages = new List<string> { message } };
-//    }
+    public bool IsFailure => !IsSuccess;
 
-//    public static IResult Fail(List<string> messages)
-//    {
-//        return new Result { Succeeded = false, Messages = messages };
-//    }
+    public Error Error { get; }
 
-//    public static Task<IResult> FailAsync()
-//    {
-//        return Task.FromResult(Fail());
-//    }
+    public static Result Success() => new(true, Error.None);
 
-//    public static Task<IResult> FailAsync(string message)
-//    {
-//        return Task.FromResult(Fail(message));
-//    }
+    public static Result<TValue> Success<TValue>(TValue value) => new(value, true, Error.None);
 
-//    public static Task<IResult> FailAsync(List<string> messages)
-//    {
-//        return Task.FromResult(Fail(messages));
-//    }
+    public static Result Failure(Error error) => new(false, error);
 
-//    public static IResult Success()
-//    {
-//        return new Result { Succeeded = true };
-//    }
+    public static Result<TValue> Failure<TValue>(Error error) => new(default, false, error);
 
-//    public static IResult Success(string message)
-//    {
-//        return new Result { Succeeded = true, Messages = new List<string> { message } };
-//    }
+    public static Result Create(bool condition) => condition ? Success() : Failure(Error.ConditionNotMet);
 
-//    public static Task<IResult> SuccessAsync()
-//    {
-//        return Task.FromResult(Success());
-//    }
+    public static Result<TValue> Create<TValue>(TValue? value) => value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
+}
 
-//    public static Task<IResult> SuccessAsync(string message)
-//    {
-//        return Task.FromResult(Success(message));
-//    }
-//}
+public class Result<TValue> : Result
+{
+    private readonly TValue? _value;
 
-//public class Result<T> : Result, IResult<T>
-//{
-//    public Result()
-//    {
-//    }
+    protected internal Result(TValue? value, bool isSuccess, Error error)
+        : base(isSuccess, error) =>
+        _value = value;
 
-//    public T Data { get; set; }
+    public TValue Value => IsSuccess
+        ? _value!
+        : throw new InvalidOperationException("O valor de um resultado que retornou falha não pode ser acessado.");
 
-//    public new static Result<T> Fail()
-//    {
-//        return new Result<T> { Succeeded = false };
-//    }
-
-//    public new static Result<T> Fail(string message)
-//    {
-//        return new Result<T> { Succeeded = false, Messages = new List<string> { message } };
-//    }
-
-//    public new static Result<T> Fail(List<string> messages)
-//    {
-//        return new Result<T> { Succeeded = false, Messages = messages };
-//    }
-
-//    public new static Task<Result<T>> FailAsync()
-//    {
-//        return Task.FromResult(Fail());
-//    }
-
-//    public new static Task<Result<T>> FailAsync(string message)
-//    {
-//        return Task.FromResult(Fail(message));
-//    }
-
-//    public new static Task<Result<T>> FailAsync(List<string> messages)
-//    {
-//        return Task.FromResult(Fail(messages));
-//    }
-
-//    public new static Result<T> Success()
-//    {
-//        return new Result<T> { Succeeded = true };
-//    }
-
-//    public new static Result<T> Success(string message)
-//    {
-//        return new Result<T> { Succeeded = true, Messages = new List<string> { message } };
-//    }
-
-//    public static Result<T> Success(T data)
-//    {
-//        return new Result<T> { Succeeded = true, Data = data };
-//    }
-
-//    public static Result<T> Success(T data, string message)
-//    {
-//        return new Result<T> { Succeeded = true, Data = data, Messages = new List<string> { message } };
-//    }
-
-//    public static Result<T> Success(T data, List<string> messages)
-//    {
-//        return new Result<T> { Succeeded = true, Data = data, Messages = messages };
-//    }
-
-//    public new static Task<Result<T>> SuccessAsync()
-//    {
-//        return Task.FromResult(Success());
-//    }
-
-//    public new static Task<Result<T>> SuccessAsync(string message)
-//    {
-//        return Task.FromResult(Success(message));
-//    }
-
-//    public static Task<Result<T>> SuccessAsync(T data)
-//    {
-//        return Task.FromResult(Success(data));
-//    }
-
-//    public static Task<Result<T>> SuccessAsync(T data, string message)
-//    {
-//        return Task.FromResult(Success(data, message));
-//    }
-//}
+    public static implicit operator Result<TValue>(TValue? value) => Create(value);
+}

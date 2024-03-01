@@ -41,6 +41,17 @@ public class NotaFiscalController : ControllerBase
             return false;
     }
 
+    [HttpPost("ImportarMultiplasNotasFiscais")]
+    public async Task<bool> ImportarMultiplasNotasFiscais([FromBody] List<NotaFiscal> notasFiscais, CancellationToken cancellationToken)
+    {
+        var result = await new CreateMultiplasNotasFiscaisCommandHandler(_sqlConnection).Handle(new CreateMultiplasNotasFiscaisCommand(notasFiscais), cancellationToken);
+
+        if (result.IsSuccess)
+            return true;
+        else
+            return false;
+    }
+
 	[HttpPut("EditarNotaFiscal")]
 	public async Task<bool> EditarNotaFiscal([FromBody] NotaFiscal notaFiscal, CancellationToken cancellationToken)
 	{

@@ -1,6 +1,7 @@
 ﻿using LeitorNFe.Application.Abstractions.Command;
 using LeitorNFe.Domain.Entities.NotasFiscais;
+using System.Collections.Generic;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Create;
 
-public sealed record CreateNotaFiscalCommand(NotaFiscal notaFiscal) : ICommand;
+public sealed record CreateMultiplasNotasFiscaisCommand(List<NotaFiscal> notasFiscais) : ICommand;

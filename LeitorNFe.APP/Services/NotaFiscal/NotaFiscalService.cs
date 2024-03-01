@@ -78,6 +78,22 @@ public class NotaFiscalService : INotaFiscalService
         }
     }
 
+    public async Task<bool> ImportarMultiplasNotasFiscais(List<NotaFiscalModel> notasFiscais)
+    {
+        var request = await _httpClient.PostAsJsonAsync("api/NotaFiscal/ImportarMultiplasNotasFiscais", notasFiscais);
+
+        if (request.StatusCode is HttpStatusCode.OK)
+        {
+            // Success
+            return true;
+        }
+        else
+        {
+            // Error
+            return false;
+        }
+    }
+
     public async Task<List<NotaFiscalModel>> ListarNotasFiscais()
     {
         var request = await _httpClient.GetFromJsonAsync<List<NotaFiscalModel>>("api/NotaFiscal/BuscarNotasFiscais");

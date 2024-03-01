@@ -6,7 +6,7 @@ using MudBlazor;
 using System.Collections.Generic;
 using System.Linq;
 using LeitorNFe.App.Models.NotaFiscal;
-using LeitorNFe.App.Infrastructure.Wrapper;
+using System.Threading.Tasks;
 
 namespace LeitorNFe.App.Pages.Importacao;
 
@@ -47,7 +47,7 @@ public partial class ImportacaoAutomaticaPage
         arquivos.ToList().ForEach(item => _arquivos.Add(item));
     }
 
-    private void ImportarArquivos()
+    private async Task ImportarArquivos()
     {
         // Importar Arquivos
         var arquivos = _arquivos.ToList();
@@ -58,18 +58,21 @@ public partial class ImportacaoAutomaticaPage
             return;
         }
 
-        var resultado = false;
+        var listaNotasFiscais = new List<NotaFiscalModel>();
 
-        arquivos.ForEach(async item =>
+        await arquivos.ForEachAsync(async item =>
         {
-            var notaFiscal = await _notaFiscalService.MontarNotaFiscal(item);
-            resultado = await _notaFiscalService.ImportarNotaFiscal(notaFiscal);
+            var notaFiscalMontada = await _notaFiscalService.MontarNotaFiscal(item);
+
+            listaNotasFiscais.Add(notaFiscalMontada);
         });
 
-        //if (resultado is true)
-        //	_snackbar.Add($"Nota(s) importada(s) com sucesso!", Severity.Success);
-        //else
-        //	_snackbar.Add($"Ocorreu um erro ao Importar as Notas Fiscais.", Severity.Error);
+        var resultado = await _notaFiscalService.ImportarMultiplasNotasFiscais(listaNotasFiscais);
+
+        if (resultado is true)
+            _snackbar.Add($"Nota(s) importada(s) com sucesso!", Severity.Success);
+        else
+            _snackbar.Add($"Ocorreu um erro ao Importar as Notas Fiscais.", Severity.Error);
     }
 
     private void BuscarObjetoListaAdicionado(IReadOnlyList<IBrowserFile> arquivos)
