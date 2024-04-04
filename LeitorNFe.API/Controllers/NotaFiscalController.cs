@@ -1,81 +1,71 @@
-﻿using Dapper;
-using LeitorNFe.Application.Abstractions.Data;
+﻿using LeitorNFe.Application.Abstractions.Data;
 using LeitorNFe.Application.NotaFiscalFeature.GetById;
 using LeitorNFe.Application.NotaFiscalFeature.Create;
 using LeitorNFe.Domain.Entities.NotasFiscais;
 using Microsoft.AspNetCore.Mvc;
-using NotaFiscalFeature.GetById;
 using LeitorNFe.Application.NotaFiscalFeature.Get;
 using LeitorNFe.Application.NotaFiscalFeature.Delete;
 using LeitorNFe.Application.NotaFiscalFeature.Update;
+using LeitorNFe.API.Abstractions;
+using LeitorNFe.Application.Abstractions.Dispatcher;
+using LeitorNFe.SharedKernel;
+using LeitorNFe.Application.Abstractions.Messaging;
 
 namespace LeitorNFe.API.Controllers;
 
 [Route("api/[controller]")]
-[ApiController]
-public class NotaFiscalController : ControllerBase
+public class NotaFiscalController : ApiController
 {
-    private readonly ISqlConnectionFactory _sqlConnection;
-
-    public NotaFiscalController(ISqlConnectionFactory sqlConnection)
+    public NotaFiscalController(ISqlConnectionFactory sqlConnection, IDispatcher dispatcher)
+        : base(sqlConnection, dispatcher)
     {
-        _sqlConnection = sqlConnection;
     }
 
     [HttpGet("BuscarNotaFiscalPorId/{id}")]
     public async Task<NotaFiscal> GetNotaFiscalById(int id, CancellationToken cancellationToken)
     {
-        var result = await new GetNotaFiscalByIdQueryHandler(_sqlConnection).Handle(new GetNotaFiscalByIdQuery(id), cancellationToken);
+		var result = await _dispatcher.Query<GetNotaFiscalByIdQuery, NotaFiscal>(new GetNotaFiscalByIdQuery(id), cancellationToken);
 
-        return result.Value;
+		return result.Value;
     }
 
     [HttpPost("ImportarNotaFiscal")]
     public async Task<bool> ImportarNotaFiscal([FromBody] NotaFiscal notaFiscal, CancellationToken cancellationToken)
     {
-        var result = await new CreateNotaFiscalCommandHandler(_sqlConnection).Handle(new CreateNotaFiscalCommand(notaFiscal), cancellationToken);
+		await _dispatcher.Send(new CreateNotaFiscalCommand(notaFiscal), cancellationToken);
 
-        if (result.IsSuccess)
-            return true;
-        else
-            return false;
+        return true; // try / catch result
     }
 
     [HttpPost("ImportarMultiplasNotasFiscais")]
     public async Task<bool> ImportarMultiplasNotasFiscais([FromBody] List<NotaFiscal> notasFiscais, CancellationToken cancellationToken)
     {
-        var result = await new CreateMultiplasNotasFiscaisCommandHandler(_sqlConnection).Handle(new CreateMultiplasNotasFiscaisCommand(notasFiscais), cancellationToken);
+		await _dispatcher.Send(new CreateMultiplasNotasFiscaisCommand(notasFiscais), cancellationToken);
 
-        if (result.IsSuccess)
-            return true;
-        else
-            return false;
+        return true;
     }
 
 	[HttpPut("EditarNotaFiscal")]
 	public async Task<bool> EditarNotaFiscal([FromBody] NotaFiscal notaFiscal, CancellationToken cancellationToken)
 	{
-		var result = await new UpdateNotaFiscalCommandHandler(_sqlConnection).Handle(new UpdateNotaFiscalCommand(notaFiscal), cancellationToken);
+		await _dispatcher.Send(new UpdateNotaFiscalCommand(notaFiscal), cancellationToken);
 
-		if (result.IsSuccess)
-			return true;
-		else
-			return false;
+		return true; // try / catch result
 	}
 
 	[HttpDelete("DeletarNotaFiscal/{id}")]
     public async Task<bool> DeletarNotaFiscal(int id, CancellationToken cancellationToken)
     {
-        var result = await new DeleteNotaFiscalCommandHandler(_sqlConnection).Handle(new DeleteNotaFiscalCommand(id), cancellationToken);
+		await _dispatcher.Send(new DeleteNotaFiscalCommand(id), cancellationToken);
 
-        return true;
+		return true; // try / catch result
     }
 
-    [HttpGet("BuscarNotasFiscais")]
-    public async Task<List<NotaFiscal>> BuscarNotasFiscais(CancellationToken cancellationToken)
-    {
-        var result = await new GetNotaFiscalQueryHandler(_sqlConnection).Handle(new GetNotaFiscalQuery(), cancellationToken);
+	[HttpGet("BuscarNotasFiscais")]
+	public async Task<List<NotaFiscal>> BuscarNotasFiscais(CancellationToken cancellationToken)
+	{
+		var result = await _dispatcher.Query<GetNotaFiscalQuery, List<NotaFiscal>>(new GetNotaFiscalQuery(), cancellationToken);
 
-        return result.Value;
-    }
+		return result.Value;
+	}
 }

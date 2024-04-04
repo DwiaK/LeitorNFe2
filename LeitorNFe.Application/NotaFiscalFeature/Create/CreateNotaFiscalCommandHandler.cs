@@ -145,5 +145,5 @@ public class CreateNotaFiscalCommandHandler : ICommandHandler<CreateNotaFiscalCo
 
         return nfeQuery.ToString();
     }
-    #endregion
+	#endregion
 }

@@ -1,8 +1,8 @@
-
+using LeitorNFe.API.Configurations;
+using LeitorNFe.Application;
 using LeitorNFe.Application.Abstractions.Data;
-using LeitorNFe.Application.NotaFiscalFeature.GetById;
+using LeitorNFe.Application.Abstractions.Dispatcher;
 using LeitorNFe.Persistence;
-using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 
 namespace LeitorNFe.API
@@ -39,8 +39,10 @@ namespace LeitorNFe.API
                 .AddSwaggerGen(x => x.SwaggerDoc("v1", new OpenApiInfo { Title = "LeitorNFe.API", Version = "v1" }));
 
             builder.Services.AddScoped<ISqlConnectionFactory, SqlConnectionFactory>();
+			builder.Services.AddHandlersFromAssembly(typeof(AssemblyReference).Assembly);
+			builder.Services.AddScoped<IDispatcher, Dispatcher>();
 
-            var app = builder.Build();
+			var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
             {

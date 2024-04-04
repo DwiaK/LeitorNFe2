@@ -11,7 +11,7 @@ using LeitorNFe.Application.NotaFiscalFeature.GetById;
 using LeitorNFe.Domain.Entities.Enderecos;
 using System.Linq;
 
-namespace NotaFiscalFeature.GetById;
+namespace LeitorNFe.Application.NotaFiscalFeature.GetById;
 
 public sealed class GetNotaFiscalByIdQueryHandler : IQueryHandler<GetNotaFiscalByIdQuery, NotaFiscal>
 {
