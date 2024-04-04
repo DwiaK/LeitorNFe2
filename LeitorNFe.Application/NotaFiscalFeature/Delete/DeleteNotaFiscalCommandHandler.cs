@@ -11,7 +11,7 @@ using System.Transactions;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Delete;
 
-public sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNotaFiscalCommand>
+public sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNotaFiscalCommand, bool>
 {
     #region Atributos
     private readonly ISqlConnectionFactory _sqlConnectionFactory;
@@ -25,7 +25,7 @@ public sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNotaF
     #endregion
 
     #region Handle
-    public async Task<Result> Handle(DeleteNotaFiscalCommand query, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(DeleteNotaFiscalCommand query, CancellationToken cancellationToken)
     {
         // Criar Conexão
         await using var sqlConnection = _sqlConnectionFactory

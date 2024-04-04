@@ -11,7 +11,7 @@ using System.Transactions;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Create;
 
-public class CreateMultiplasNotasFiscaisCommandHandler : ICommandHandler<CreateMultiplasNotasFiscaisCommand>
+public class CreateMultiplasNotasFiscaisCommandHandler : ICommandHandler<CreateMultiplasNotasFiscaisCommand, bool>
 {
     #region Atributos
     private readonly ISqlConnectionFactory _sqlConnectionFactory;
@@ -23,7 +23,7 @@ public class CreateMultiplasNotasFiscaisCommandHandler : ICommandHandler<CreateM
     #endregion
 
     #region Handler
-    public async Task<Result> Handle(CreateMultiplasNotasFiscaisCommand command, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(CreateMultiplasNotasFiscaisCommand command, CancellationToken cancellationToken)
     {
         // Criar Conexão
         await using var sqlConnection = _sqlConnectionFactory
@@ -62,18 +62,16 @@ public class CreateMultiplasNotasFiscaisCommandHandler : ICommandHandler<CreateM
                 });
 
                 if (linhasAfetadasEmit is > 0 && linhasAfetadasDest is > 0)
-                    return Result.Success(true);
-
-            }
-            catch (Exception)
+					return Result.Success<bool>(true);
+			}
+			catch (Exception)
             {
                 transaction.Dispose();
+				return Result.Failure<bool>(Error.NullValue);
+			}
 
-                return Result.Failure(Error.NullValue);
-            }
-
-            return Result.Success(true);
-        }
+			return Result.Failure<bool>(Error.NullValue);
+		}
     }
     #endregion
 

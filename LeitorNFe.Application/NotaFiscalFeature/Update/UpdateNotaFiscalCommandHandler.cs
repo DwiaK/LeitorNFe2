@@ -12,19 +12,19 @@ using System.Transactions;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Update;
 
-public class UpdateNotaFiscalCommandHandler : ICommandHandler<UpdateNotaFiscalCommand>
+public class UpdateNotaFiscalCommandHandler : ICommandHandler<UpdateNotaFiscalCommand, bool>
 {
 	#region Atributos
 	private ISqlConnectionFactory _sqlConnectionFactory;
-    #endregion
+	#endregion
 
-    #region Construtor
-    public UpdateNotaFiscalCommandHandler(ISqlConnectionFactory sqlConnectionFactory) => 
+	#region Construtor
+	public UpdateNotaFiscalCommandHandler(ISqlConnectionFactory sqlConnectionFactory) =>
 		_sqlConnectionFactory = sqlConnectionFactory;
-    #endregion
+	#endregion
 
-    #region Handle
-    public async Task<Result> Handle(UpdateNotaFiscalCommand command, CancellationToken cancellationToken)
+	#region Handle
+	public async Task<Result<bool>> Handle(UpdateNotaFiscalCommand command, CancellationToken cancellationToken)
 	{
 		// Criar Conexão
 		await using var sqlConnection = _sqlConnectionFactory
@@ -40,19 +40,22 @@ public class UpdateNotaFiscalCommandHandler : ICommandHandler<UpdateNotaFiscalCo
 				// Buscar queries
 				var nfQuery = NotaFiscalStringQuery();
 
-                // Executar Edição na NotaFiscal
-                await sqlConnection.ExecuteAsync(nfQuery, new { command.notaFiscal.Descricao, command.notaFiscal.IdNotaFiscal });
+				// Executar Edição na NotaFiscal
+				await sqlConnection.ExecuteAsync(nfQuery, new { command.notaFiscal.Descricao, command.notaFiscal.IdNotaFiscal });
 
-                transaction.Complete();
+				transaction.Complete();
+
+				return Result.Success<bool>(true);
 			}
 			catch (Exception)
 			{
 				transaction.Dispose();
 
-				return Result.Failure(Error.NullValue);
+				return Result.Failure<bool>(Error.NullValue);
+
 			}
 
-			return Result.Success(true);
+			return Result.Failure<bool>(Error.NullValue);
 		}
 	}
 	#endregion

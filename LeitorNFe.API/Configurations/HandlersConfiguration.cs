@@ -7,15 +7,22 @@ public static class HandlersConfiguration
 {
 	public static void AddHandlersFromAssembly(this IServiceCollection services, Assembly assembly)
 	{
-		var handlerInterfaceType = typeof(ICommandHandler<>);
+		#region Command Types
+		var commandHandlerInterfaceType = typeof(ICommandHandler<>);
+		var commandHandlerInterfaceType2 = typeof(ICommandHandler<,>);
+		#endregion
+
+		#region Query Types
 		var queryHandlerInterfaceType = typeof(IQueryHandler<,>);
+		#endregion
 
 		var handlerTypes = assembly.GetTypes()
 			.Where(t => t.Namespace != null && t.Namespace.StartsWith("LeitorNFe.Application"))
 			.Where(t => t.Name.EndsWith("Handler"))
 			.Where(t => t.GetInterfaces().Any(i =>
 				i.IsGenericType &&
-				(i.GetGenericTypeDefinition() == handlerInterfaceType ||
+				(i.GetGenericTypeDefinition() == commandHandlerInterfaceType ||
+				 i.GetGenericTypeDefinition() == commandHandlerInterfaceType2 ||
 				 i.GetGenericTypeDefinition() == queryHandlerInterfaceType)))
 			.ToList();
 
@@ -23,7 +30,8 @@ public static class HandlersConfiguration
 		{
 			var implementedInterfaces = handlerType.GetInterfaces().Where(i =>
 				i.IsGenericType &&
-				(i.GetGenericTypeDefinition() == handlerInterfaceType ||
+				(i.GetGenericTypeDefinition() == commandHandlerInterfaceType ||
+				 i.GetGenericTypeDefinition() == commandHandlerInterfaceType2 ||
 				 i.GetGenericTypeDefinition() == queryHandlerInterfaceType));
 
 			foreach (var implementedInterface in implementedInterfaces)
