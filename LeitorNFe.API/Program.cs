@@ -1,7 +1,9 @@
+
 using LeitorNFe.API.Configurations;
 using LeitorNFe.Application;
 using LeitorNFe.Application.Abstractions.Data;
 using LeitorNFe.Application.Abstractions.Dispatcher;
+using LeitorNFe.Application.NotaFiscalFeature.GetById;
 using LeitorNFe.Persistence;
 using Microsoft.OpenApi.Models;
 
@@ -23,12 +25,10 @@ namespace LeitorNFe.API
 
             builder.Configuration.AddConfiguration(configuration);
 
-            var corsLiberate = builder.Configuration.GetValue<string>("CorsLiberate")!;
-
             builder.Services.AddCors(policy =>
             {
                 policy.AddPolicy("AllowSpecificOrigin", builder =>
-                 builder.WithOrigins(corsLiberate)
+                 builder.WithOrigins("http://localhost:7227/")
                   .SetIsOriginAllowed((host) => true) // Para endereço localhost
                   .AllowAnyMethod()
                   .AllowAnyHeader()
@@ -38,9 +38,10 @@ namespace LeitorNFe.API
             builder.Services
                 .AddSwaggerGen(x => x.SwaggerDoc("v1", new OpenApiInfo { Title = "LeitorNFe.API", Version = "v1" }));
 
-            builder.Services.AddScoped<ISqlConnectionFactory, SqlConnectionFactory>();
-			builder.Services.AddHandlersFromAssembly(typeof(AssemblyReference).Assembly);
+            builder.Services.AddScoped<IDbConnection, DbConnectionFactory>();
 			builder.Services.AddScoped<IDispatcher, Dispatcher>();
+
+			builder.Services.AddHandlersFromAssembly(typeof(AssemblyReference).Assembly);
 
 			var app = builder.Build();
 

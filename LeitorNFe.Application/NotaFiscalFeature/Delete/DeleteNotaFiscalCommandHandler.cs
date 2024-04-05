@@ -14,39 +14,46 @@ namespace LeitorNFe.Application.NotaFiscalFeature.Delete;
 public sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNotaFiscalCommand, bool>
 {
     #region Atributos
-    private readonly ISqlConnectionFactory _sqlConnectionFactory;
+    private readonly IDbConnection _dbConnectionFactory;
     #endregion
 
     #region Construtor
-    public DeleteNotaFiscalCommandHandler(ISqlConnectionFactory sqlConnectionFactory)
+    public DeleteNotaFiscalCommandHandler(IDbConnection dbConnectionFactory)
     {
-        _sqlConnectionFactory = sqlConnectionFactory;
+        _dbConnectionFactory = dbConnectionFactory;
     }
     #endregion
 
     #region Handle
-    public async Task<Result<bool>> Handle(DeleteNotaFiscalCommand query, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(DeleteNotaFiscalCommand command, CancellationToken cancellationToken)
     {
-        // Criar Conexão
-        await using var sqlConnection = _sqlConnectionFactory
-            .CreateConnection();
+        #region Validação
+        if (command is null)
+            return Result.Failure<bool>(Error.NullValue);
+		#endregion
 
-        using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+		#region Conexão
+		await using var dbConnection = _dbConnectionFactory.CreateConnection();
+		#endregion
+
+		#region Queries
+		var nfQuery = DeleteNotaFiscalStringQuery();
+		var nfeQuery = DeleteNotaFiscalEnderecoStringQuery();
+		#endregion
+
+		#region Transaction
+		using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
             try
             {
                 // Iniciar Conexão Assíncrona
-                await sqlConnection.OpenAsync();
+                await dbConnection.OpenAsync();
 
-                // Buscar queries
-                var nfQuery = DeleteNotaFiscalStringQuery();
-                var nfeQuery = DeleteNotaFiscalEnderecoStringQuery();
+                var linhasAfetadasNFE = await dbConnection
+					.ExecuteAsync(nfeQuery, new { IdNotaFiscal = command.id });
 
-                var linhasAfetadasNFE = await sqlConnection
-                    .ExecuteAsync(nfeQuery, new { IdNotaFiscal = query.id });
-
-                var linhasAfetadasNF = await sqlConnection
-                    .ExecuteAsync(nfQuery, new { IdNotaFiscal = query.id });
+                var linhasAfetadasNF = await dbConnection
+					.ExecuteAsync(nfQuery, new { IdNotaFiscal = command.id });
 
                 if (linhasAfetadasNF is not > 0 && linhasAfetadasNFE is not > 0)
                 {
@@ -64,6 +71,7 @@ public sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNotaF
                 return Result.Failure<bool>(Error.NullValue);
             }
         }
+		#endregion
     }
 
     #endregion
@@ -74,10 +82,10 @@ public sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNotaF
         #region Query NotaFiscal
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendLine($"DELETE FROM");
-        sb.AppendLine($"    [NotaFiscal]");
-        sb.AppendLine($"WHERE");
-        sb.AppendLine($"    [IdNotaFiscal] = @IdNotaFiscal");
+        sb.AppendLine($"DELETE FROM")
+          .AppendLine($"    [NotaFiscal]")
+          .AppendLine($"WHERE")
+          .AppendLine($"    [IdNotaFiscal] = @IdNotaFiscal");
 
         return sb.ToString();
         #endregion
@@ -88,10 +96,10 @@ public sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNotaF
         #region Query NotaFiscalEndereco
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendLine($"DELETE FROM");
-        sb.AppendLine($"    [NotaFiscalEnderecos]");
-        sb.AppendLine($"WHERE");
-        sb.AppendLine($"    [IdNotaFiscal] = @IdNotaFiscal");
+        sb.AppendLine($"DELETE FROM")
+          .AppendLine($"    [NotaFiscalEnderecos]")
+          .AppendLine($"WHERE")
+          .AppendLine($"    [IdNotaFiscal] = @IdNotaFiscal");
 
         return sb.ToString();
         #endregion

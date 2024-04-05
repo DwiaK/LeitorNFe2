@@ -10,95 +10,96 @@ using System.Text;
 using LeitorNFe.Application.NotaFiscalFeature.GetById;
 using LeitorNFe.Domain.Entities.Enderecos;
 using System.Linq;
+using Microsoft.Data.SqlClient;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.GetById;
 
 public sealed class GetNotaFiscalByIdQueryHandler : IQueryHandler<GetNotaFiscalByIdQuery, NotaFiscal>
 {
-    #region Atributos
-    private readonly ISqlConnectionFactory _sqlConnectionFactory;
-    #endregion
+	#region Atributos
+	private readonly IDbConnection _dbConnectionFactory;
+	#endregion
 
-    #region Construtor
-    public GetNotaFiscalByIdQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
-    {
-        _sqlConnectionFactory = sqlConnectionFactory;
-    }
-    #endregion
+	#region Construtor
+	public GetNotaFiscalByIdQueryHandler(IDbConnection dbConnectionFactory)
+	{
+		_dbConnectionFactory = dbConnectionFactory;
+	}
+	#endregion
 
-    #region Handler
-    public async Task<Result<NotaFiscal>> Handle(GetNotaFiscalByIdQuery query, CancellationToken cancellationToken)
-    {
-        await using var sqlConnection = _sqlConnectionFactory
-            .CreateConnection();
+	#region Handler
+	public async Task<Result<NotaFiscal>> Handle(GetNotaFiscalByIdQuery query, CancellationToken cancellationToken)
+	{
+		#region Validação
+		if (query is null)
+			return Result.Failure<NotaFiscal>(Error.NullValue);
+		#endregion
 
-        try
-        {
-            // Iniciar Conexão Assíncrona
-            await sqlConnection.OpenAsync();
+		#region Conexão
+		await using var dbConnection = _dbConnectionFactory.CreateConnection();
+		await dbConnection.OpenAsync();
+		#endregion
 
-            // Buscar query
-            var nfQuery = GetNotaFiscalByIdStringQuery();
+		#region Query
+		var nfQuery = GetNotaFiscalByIdStringQuery();
+		#endregion
 
-            var notaFiscal = await sqlConnection
-                .QueryAsync<NotaFiscal, Endereco, Endereco, NotaFiscal>
-                (nfQuery, (notaFiscal, emitente, destinatario) =>
-                {
-                    notaFiscal.EnderecoEmitente = emitente;
-                    notaFiscal.EnderecoDestinatario = destinatario;
+		#region Buscas
+		var notaFiscal = (await dbConnection
+			.QueryAsync<NotaFiscal, Endereco, Endereco, NotaFiscal>
+				(nfQuery, (notaFiscal, emitente, destinatario) =>
+					{
+						notaFiscal.EnderecoEmitente = emitente;
+						notaFiscal.EnderecoDestinatario = destinatario;
 
-                    return notaFiscal;
-                },
-                new { IdNotaFiscal = query.id },
-                splitOn: "IdNotaFiscalEnderecos");
-            
-            notaFiscal.FirstOrDefault();
+						return notaFiscal;
+					},
+					new { IdNotaFiscal = query.id },
+					splitOn: "IdNotaFiscalEnderecos"))
+			.FirstOrDefault();
+		#endregion
 
-            // Se a lista de notas fiscais for nula
-            if (notaFiscal is null)
-            {
-                return Result.Failure<NotaFiscal>(Error.NullValue);
-            }
+		#region Validações
+		if (notaFiscal is null)
+		{
+			return Result.Failure<NotaFiscal>(Error.NullValue);
+		}
 
-            return Result.Success<NotaFiscal>(notaFiscal.FirstOrDefault());
-        }
-        catch (Exception)
-        {
-            return Result.Failure<NotaFiscal>(Error.None);
-        }
-    }
+		return Result.Success<NotaFiscal>(notaFiscal);
+		#endregion
+	}
 
-    #endregion
+	#endregion
 
-    #region Database Queries
-    public string GetNotaFiscalByIdStringQuery()
-    {
-        StringBuilder query = new StringBuilder();
+	#region Database Queries
+	public string GetNotaFiscalByIdStringQuery()
+	{
+		StringBuilder query = new StringBuilder();
 
-        query.AppendLine($"SELECT ");
-        query.AppendLine($"  [NF].*, ");
-        query.AppendLine($"  [EnderecoEmitente].*, ");
-        query.AppendLine($"  [EnderecoDestinatario].* ");
-        query.AppendLine($"    FROM ");
-        query.AppendLine($"        [NotaFiscal][NF] ");
+		query.AppendLine($"SELECT ")
+			 .AppendLine($"  [NF].*, ")
+			 .AppendLine($"  [EnderecoEmitente].*, ")
+			 .AppendLine($"  [EnderecoDestinatario].* ")
+			 .AppendLine($"    FROM ")
+			 .AppendLine($"        [NotaFiscal][NF] ")
 
-        query.AppendLine($"    INNER JOIN ");
-        query.AppendLine($"        [NotaFiscalEnderecos][EnderecoEmitente] ");
-        query.AppendLine($"        ON ");
-        query.AppendLine($"            [EnderecoEmitente].[IdNotaFiscal] = [NF].[IdNotaFiscal] ");
-        query.AppendLine($"        AND ");
-        query.AppendLine($"            [EnderecoEmitente].[IsEmit] = 1 ");
+			 .AppendLine($"    INNER JOIN ")
+			 .AppendLine($"        [NotaFiscalEnderecos][EnderecoEmitente] ")
+			 .AppendLine($"        ON ")
+			 .AppendLine($"            [EnderecoEmitente].[IdNotaFiscal] = [NF].[IdNotaFiscal] ")
+			 .AppendLine($"        AND ")
+			 .AppendLine($"            [EnderecoEmitente].[IsEmit] = 1 ")
 
-        query.AppendLine($"    INNER JOIN ");
-        query.AppendLine($"        [NotaFiscalEnderecos][EnderecoDestinatario] ");
-        query.AppendLine($"        ON ");
-        query.AppendLine($"            [EnderecoDestinatario].[IdNotaFiscal] = [NF].[IdNotaFiscal] ");
-        query.AppendLine($"        AND ");
-        query.AppendLine($"            [EnderecoDestinatario].[IsEmit] = 0 ");
-        query.AppendLine($"WHERE ");
-        query.AppendLine($"    [NF].[IdNotaFiscal] = @IdNotaFiscal ");
+			 .AppendLine($"    INNER JOIN ")
+			 .AppendLine($"        [NotaFiscalEnderecos][EnderecoDestinatario] ")
+			 .AppendLine($"        ON ")
+			 .AppendLine($"            [EnderecoDestinatario].[IdNotaFiscal] = [NF].[IdNotaFiscal] ")
+			 .AppendLine($"        AND ")
+			 .AppendLine($"            [EnderecoDestinatario].[IsEmit] = 0 ")
+			 .AppendLine($"WHERE ")
+			 .AppendLine($"    [NF].[IdNotaFiscal] = @IdNotaFiscal ");
 
-        return query.ToString();
-    }
-    #endregion
+		return query.ToString();
+	}
+	#endregion
 }

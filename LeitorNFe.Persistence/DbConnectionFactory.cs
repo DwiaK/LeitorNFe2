@@ -4,11 +4,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace LeitorNFe.Persistence;
 
-public class SqlConnectionFactory : ISqlConnectionFactory
+public class DbConnectionFactory : IDbConnection
 {
     private readonly IConfiguration _configuration;
 
-    public SqlConnectionFactory(IConfiguration configuration)
+    public DbConnectionFactory(IConfiguration configuration)
     {
         _configuration = configuration;
     }

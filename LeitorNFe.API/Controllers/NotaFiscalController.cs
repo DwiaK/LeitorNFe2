@@ -8,8 +8,6 @@ using LeitorNFe.Application.NotaFiscalFeature.Delete;
 using LeitorNFe.Application.NotaFiscalFeature.Update;
 using LeitorNFe.API.Abstractions;
 using LeitorNFe.Application.Abstractions.Dispatcher;
-using LeitorNFe.SharedKernel;
-using LeitorNFe.Application.Abstractions.Messaging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace LeitorNFe.API.Controllers;
@@ -17,8 +15,8 @@ namespace LeitorNFe.API.Controllers;
 [Route("api/[controller]")]
 public class NotaFiscalController : ApiController
 {
-	public NotaFiscalController(ISqlConnectionFactory sqlConnection, IDispatcher dispatcher)
-		: base(sqlConnection, dispatcher)
+	public NotaFiscalController(IDbConnection dbConnection, IDispatcher dispatcher)
+		: base(dbConnection, dispatcher)
 	{
 	}
 

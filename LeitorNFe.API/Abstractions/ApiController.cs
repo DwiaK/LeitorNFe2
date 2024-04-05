@@ -8,13 +8,13 @@ namespace LeitorNFe.API.Abstractions;
 public abstract class ApiController : ControllerBase
 {
 	#region Injeções
-	protected readonly ISqlConnectionFactory _sqlConnection;
+	protected readonly IDbConnection _dbConnection;
 	protected readonly IDispatcher _dispatcher;
 	#endregion
 
-	protected ApiController(ISqlConnectionFactory sqlConnection, IDispatcher dispatcher)
+	protected ApiController(IDbConnection dbConnection, IDispatcher dispatcher)
     {
-		_sqlConnection = sqlConnection;
+		_dbConnection = dbConnection;
 		_dispatcher = dispatcher;
     }
 }

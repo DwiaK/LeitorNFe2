@@ -14,36 +14,46 @@ namespace LeitorNFe.Application.NotaFiscalFeature.Create;
 public class CreateMultiplasNotasFiscaisCommandHandler : ICommandHandler<CreateMultiplasNotasFiscaisCommand, bool>
 {
     #region Atributos
-    private readonly ISqlConnectionFactory _sqlConnectionFactory;
+    private readonly IDbConnection _dbConnectionFactory;
     #endregion
 
     #region Construtor
-    public CreateMultiplasNotasFiscaisCommandHandler(ISqlConnectionFactory sqlConnectionFactory) =>
-        _sqlConnectionFactory = sqlConnectionFactory;
+    public CreateMultiplasNotasFiscaisCommandHandler(IDbConnection dbConnectionFactory) =>
+		_dbConnectionFactory = dbConnectionFactory;
     #endregion
 
     #region Handler
     public async Task<Result<bool>> Handle(CreateMultiplasNotasFiscaisCommand command, CancellationToken cancellationToken)
     {
-        // Criar Conexão
-        await using var sqlConnection = _sqlConnectionFactory
-            .CreateConnection();
+        #region Validação
+        if (command is null)
+            return Result.Failure<bool>(Error.NullValue);
+        #endregion
 
-        using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+        #region Conexão
+        await using var dbConnection = _dbConnectionFactory.CreateConnection();
+		#endregion
+
+		#region Queries
+		var nfQuery = NotaFiscalStringQuery();
+		var nfeQuery = NotaFiscalEnderecoStringQuery();
+		#endregion
+
+		#region Variáveis
+		int linhasAfetadasEmit = 0;
+		int linhasAfetadasDest = 0;
+		#endregion
+
+		#region Transaction
+		using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
             try
             {
-                await sqlConnection.OpenAsync();
-
-                var nfQuery = NotaFiscalStringQuery();
-                var nfeQuery = NotaFiscalEnderecoStringQuery();
-
-                int linhasAfetadasEmit = 0;
-                int linhasAfetadasDest = 0;
+                await dbConnection.OpenAsync();
 
                 await command.notasFiscais.ForEachAsync(async item =>
                 {
-                    var notaFiscalId = await sqlConnection
+                    var notaFiscalId = await dbConnection
                         .ExecuteScalarAsync<int>(nfQuery, item);
 
                     if (notaFiscalId is > 0)
@@ -52,10 +62,10 @@ public class CreateMultiplasNotasFiscaisCommandHandler : ICommandHandler<CreateM
                         item.EnderecoDestinatario.IdNotaFiscal = notaFiscalId;
                     }
 
-                    linhasAfetadasEmit = await sqlConnection
+                    linhasAfetadasEmit = await dbConnection
                         .ExecuteAsync(nfeQuery, item.EnderecoEmitente);
 
-                    linhasAfetadasDest = await sqlConnection
+                    linhasAfetadasDest = await dbConnection
                         .ExecuteAsync(nfeQuery, item.EnderecoDestinatario);
 
                     transaction.Complete();
@@ -72,6 +82,7 @@ public class CreateMultiplasNotasFiscaisCommandHandler : ICommandHandler<CreateM
 
 			return Result.Failure<bool>(Error.NullValue);
 		}
+		#endregion
     }
     #endregion
 
@@ -81,28 +92,28 @@ public class CreateMultiplasNotasFiscaisCommandHandler : ICommandHandler<CreateM
         #region Query NotaFiscal
         StringBuilder nfQuery = new StringBuilder();
 
-        nfQuery.AppendLine("INSERT INTO");
-        nfQuery.AppendLine("    [NotaFiscal] (");
-        nfQuery.AppendLine("        [nNF], ");
-        nfQuery.AppendLine("        [chNFe], ");
-        nfQuery.AppendLine("        [dhEmi], ");
-        nfQuery.AppendLine("        [CNPJEmit], ");
-        nfQuery.AppendLine("        [xNomeEmit], ");
-        nfQuery.AppendLine("        [CNPJDest], ");
-        nfQuery.AppendLine("        [xNomeDest], ");
-        nfQuery.AppendLine("        [EmailDest]");
-        nfQuery.AppendLine("    )");
-        nfQuery.AppendLine("    Values (");
-        nfQuery.AppendLine("        @nNF, ");
-        nfQuery.AppendLine("        @chNFe, ");
-        nfQuery.AppendLine("        @dhEmi, ");
-        nfQuery.AppendLine("        @CNPJEmit, ");
-        nfQuery.AppendLine("        @xNomeEmit, ");
-        nfQuery.AppendLine("        @CNPJDest, ");
-        nfQuery.AppendLine("        @xNomeDest, ");
-        nfQuery.AppendLine("        @EmailDest  ");
-        nfQuery.AppendLine("    );");
-        nfQuery.AppendLine("SELECT SCOPE_IDENTITY()"); // Buscar o Valor Identity do que foi inserido
+        nfQuery.AppendLine("INSERT INTO")
+               .AppendLine("    [NotaFiscal] (")
+               .AppendLine("        [nNF], ")
+               .AppendLine("        [chNFe], ")
+               .AppendLine("        [dhEmi], ")
+               .AppendLine("        [CNPJEmit], ")
+               .AppendLine("        [xNomeEmit], ")
+               .AppendLine("        [CNPJDest], ")
+               .AppendLine("        [xNomeDest], ")
+               .AppendLine("        [EmailDest]")
+               .AppendLine("    )")
+               .AppendLine("    Values (")
+               .AppendLine("        @nNF, ")
+               .AppendLine("        @chNFe, ")
+               .AppendLine("        @dhEmi, ")
+               .AppendLine("        @CNPJEmit, ")
+               .AppendLine("        @xNomeEmit, ")
+               .AppendLine("        @CNPJDest, ")
+               .AppendLine("        @xNomeDest, ")
+               .AppendLine("        @EmailDest  ")
+               .AppendLine("    );")
+               .AppendLine("SELECT SCOPE_IDENTITY()"); // Busca o Valor Identity do que foi inserido
         #endregion
 
         return nfQuery.ToString();
@@ -113,27 +124,27 @@ public class CreateMultiplasNotasFiscaisCommandHandler : ICommandHandler<CreateM
         #region Query NotaFiscalEnderecos
         StringBuilder nfeQuery = new StringBuilder();
 
-        nfeQuery.AppendLine("INSERT INTO");
-        nfeQuery.AppendLine("    [NotaFiscalEnderecos] (");
-        nfeQuery.AppendLine("        [IdNotaFiscal],");
-        nfeQuery.AppendLine("        [IsEmit],");
-        nfeQuery.AppendLine("        [xLgr],");
-        nfeQuery.AppendLine("        [nro], ");
-        nfeQuery.AppendLine("        [xBairro], ");
-        nfeQuery.AppendLine("        [xMun], ");
-        nfeQuery.AppendLine("        [UF], ");
-        nfeQuery.AppendLine("        [CEP]");
-        nfeQuery.AppendLine("    )");
-        nfeQuery.AppendLine("    Values (");
-        nfeQuery.AppendLine("        @IdNotaFiscal, ");
-        nfeQuery.AppendLine("        @IsEmit, ");
-        nfeQuery.AppendLine("        @xLgr, ");
-        nfeQuery.AppendLine("        @nro, ");
-        nfeQuery.AppendLine("        @xBairro, ");
-        nfeQuery.AppendLine("        @xMun, ");
-        nfeQuery.AppendLine("        @UF, ");
-        nfeQuery.AppendLine("        @CEP ");
-        nfeQuery.AppendLine("    )");
+        nfeQuery.AppendLine("INSERT INTO")
+                .AppendLine("    [NotaFiscalEnderecos] (")
+                .AppendLine("        [IdNotaFiscal],")
+                .AppendLine("        [IsEmit],")
+                .AppendLine("        [xLgr],")
+                .AppendLine("        [nro], ")
+                .AppendLine("        [xBairro], ")
+                .AppendLine("        [xMun], ")
+                .AppendLine("        [UF], ")
+                .AppendLine("        [CEP]")
+                .AppendLine("    )")
+                .AppendLine("    Values (")
+                .AppendLine("        @IdNotaFiscal, ")
+                .AppendLine("        @IsEmit, ")
+                .AppendLine("        @xLgr, ")
+                .AppendLine("        @nro, ")
+                .AppendLine("        @xBairro, ")
+                .AppendLine("        @xMun, ")
+                .AppendLine("        @UF, ")
+                .AppendLine("        @CEP ")
+                .AppendLine("    )");
         #endregion
 
         return nfeQuery.ToString();
