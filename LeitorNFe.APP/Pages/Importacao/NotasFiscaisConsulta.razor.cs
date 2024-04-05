@@ -62,10 +62,14 @@ public partial class NotasFiscaisConsulta
         _navigationManager.NavigateTo($"/importacao/edicao/{id}");
     }
 
-    private void DeletarNotaFiscal(int id)
+    private async void DeletarNotaFiscal(int id)
     {
-        _notaFiscalService.DeletarNotaFiscal(id);
-    }
+        await _notaFiscalService.DeletarNotaFiscal(id);
+
+		await _notaFiscalService.ListarNotasFiscais();
+
+        StateHasChanged();
+	}
     #endregion
 
     #region Breadcrumbs

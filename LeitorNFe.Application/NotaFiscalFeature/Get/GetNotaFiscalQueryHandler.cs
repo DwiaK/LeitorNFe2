@@ -32,9 +32,7 @@ public class GetNotaFiscalQueryHandler : IQueryHandler<GetNotaFiscalQuery, List<
     {
         #region Validação
         if (query is null)
-		{
             return Result.Failure<List<NotaFiscal>>(Error.NullValue);
-		}
 		#endregion
 
 		#region Conexão
@@ -48,22 +46,20 @@ public class GetNotaFiscalQueryHandler : IQueryHandler<GetNotaFiscalQuery, List<
 
 		#region Buscas Database
 		var notasFiscais = (await sqlConnection.QueryAsync<NotaFiscal, Endereco, Endereco, NotaFiscal>(
-				nfQuery,
-				(notaFiscal, enderecoEmitente, enderecoDestinatario) =>
-				{
-					notaFiscal.EnderecoEmitente = enderecoEmitente;
-					notaFiscal.EnderecoDestinatario = enderecoDestinatario;
-					return notaFiscal;
-				},
-				splitOn: "IdNotaFiscalEnderecos, IdNotaFiscalEnderecos"
-			)).ToList();
+			nfQuery,
+			(notaFiscal, enderecoEmitente, enderecoDestinatario) =>
+			{
+				notaFiscal.EnderecoEmitente = enderecoEmitente;
+				notaFiscal.EnderecoDestinatario = enderecoDestinatario;
+				return notaFiscal;
+			},
+			splitOn: "IdNotaFiscalEnderecos, IdNotaFiscalEnderecos"
+		)).ToList();
 		#endregion
 
 		#region Validações
 		if (notasFiscais.IsNullOrEmpty())
-		{
 			return Result.Failure<List<NotaFiscal>>(Error.NullValue);
-		}
 
 		return Result.Success<List<NotaFiscal>>(notasFiscais);
 		#endregion

@@ -52,7 +52,7 @@ public class NotaFiscalController : ApiController
 			return true;
 		#endregion
 
-		return false; // try / catch result
+		return false;
 	}
 
 	[HttpPost("ImportarMultiplasNotasFiscais")]

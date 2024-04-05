@@ -26,10 +26,13 @@ public partial class EdicaoNotaFiscalPage
     private NotaFiscalModel NotaFiscal { get; set; }
 
     private string Descricao { get; set; }
-    #endregion
 
-    #region Breadcrumbs
-    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+	[Inject]
+	private ISnackbar _snackbar { get; set; }
+	#endregion
+
+	#region Breadcrumbs
+	private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
     {
         new BreadcrumbItem("Nota Fiscal", href: "/"),
         new BreadcrumbItem("Edição", href: null, disabled: true)
@@ -57,14 +60,20 @@ public partial class EdicaoNotaFiscalPage
     private void CancelarEdicao() =>
         _navigationManager.NavigateTo($"/importacao/consulta");
 
-    private void SalvarEdicao()
+    private async void SalvarEdicao()
     {
         // Setar descrição
         if (!string.IsNullOrEmpty(Descricao))
             NotaFiscal.Descricao = Descricao;
 
         // Update
-        var retorno = _notaFiscalService.EditarNotaFiscal(NotaFiscal);
-    }
+        var retorno = await _notaFiscalService.EditarNotaFiscal(NotaFiscal);
+
+		if (retorno is true)
+			_snackbar.Add($"Nota editada com sucesso!", Severity.Success);
+		else
+			_snackbar.Add($"Ocorreu um erro ao Editar a Nota Fiscal.", Severity.Error);
+
+	}
     #endregion
 }
