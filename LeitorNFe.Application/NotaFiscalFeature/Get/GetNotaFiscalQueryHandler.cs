@@ -27,7 +27,7 @@ public class GetNotaFiscalQueryHandler : IQueryHandler<GetNotaFiscalQuery, List<
     }
     #endregion
 
-    #region Handle
+    #region Handler
     public async Task<Result<List<NotaFiscal>>> Handle(GetNotaFiscalQuery query, CancellationToken cancellationToken)
     {
         #region Validação
