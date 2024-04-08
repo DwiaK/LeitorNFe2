@@ -9,7 +9,7 @@ public static class HandlersConfiguration
 	{
 		#region Command Types
 		var commandHandlerInterfaceType = typeof(ICommandHandler<>);
-		var commandHandlerInterfaceType2 = typeof(ICommandHandler<,>);
+		var commandHandlerResponseInterfaceType = typeof(ICommandHandler<,>);
 		#endregion
 
 		#region Query Types
@@ -22,7 +22,7 @@ public static class HandlersConfiguration
 			.Where(t => t.GetInterfaces().Any(i =>
 				i.IsGenericType &&
 				(i.GetGenericTypeDefinition() == commandHandlerInterfaceType ||
-				 i.GetGenericTypeDefinition() == commandHandlerInterfaceType2 ||
+				 i.GetGenericTypeDefinition() == commandHandlerResponseInterfaceType ||
 				 i.GetGenericTypeDefinition() == queryHandlerInterfaceType)))
 			.ToList();
 
@@ -31,7 +31,7 @@ public static class HandlersConfiguration
 			var implementedInterfaces = handlerType.GetInterfaces().Where(i =>
 				i.IsGenericType &&
 				(i.GetGenericTypeDefinition() == commandHandlerInterfaceType ||
-				 i.GetGenericTypeDefinition() == commandHandlerInterfaceType2 ||
+				 i.GetGenericTypeDefinition() == commandHandlerResponseInterfaceType ||
 				 i.GetGenericTypeDefinition() == queryHandlerInterfaceType));
 
 			foreach (var implementedInterface in implementedInterfaces)

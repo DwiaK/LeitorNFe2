@@ -23,7 +23,7 @@ public class Dispatcher : IDispatcher
 		var handler = _serviceProvider.GetService(typeof(ICommandHandler<TCommand>)) as ICommandHandler<TCommand>;
 
 		if (handler is null)
-			throw new InvalidOperationException($"Handler not found for command type '{ typeof(TCommand) }'.");
+			throw new InvalidOperationException($"Handler não encontrado para o tipo de comando '{ typeof(TCommand) }'.");
 
 		await handler.Handle(command, cancellationToken);
 	}
@@ -34,7 +34,7 @@ public class Dispatcher : IDispatcher
 		var handler = _serviceProvider.GetService(typeof(ICommandHandler<TCommand, TResponse>)) as ICommandHandler<TCommand, TResponse>;
 
 		if (handler is null)
-			throw new InvalidOperationException($"Handler not found for command type '{ typeof(TCommand) }'.");
+			throw new InvalidOperationException($"Handler não encontrado para o tipo de comando '{typeof(TCommand)}'.");
 
 		return await handler.Handle(command, cancellationToken);
 	}
@@ -45,7 +45,7 @@ public class Dispatcher : IDispatcher
 		var handler = _serviceProvider.GetService(typeof(IQueryHandler<TQuery, TResponse>)) as IQueryHandler<TQuery, TResponse>;
 
 		if (handler is null)
-			throw new InvalidOperationException($"Handler not found for query type '{ typeof(TQuery) }'.");
+			throw new InvalidOperationException($"Handler não encontrado para o tipo de query '{ typeof(TQuery) }'.");
 
 		return await handler.Handle(query, cancellationToken);
 	}
