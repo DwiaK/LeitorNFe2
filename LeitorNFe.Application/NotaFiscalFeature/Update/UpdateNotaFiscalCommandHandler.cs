@@ -23,7 +23,7 @@ public class UpdateNotaFiscalCommandHandler : ICommandHandler<UpdateNotaFiscalCo
 		_dbConnectionFactory = dbConnectionFactory;
 	#endregion
 
-	#region Handle
+	#region Handler
 	public async Task<Result<bool>> Handle(UpdateNotaFiscalCommand command, CancellationToken cancellationToken)
 	{
 		#region Validação
