@@ -5,16 +5,13 @@ using LeitorNFe.Application.Abstractions.Data;
 using LeitorNFe.Application.Abstractions.Messaging;
 using System.Threading.Tasks;
 using System.Threading;
-using System;
 using System.Text;
-using LeitorNFe.Application.NotaFiscalFeature.GetById;
 using LeitorNFe.Domain.Entities.Enderecos;
 using System.Linq;
-using Microsoft.Data.SqlClient;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.GetById;
 
-public sealed class GetNotaFiscalByIdQueryHandler : IQueryHandler<GetNotaFiscalByIdQuery, NotaFiscal>
+internal sealed class GetNotaFiscalByIdQueryHandler : IQueryHandler<GetNotaFiscalByIdQuery, NotaFiscal>
 {
 	#region Atributos
 	private readonly IDbConnection _dbConnectionFactory;

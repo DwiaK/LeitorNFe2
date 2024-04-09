@@ -12,7 +12,7 @@ using System.Transactions;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Update;
 
-public class UpdateNotaFiscalCommandHandler : ICommandHandler<UpdateNotaFiscalCommand, bool>
+internal sealed class UpdateNotaFiscalCommandHandler : ICommandHandler<UpdateNotaFiscalCommand, bool>
 {
 	#region Atributos
 	private IDbConnection _dbConnectionFactory;

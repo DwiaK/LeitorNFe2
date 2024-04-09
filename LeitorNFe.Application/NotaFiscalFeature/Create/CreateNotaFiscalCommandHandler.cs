@@ -15,7 +15,7 @@ using System.Transactions;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Create;
 
-public class CreateNotaFiscalCommandHandler : ICommandHandler<CreateNotaFiscalCommand, bool>
+internal sealed class CreateNotaFiscalCommandHandler : ICommandHandler<CreateNotaFiscalCommand, bool>
 {
 	#region Atributos
 	private readonly IDbConnection _dbConnectionFactory;

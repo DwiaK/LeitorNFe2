@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeitorNFe.App.Infrastructur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{732AE360-18D5-479D-97A6-9FA8051888CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeitorNFe.SharedKernel", "LeitorNFe.SharedKernel\LeitorNFe.SharedKernel.csproj", "{1160545B-C407-4377-8CD7-C6EB4E546BB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeitorNFe.SharedKernel", "LeitorNFe.SharedKernel\LeitorNFe.SharedKernel.csproj", "{1160545B-C407-4377-8CD7-C6EB4E546BB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeitorNFe.Infrastructure", "LeitorNFe.Infrastructure\LeitorNFe.Infrastructure.csproj", "{FE682455-4F43-47DF-9F37-CEAAE4DDBDA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{1160545B-C407-4377-8CD7-C6EB4E546BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1160545B-C407-4377-8CD7-C6EB4E546BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1160545B-C407-4377-8CD7-C6EB4E546BB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE682455-4F43-47DF-9F37-CEAAE4DDBDA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE682455-4F43-47DF-9F37-CEAAE4DDBDA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE682455-4F43-47DF-9F37-CEAAE4DDBDA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE682455-4F43-47DF-9F37-CEAAE4DDBDA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{E51CE89C-94FC-4982-9FE2-50D435073091} = {68488844-F95E-476E-B1E1-D471A929BB72}
 		{732AE360-18D5-479D-97A6-9FA8051888CA} = {CC7E836C-E5B7-4392-B20E-C3A33D98C3C9}
 		{1160545B-C407-4377-8CD7-C6EB4E546BB5} = {732AE360-18D5-479D-97A6-9FA8051888CA}
+		{FE682455-4F43-47DF-9F37-CEAAE4DDBDA0} = {68488844-F95E-476E-B1E1-D471A929BB72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {928694B7-A8B5-4AB7-9833-B3AA73A4FEA9}

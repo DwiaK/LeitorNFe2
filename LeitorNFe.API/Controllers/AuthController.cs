@@ -16,6 +16,7 @@ public class AuthController : ApiController
 	{
 	}
 
+	[HttpGet("Login")]
 	public async Task<IActionResult> LoginAccount([FromBody] LoginRequest request, CancellationToken cancellationToken)
 	{
 		#region Validação
@@ -37,7 +38,7 @@ public class AuthController : ApiController
 		return Ok(tokenResult);
 	}
 
-	[HttpPost]
+	[HttpPost("Register")]
 	public async Task<IActionResult> RegisterAccount([FromBody] RegisterRequest request, CancellationToken cancellationToken)
 	{
 		#region Validação
