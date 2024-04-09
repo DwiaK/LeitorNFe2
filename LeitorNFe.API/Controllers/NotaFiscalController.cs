@@ -23,14 +23,12 @@ public class NotaFiscalController : ApiController
 	[HttpGet("BuscarNotaFiscalPorId/{id}")]
 	public async Task<NotaFiscal> GetNotaFiscalById(int id, CancellationToken cancellationToken)
 	{
-		#region Validação
 		if (Equals(id, 0))
 			return new NotaFiscal();
-		#endregion
 
-		#region Requisição
-		var result = await _dispatcher.Query<GetNotaFiscalByIdQuery, NotaFiscal>(new GetNotaFiscalByIdQuery(id), cancellationToken);
-		#endregion
+		var query = new GetNotaFiscalByIdQuery(id);
+
+		var result = await _dispatcher.Query<GetNotaFiscalByIdQuery, NotaFiscal>(query, cancellationToken);
 
 		return result.Value;
 	}
@@ -38,19 +36,15 @@ public class NotaFiscalController : ApiController
 	[HttpPost("ImportarNotaFiscal")]
 	public async Task<bool> ImportarNotaFiscal([FromBody] NotaFiscal notaFiscal, CancellationToken cancellationToken)
 	{
-		#region Validação
 		if (notaFiscal is null)
 			return false;
-		#endregion
 
-		#region Requisição
-		var result = await _dispatcher.Send<CreateNotaFiscalCommand, bool>(new CreateNotaFiscalCommand(notaFiscal), cancellationToken);
-		#endregion
+		var command = new CreateNotaFiscalCommand(notaFiscal);
 
-		#region Validações
+		var result = await _dispatcher.Send<CreateNotaFiscalCommand, bool>(command, cancellationToken);
+
 		if (result.IsSuccess)
 			return true;
-		#endregion
 
 		return false;
 	}
@@ -58,19 +52,15 @@ public class NotaFiscalController : ApiController
 	[HttpPost("ImportarMultiplasNotasFiscais")]
 	public async Task<bool> ImportarMultiplasNotasFiscais([FromBody] List<NotaFiscal> notasFiscais, CancellationToken cancellationToken)
 	{
-		#region Validação
 		if (notasFiscais.IsNullOrEmpty())
 			return false;
-		#endregion
 
-		#region Requisição
-		var result = await _dispatcher.Send<CreateMultiplasNotasFiscaisCommand, bool>(new CreateMultiplasNotasFiscaisCommand(notasFiscais), cancellationToken);
-		#endregion
+		var command = new CreateMultiplasNotasFiscaisCommand(notasFiscais);
 
-		#region Validações
+		var result = await _dispatcher.Send<CreateMultiplasNotasFiscaisCommand, bool>(command, cancellationToken);
+
 		if (result.IsSuccess)
 			return true;
-		#endregion
 
 		return false;
 	}
@@ -78,19 +68,15 @@ public class NotaFiscalController : ApiController
 	[HttpPut("EditarNotaFiscal")]
 	public async Task<bool> EditarNotaFiscal([FromBody] NotaFiscal notaFiscal, CancellationToken cancellationToken)
 	{
-		#region Validação
 		if (notaFiscal is null)
 			return false;
-		#endregion
 
-		#region Requisição
-		var result = await _dispatcher.Send<UpdateNotaFiscalCommand, bool>(new UpdateNotaFiscalCommand(notaFiscal), cancellationToken);
-		#endregion
+		var command = new UpdateNotaFiscalCommand(notaFiscal);
 
-		#region Validações
+		var result = await _dispatcher.Send<UpdateNotaFiscalCommand, bool>(command, cancellationToken);
+
 		if (result.IsSuccess)
 			return true;
-		#endregion
 
 		return false;
 	}
@@ -98,19 +84,15 @@ public class NotaFiscalController : ApiController
 	[HttpDelete("DeletarNotaFiscal/{id}")]
 	public async Task<bool> DeletarNotaFiscal(int id, CancellationToken cancellationToken)
 	{
-		#region Validação
 		if (Equals(id, 0))
 			return false;
-		#endregion
 
-		#region Requisição
-		var result = await _dispatcher.Send<DeleteNotaFiscalCommand, bool>(new DeleteNotaFiscalCommand(id), cancellationToken);
-		#endregion
+		var command = new DeleteNotaFiscalCommand(id);
 
-		#region Validações
+		var result = await _dispatcher.Send<DeleteNotaFiscalCommand, bool>(command, cancellationToken);
+
 		if (result.IsSuccess)
 			return true;
-		#endregion
 
 		return false;
 	}
@@ -118,9 +100,9 @@ public class NotaFiscalController : ApiController
 	[HttpGet("BuscarNotasFiscais")]
 	public async Task<List<NotaFiscal>> BuscarNotasFiscais(CancellationToken cancellationToken)
 	{
-		#region Requisição
-		var result = await _dispatcher.Query<GetNotaFiscalQuery, List<NotaFiscal>>(new GetNotaFiscalQuery(), cancellationToken);
-		#endregion
+		var query = new GetNotaFiscalQuery();
+
+		var result = await _dispatcher.Query<GetNotaFiscalQuery, List<NotaFiscal>>(query, cancellationToken);
 
 		return result.Value;
 	}

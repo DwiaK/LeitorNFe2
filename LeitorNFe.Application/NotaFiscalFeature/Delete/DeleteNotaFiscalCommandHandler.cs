@@ -13,35 +13,21 @@ namespace LeitorNFe.Application.NotaFiscalFeature.Delete;
 
 internal sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNotaFiscalCommand, bool>
 {
-    #region Atributos
     private readonly IDbConnection _dbConnectionFactory;
-    #endregion
 
-    #region Construtor
-    public DeleteNotaFiscalCommandHandler(IDbConnection dbConnectionFactory)
-    {
+    public DeleteNotaFiscalCommandHandler(IDbConnection dbConnectionFactory) =>
         _dbConnectionFactory = dbConnectionFactory;
-    }
-    #endregion
 
-    #region Handle
     public async Task<Result<bool>> Handle(DeleteNotaFiscalCommand command, CancellationToken cancellationToken)
     {
-        #region Validação
         if (command is null)
             return Result.Failure<bool>(Error.NullValue);
-		#endregion
 
-		#region Conexão
 		await using var dbConnection = _dbConnectionFactory.CreateConnection();
-		#endregion
 
-		#region Queries
 		var nfQuery = DeleteNotaFiscalStringQuery();
 		var nfeQuery = DeleteNotaFiscalEnderecoStringQuery();
-		#endregion
 
-		#region Transaction
 		using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
             try
@@ -71,15 +57,10 @@ internal sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNot
                 return Result.Failure<bool>(Error.NullValue);
             }
         }
-		#endregion
     }
 
-    #endregion
-
-    #region Database Queries
     private string DeleteNotaFiscalStringQuery()
     {
-        #region Query NotaFiscal
         StringBuilder sb = new StringBuilder();
 
         sb.AppendLine($"DELETE FROM")
@@ -88,12 +69,10 @@ internal sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNot
           .AppendLine($"    [IdNotaFiscal] = @IdNotaFiscal");
 
         return sb.ToString();
-        #endregion
     }
 
     private string DeleteNotaFiscalEnderecoStringQuery()
     {
-        #region Query NotaFiscalEndereco
         StringBuilder sb = new StringBuilder();
 
         sb.AppendLine($"DELETE FROM")
@@ -102,7 +81,5 @@ internal sealed class DeleteNotaFiscalCommandHandler : ICommandHandler<DeleteNot
           .AppendLine($"    [IdNotaFiscal] = @IdNotaFiscal");
 
         return sb.ToString();
-        #endregion
     }
-    #endregion
 }

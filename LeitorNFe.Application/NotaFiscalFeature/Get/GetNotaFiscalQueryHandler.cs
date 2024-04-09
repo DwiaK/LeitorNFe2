@@ -11,41 +11,37 @@ using LeitorNFe.SharedKernel;
 using Microsoft.IdentityModel.Tokens;
 using Dapper;
 using System.Linq;
+using Microsoft.Data.SqlClient;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Get;
 
 internal sealed class GetNotaFiscalQueryHandler : IQueryHandler<GetNotaFiscalQuery, List<NotaFiscal>>
 {
-    #region Atributos
     private readonly IDbConnection _dbConnectionFactory;
-    #endregion
-
-    #region Construtor
-    public GetNotaFiscalQueryHandler(IDbConnection dbConnectionFactory)
-    {
+    
+	public GetNotaFiscalQueryHandler(IDbConnection dbConnectionFactory) =>
 		_dbConnectionFactory = dbConnectionFactory;
-    }
-    #endregion
 
-    #region Handler
     public async Task<Result<List<NotaFiscal>>> Handle(GetNotaFiscalQuery query, CancellationToken cancellationToken)
     {
-        #region Validação
         if (query is null)
             return Result.Failure<List<NotaFiscal>>(Error.NullValue);
-		#endregion
 
-		#region Conexão
+		// Connection
 		await using var sqlConnection = _dbConnectionFactory.CreateConnection();
 		await sqlConnection.OpenAsync();
-		#endregion
 
-		#region Query
-		var nfQuery = GetNotasFiscaisStringQuery();
-		#endregion
+		// Notas Fiscais
+		var listaNotasFiscais = await GetNotasFiscais(sqlConnection, GetNotasFiscaisStringQuery());
 
-		#region Buscas Database
-		var notasFiscais = (await sqlConnection.QueryAsync<NotaFiscal, Endereco, Endereco, NotaFiscal>(
+		if (listaNotasFiscais.IsNullOrEmpty())
+			return Result.Failure<List<NotaFiscal>>(Error.NullValue);
+
+		return Result.Success<List<NotaFiscal>>(listaNotasFiscais);
+    }
+
+	public async Task<List<NotaFiscal>> GetNotasFiscais(SqlConnection sqlConnection, string nfQuery) =>
+		(await sqlConnection.QueryAsync<NotaFiscal, Endereco, Endereco, NotaFiscal>(
 			nfQuery,
 			(notaFiscal, enderecoEmitente, enderecoDestinatario) =>
 			{
@@ -55,18 +51,7 @@ internal sealed class GetNotaFiscalQueryHandler : IQueryHandler<GetNotaFiscalQue
 			},
 			splitOn: "IdNotaFiscalEnderecos, IdNotaFiscalEnderecos"
 		)).ToList();
-		#endregion
 
-		#region Validações
-		if (notasFiscais.IsNullOrEmpty())
-			return Result.Failure<List<NotaFiscal>>(Error.NullValue);
-
-		return Result.Success<List<NotaFiscal>>(notasFiscais);
-		#endregion
-    }
-    #endregion
-
-    #region Database Queries
     public string GetNotasFiscaisStringQuery()
     {
         StringBuilder query = new StringBuilder();
@@ -100,5 +85,4 @@ internal sealed class GetNotaFiscalQueryHandler : IQueryHandler<GetNotaFiscalQue
 
 		return query.ToString();
     }
-    #endregion
 }

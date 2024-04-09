@@ -17,35 +17,21 @@ namespace LeitorNFe.Application.NotaFiscalFeature.Create;
 
 internal sealed class CreateNotaFiscalCommandHandler : ICommandHandler<CreateNotaFiscalCommand, bool>
 {
-	#region Atributos
 	private readonly IDbConnection _dbConnectionFactory;
-	#endregion
 
-	#region Construtor
-	public CreateNotaFiscalCommandHandler(IDbConnection dbConnectionFactory)
-	{
+	public CreateNotaFiscalCommandHandler(IDbConnection dbConnectionFactory) =>
 		_dbConnectionFactory = dbConnectionFactory;
-	}
-	#endregion
 
-	#region Handle
 	public async Task<Result<bool>> Handle(CreateNotaFiscalCommand command, CancellationToken cancellationToken)
 	{
-		#region Validação
 		if (command is null)
 			return Result.Failure<bool>(Error.NullValue);
-		#endregion
 
-		#region Conexão
 		await using var dbConnection = _dbConnectionFactory.CreateConnection();
-		#endregion
 
-		#region Queries
 		var nfQuery = NotaFiscalStringQuery();
 		var nfeQuery = NotaFiscalEnderecoStringQuery();
-		#endregion
 
-		#region Transaction
 		using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
 		{
 			try
@@ -86,14 +72,10 @@ internal sealed class CreateNotaFiscalCommandHandler : ICommandHandler<CreateNot
 
 			return Result.Failure<bool>(Error.NullValue);
 		}
-		#endregion
 	}
-	#endregion
 
-	#region Database Queries
 	public string NotaFiscalStringQuery()
 	{
-		#region Query NotaFiscal
 		StringBuilder nfQuery = new StringBuilder();
 
 		nfQuery.AppendLine("INSERT INTO")
@@ -118,14 +100,12 @@ internal sealed class CreateNotaFiscalCommandHandler : ICommandHandler<CreateNot
 			   .AppendLine("        @EmailDest  ")
 			   .AppendLine("    );")
 			   .AppendLine("SELECT SCOPE_IDENTITY()"); // Busca o Valor Identity do que foi inserido
-		#endregion
 
 		return nfQuery.ToString();
 	}
 
 	public string NotaFiscalEnderecoStringQuery()
 	{
-		#region Query NotaFiscalEnderecos
 		StringBuilder nfeQuery = new StringBuilder();
 
 		nfeQuery.AppendLine("INSERT INTO")
@@ -149,9 +129,7 @@ internal sealed class CreateNotaFiscalCommandHandler : ICommandHandler<CreateNot
 				.AppendLine("        @UF, ")
 				.AppendLine("        @CEP ")
 				.AppendLine("    )");
-		#endregion
 
 		return nfeQuery.ToString();
 	}
-	#endregion
 }
