@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Get;
 
-public class GetNotaFiscalQueryHandler : IQueryHandler<GetNotaFiscalQuery, List<NotaFiscal>>
+internal sealed class GetNotaFiscalQueryHandler : IQueryHandler<GetNotaFiscalQuery, List<NotaFiscal>>
 {
     #region Atributos
     private readonly IDbConnection _dbConnectionFactory;

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LeitorNFe.Application\LeitorNFe.Application.csproj" />
+    <ProjectReference Include="..\LeitorNFe.Infrastructure\LeitorNFe.Infrastructure.csproj" />
     <ProjectReference Include="..\LeitorNFe.Persistence\LeitorNFe.Persistence.csproj" />
   </ItemGroup>
 

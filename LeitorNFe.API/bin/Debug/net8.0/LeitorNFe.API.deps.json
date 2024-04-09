@@ -9,6 +9,7 @@
       "LeitorNFe.API/1.0.0": {
         "dependencies": {
           "LeitorNFe.Application": "1.0.0",
+          "LeitorNFe.Infrastructure": "1.0.0",
           "LeitorNFe.Persistence": "1.0.0",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
@@ -500,6 +501,14 @@
           "LeitorNFe.Domain.dll": {}
         }
       },
+      "LeitorNFe.Infrastructure/1.0.0": {
+        "dependencies": {
+          "LeitorNFe.Application": "1.0.0"
+        },
+        "runtime": {
+          "LeitorNFe.Infrastructure.dll": {}
+        }
+      },
       "LeitorNFe.Persistence/1.0.0": {
         "dependencies": {
           "LeitorNFe.Application": "1.0.0",
@@ -886,6 +895,11 @@
       "sha512": ""
     },
     "LeitorNFe.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "LeitorNFe.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

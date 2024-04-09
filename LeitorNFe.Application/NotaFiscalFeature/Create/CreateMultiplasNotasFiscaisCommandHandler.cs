@@ -11,7 +11,7 @@ using System.Transactions;
 
 namespace LeitorNFe.Application.NotaFiscalFeature.Create;
 
-public class CreateMultiplasNotasFiscaisCommandHandler : ICommandHandler<CreateMultiplasNotasFiscaisCommand, bool>
+internal sealed class CreateMultiplasNotasFiscaisCommandHandler : ICommandHandler<CreateMultiplasNotasFiscaisCommand, bool>
 {
     #region Atributos
     private readonly IDbConnection _dbConnectionFactory;
